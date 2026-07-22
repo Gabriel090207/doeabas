@@ -1,0 +1,714 @@
+/* ==========================================================
+   PÁGINA
+========================================================== */
+
+.transparency-page{
+
+    background:var(--color-background);
+}
+
+.transparency-page .container{
+
+    width:100%;
+    max-width:1440px;
+
+    margin:0 auto;
+
+    padding: 4rem 4rem;
+   
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.transparency-hero{
+
+    padding:8rem 0 2rem;
+
+    background:var(--color-background);
+}
+
+.transparency-hero-content{
+
+    max-width:1440px;
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.transparency-badge,
+.faq-badge{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:.6rem;
+
+    margin-bottom:1.25rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.transparency-badge svg,
+.faq-badge svg{
+
+    width:18px;
+    height:18px;
+}
+
+/* ==========================================================
+   TÍTULO HERO
+========================================================== */
+
+.transparency-hero h1{
+
+    max-width:900px;
+
+    color:var(--color-title);
+
+    font-size:4rem;
+    font-weight:800;
+
+    line-height:1.08;
+
+    letter-spacing:-1.5px;
+}
+
+.transparency-hero h1 span{
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   TEXTO HERO
+========================================================== */
+
+.transparency-intro{
+
+    max-width:1440px;
+
+    margin-top:2rem;
+
+    color:var(--color-text);
+
+    font-size:1.05rem;
+
+    line-height:1.9;
+}
+
+.transparency-text{
+
+    max-width:1440px;
+
+    margin-top:2rem;
+
+    display:grid;
+
+    gap:1.5rem;
+}
+
+.transparency-text p{
+
+    color:var(--color-text);
+
+    font-size:.95rem;
+
+    line-height:1.9;
+}
+
+/* ==========================================================
+   BOTÃO HERO
+========================================================== */
+
+.transparency-button{
+
+    height:4rem;
+
+    margin-top:2.5rem;
+
+    padding:0 2rem;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:.75rem;
+
+    border:none;
+    border-radius:var(--radius-lg);
+
+    background:var(--color-primary);
+
+    color:#FFF;
+
+    font-size:1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.transparency-button:hover{
+
+    background:var(--color-primary-hover);
+
+    transform:translateY(-2px);
+}
+
+.transparency-button svg{
+
+    width:18px;
+    height:18px;
+}
+
+/* ==========================================================
+   FAQ
+========================================================== */
+
+.transparency-faq{
+
+    padding: 0rem 0 0rem;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   HEADER FAQ
+========================================================== */
+
+.faq-header{
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-top: -70px;
+
+    gap:2rem;
+
+    margin-bottom:3rem;
+}
+
+.faq-header h2{
+
+    color:var(--color-title);
+
+    font-size:3.25rem;
+    font-weight:800;
+
+    line-height:1.15;
+
+    letter-spacing:-1px;
+}
+
+.faq-header h2 span{
+
+    color:var(--color-primary);
+}
+
+.faq-all-button{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:.5rem;
+
+    padding:0;
+
+    border:none;
+
+    background:transparent;
+
+    color:var(--color-primary);
+
+    font-size:.85rem;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.faq-all-button svg{
+
+    width:16px;
+    height:16px;
+
+    transition:transform .3s ease;
+}
+
+.faq-all-button:hover svg{
+
+    transform:translateX(4px);
+}
+
+/* ==========================================================
+   LISTA FAQ
+========================================================== */
+
+.faq-list{
+
+    overflow:hidden;
+
+    border:1px solid #EFE8E2;
+    border-radius:var(--radius-lg);
+
+    background:#FFF;
+
+    box-shadow:var(--shadow-sm);
+}
+
+/* ==========================================================
+   ITEM FAQ
+========================================================== */
+
+.faq-item{
+
+    border-bottom:1px solid #EFE8E2;
+}
+
+.faq-item:last-child{
+
+    border-bottom:none;
+}
+
+/* ==========================================================
+   PERGUNTA
+========================================================== */
+
+.faq-question{
+
+    width:100%;
+
+    min-height:5rem;
+
+    padding:1.25rem 1.75rem;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:2rem;
+
+    border:none;
+
+    background:transparent;
+
+    color:var(--color-title);
+
+    text-align:left;
+
+    font-size:.95rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:background .3s ease;
+}
+
+.faq-question:hover{
+
+    background:rgba(244,124,32,.035);
+}
+
+.faq-question svg{
+
+    width:20px;
+    height:20px;
+
+    flex-shrink:0;
+
+    color:var(--color-primary);
+
+    transition:
+        transform .35s cubic-bezier(.4,0,.2,1),
+        color .35s ease;
+}
+
+.faq-item.is-active .faq-question svg{
+
+    transform:rotate(45deg);
+}
+
+/* ==========================================================
+   RESPOSTA
+========================================================== */
+
+.faq-answer{
+
+    display:grid;
+
+    grid-template-rows:0fr;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        grid-template-rows .4s cubic-bezier(.4,0,.2,1),
+        opacity .3s ease,
+        visibility .3s ease;
+}
+
+.faq-answer-content{
+
+    min-height:0;
+
+    overflow:hidden;
+}
+
+.faq-answer-content p{
+
+    padding:0 4rem 0 1.75rem;
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+
+    line-height:1.8;
+
+    transform:translateY(-8px);
+
+    transition:
+        padding .4s cubic-bezier(.4,0,.2,1),
+        transform .4s cubic-bezier(.4,0,.2,1);
+}
+
+.faq-item.is-active .faq-answer{
+
+    grid-template-rows:1fr;
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+.faq-item.is-active .faq-answer-content p{
+
+    padding-top:.25rem;
+    padding-bottom:1.75rem;
+
+    transform:translateY(0);
+}
+
+/* ==========================================================
+   CTA ATENDIMENTO
+========================================================== */
+
+.transparency-contact{
+
+    padding:0 0 3rem;
+
+    background:var(--color-background);
+}
+
+.contact-wrapper{
+
+
+    margin-top: -70px;
+    min-height:8rem;
+
+    padding:1.5rem 2rem;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:2rem;
+
+    border:1px solid #EFE8E2;
+    border-radius:var(--radius-lg);
+
+    background:#FFF;
+
+    box-shadow:var(--shadow-sm);
+}
+
+/* ==========================================================
+   INFORMAÇÕES CTA
+========================================================== */
+
+.contact-info{
+
+    display:flex;
+    align-items:center;
+
+    gap:1.5rem;
+}
+
+.contact-icon{
+
+    width:58px;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border:1px solid rgba(244,124,32,.2);
+    border-radius:50%;
+
+    color:var(--color-primary);
+
+    background:rgba(244,124,32,.04);
+}
+
+.contact-icon svg{
+
+    width:27px;
+    height:27px;
+}
+
+.contact-info h2{
+
+    color:var(--color-title);
+
+    font-size:1rem;
+    font-weight:800;
+}
+
+.contact-info p{
+
+    margin-top:.45rem;
+
+    color:var(--color-text);
+
+    font-size:.8rem;
+}
+
+/* ==========================================================
+   BOTÃO CTA
+========================================================== */
+
+.contact-button{
+
+    height:3.5rem;
+
+    padding:0 1.5rem;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:.6rem;
+
+    flex-shrink:0;
+
+    border:none;
+    border-radius:var(--radius-md);
+
+    background:var(--color-primary);
+
+    color:#FFF;
+
+    font-size:.85rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.contact-button:hover{
+
+    background:var(--color-primary-hover);
+
+    transform:translateY(-2px);
+}
+
+.contact-button svg{
+
+    width:17px;
+    height:17px;
+}
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .transparency-page .container{
+
+        padding:0 2rem;
+    }
+
+    .transparency-hero{
+
+        padding:11rem 0 8rem;
+    }
+
+    .transparency-hero h1{
+
+        font-size:3rem;
+    }
+
+    .faq-header h2{
+
+        font-size:2.8rem;
+    }
+
+    .contact-wrapper{
+        margin-top: 50px;
+    }
+
+}
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .transparency-hero{
+
+        padding:10rem 0 7rem;
+    }
+
+    .transparency-hero h1{
+
+        font-size:2.4rem;
+    }
+
+    .transparency-intro{
+
+        font-size:.95rem;
+    }
+
+    .transparency-text p{
+
+        font-size:.9rem;
+    }
+
+    .transparency-faq{
+
+        padding:1rem 0 4rem;
+    }
+
+    .faq-header{
+
+        align-items:flex-start;
+        flex-direction:column;
+
+        margin-bottom:2.5rem;
+    }
+
+    .faq-header h2{
+
+        font-size:2rem;
+    }
+
+    .faq-question{
+
+        min-height:4.5rem;
+
+        padding:1.15rem 1.25rem;
+    }
+
+    .faq-answer-content p{
+
+        padding-right:1.25rem;
+        padding-left:1.25rem;
+    }
+
+    .contact-wrapper{
+        margin-top: -20px;
+
+        align-items:flex-start;
+        flex-direction:column;
+
+        padding:1.5rem;
+    }
+
+    .contact-button{
+
+        width:100%;
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .transparency-page .container{
+
+        padding:0 1rem;
+    }
+
+    .transparency-hero{
+
+        padding: 9rem 0 6rem;
+    }
+
+    .transparency-hero h1{
+
+        font-size:2rem;
+    }
+
+    .transparency-badge,
+    .faq-badge{
+
+        font-size:.85rem;
+    }
+
+    .transparency-intro,
+    .transparency-text p{
+
+        font-size:.85rem;
+    }
+
+    .transparency-button{
+
+        width:100%;
+    }
+
+    .faq-header h2{
+
+        font-size: 1.5rem;
+    }
+
+    .faq-question{
+
+        gap:1rem;
+
+        padding:1rem;
+
+        font-size:.85rem;
+    }
+
+    .faq-answer-content p{
+
+        padding-right:1rem;
+        padding-left:1rem;
+
+        font-size:.82rem;
+    }
+
+    .contact-info{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:1rem;
+    }
+
+    .contact-info h2{
+
+        font-size:.75rem;
+    }
+
+    .contact-info p{
+
+        font-size:.78rem;
+    }
+
+}

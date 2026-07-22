@@ -1,0 +1,379 @@
+/* ==========================================================
+   CARD
+========================================================== */
+
+.campaign-card{
+
+    width:100%;
+
+    max-width:none;
+
+    background:var(--color-white);
+
+    border-radius:var(--radius-xl);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-md);
+
+    transition:var(--transition);
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* ==========================================================
+   IMAGEM
+========================================================== */
+
+.campaign-image{
+
+    position:relative;
+
+    width:100%;
+    height:220px;
+
+    overflow:hidden;
+}
+
+.campaign-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.4s;
+}
+
+
+/* ==========================================================
+   CATEGORIA
+========================================================== */
+
+.campaign-category{
+
+    position:absolute;
+
+    left:1rem;
+    top:1rem;
+
+    padding:.45rem .95rem;
+
+    border-radius:var(--radius-full);
+
+    background:var(--color-white);
+
+    color:var(--color-primary);
+
+    font-size:.82rem;
+    font-weight:700;
+
+    box-shadow:var(--shadow-sm);
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.campaign-body{
+
+    padding:1.4rem;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:1rem;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.campaign-title{
+
+    color:var(--color-title);
+
+    font-size:1.3rem;
+    font-weight:700;
+
+    line-height:1.35;
+}
+
+/* ==========================================================
+   DESCRIÇÃO
+========================================================== */
+
+.campaign-description{
+
+    color:var(--color-text);
+
+    font-size:.92rem;
+
+    line-height:1.7;
+
+    min-height:70px;
+}
+
+/* ==========================================================
+   PROGRESSO
+========================================================== */
+
+.campaign-progress{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:.5rem;
+}
+
+.campaign-progress-value{
+
+    align-self:flex-end;
+
+    color:var(--color-primary);
+
+    font-size:.85rem;
+    font-weight:700;
+}
+
+.campaign-progress-bar{
+
+    width:100%;
+    height:9px;
+
+    background:var(--color-border);
+
+    border-radius:999px;
+
+    overflow:hidden;
+}
+
+.campaign-progress-fill{
+
+    height:100%;
+
+    background:var(--color-primary);
+
+    border-radius:999px;
+
+    transition:width .4s;
+}
+
+/* ==========================================================
+   VALORES
+========================================================== */
+
+.campaign-values{
+
+    display:flex;
+    justify-content:space-between;
+}
+
+.campaign-values div{
+
+    display:flex;
+    flex-direction:column;
+}
+
+.campaign-label{
+
+    margin-bottom:.35rem;
+
+    color:var(--color-text-light);
+
+    font-size:.78rem;
+}
+
+.campaign-values strong{
+
+    color:var(--color-title);
+
+    font-size:1rem;
+    font-weight:700;
+}
+
+/* Apenas o arrecadado */
+
+.campaign-values > div:first-child strong{
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   BOTÕES
+========================================================== */
+
+.campaign-actions{
+
+    display:flex;
+
+    gap:.8rem;
+
+    margin-top:.3rem;
+}
+
+.campaign-button{
+
+    flex:1;
+
+    height:3.2rem;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-primary);
+
+    color:var(--color-white);
+
+    font-size:.95rem;
+    font-weight:700;
+
+    transition:var(--transition);
+}
+
+.campaign-button:hover{
+
+    background:var(--color-primary-hover);
+}
+
+.campaign-favorite{
+
+    width:3.2rem;
+    height:3.2rem;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    color:var(--color-primary);
+
+    transition:var(--transition);
+}
+
+.campaign-favorite:hover{
+
+    background:#FFF5EF;
+
+    border-color:var(--color-primary);
+}
+
+
+
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width:1200px){
+
+    .campaign-image{
+
+        height:200px;
+    }
+
+}
+
+@media (max-width:992px){
+
+    .campaign-image{
+
+        height:180px;
+    }
+
+    .campaign-body{
+
+        padding:1.2rem;
+    }
+
+    .campaign-title{
+
+        font-size:1.15rem;
+    }
+
+    .campaign-description{
+
+        min-height:auto;
+
+        font-size:.9rem;
+
+        line-height:1.6;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .campaign-image{
+
+        height:165px;
+    }
+
+    .campaign-body{
+
+        padding:1rem;
+
+        gap:.9rem;
+    }
+
+    .campaign-category{
+
+        font-size:.75rem;
+
+        padding:.4rem .8rem;
+    }
+
+    .campaign-title{
+
+        font-size:1.05rem;
+    }
+
+    .campaign-values{
+
+        gap:1rem;
+    }
+
+    .campaign-values strong{
+
+        font-size:.92rem;
+    }
+
+    .campaign-button{
+
+        height:3rem;
+
+        font-size:.9rem;
+    }
+
+    .campaign-favorite{
+
+        width:3rem;
+        height:3rem;
+    }
+
+}
+
+@media (max-width:340px){
+
+    .campaign-image{
+
+        height:200px;
+    }
+
+    .campaign-body{
+
+        padding:1.2rem;
+    }
+
+    .campaign-title{
+
+        font-size:1.2rem;
+    }
+
+}

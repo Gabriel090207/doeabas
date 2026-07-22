@@ -1,0 +1,385 @@
+/* ==========================================================
+   CONTROLES DA HERO
+========================================================== */
+
+.hero{
+
+    /* Altura da Hero */
+    --hero-height: 47rem;
+
+    /* Background */
+    --bg-width: 100%;
+    --bg-height: 100%;
+    --bg-top: 0rem;
+    --bg-left: 0rem;
+
+    /* Coelho */
+--bunny-width: 73rem;
+--bunny-top: auto;
+--bunny-bottom: -7.5rem;
+--bunny-left: auto;
+--bunny-right: -7rem;
+
+   
+
+    position: relative;
+
+    width: 100%;
+    height: var(--hero-height);
+
+    padding-top: 8.5rem;
+
+    overflow: visible;
+    z-index: 1;
+
+    background: var(--color-background);
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.hero-background{
+
+    position:absolute;
+
+    width:var(--bg-width);
+    height:var(--bg-height);
+
+    top:var(--bg-top);
+    left:var(--bg-left);
+
+    object-fit:cover;
+
+    z-index:1;
+
+    pointer-events:none;
+    user-select:none;
+}
+
+/* ==========================================================
+   COELHO
+========================================================== */
+
+.hero-bunny{
+
+    position:absolute;
+
+    width:var(--bunny-width);
+    height:auto;
+
+    top:var(--bunny-top);
+    bottom:var(--bunny-bottom);
+
+    left:var(--bunny-left);
+    right:var(--bunny-right);
+
+    z-index:2;
+
+    pointer-events:none;
+    user-select:none;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.hero-container{
+
+    position:relative;
+
+    height:100%;
+
+    display:flex;
+    align-items:center;
+
+    z-index:20;
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.hero-content{
+    margin-top: -40px;
+    padding-left: 130px;
+    max-width:720px;
+}
+
+.hero-tag{
+
+    display:inline-block;
+
+    margin-bottom:1rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.hero-title{
+
+    color:var(--color-title);
+
+    font-size: 4.5rem;
+    font-weight:800;
+
+    line-height:1.05;
+}
+
+.hero-title span{
+
+    color:var(--color-primary);
+}
+
+.hero-description{
+
+    max-width:720px;
+
+    margin-top:2rem;
+
+    color:var(--color-text);
+
+    font-size: 1rem;
+
+    line-height:1.8;
+}
+
+/* ==========================================================
+   BOTÕES
+========================================================== */
+
+.hero-buttons{
+
+    display:flex;
+    gap:1.25rem;
+
+    margin-top:2rem;
+}
+
+.hero-primary,
+.hero-secondary{
+
+    height:4rem;
+
+    padding:0 2rem;
+
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+
+    border-radius:var(--radius-lg);
+
+    font-size:1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.hero-primary{
+
+    border:none;
+
+    background:var(--color-primary);
+
+    color:#FFF;
+}
+
+.hero-primary:hover{
+
+    background:var(--color-primary-hover);
+}
+
+.hero-secondary{
+
+    background:#FFF;
+
+    border:1px solid var(--color-primary);
+
+    color:var(--color-primary);
+}
+
+.hero-secondary:hover{
+
+    background:#FFF5EF;
+}
+
+
+
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width:1200px){
+
+    .hero{
+
+        --hero-height:58rem;
+
+        --bunny-width:48rem;
+        --bunny-bottom:-4rem;
+        --bunny-right:-10rem;
+    }
+
+    .hero-content{
+
+        padding-left:4rem;
+        max-width:600px;
+    }
+
+    .hero-title{
+
+        font-size:3.7rem;
+    }
+
+}
+
+@media (max-width:992px){
+
+    .hero{
+
+        --hero-height: 65rem;
+
+        --bunny-width:42rem;
+        --bunny-bottom:-4rem;
+        --bunny-right:50%;
+
+        padding-top:7rem;
+    }
+
+    .hero-bunny{
+
+        transform:translateX(50%);
+    }
+
+    .hero-container{
+
+        align-items:flex-start;
+    }
+
+    .hero-content{
+
+        width:100%;
+
+        margin-top:0;
+
+        padding:4rem 2rem 0;
+
+        max-width:none;
+    }
+
+    .hero-title{
+
+        font-size:3.2rem;
+    }
+
+    .hero-description{
+
+        max-width:100%;
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        width:100%;
+    }
+
+    .hero-primary,
+    .hero-secondary{
+
+        width:100%;
+
+        justify-content:center;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .hero{
+
+        --hero-height: 50rem;
+
+        --bunny-width: 40rem;
+        --bunny-bottom: -2rem;
+    }
+
+    .hero-content{
+
+        padding:2rem 1.5rem 0;
+    }
+
+    .hero-tag{
+
+        font-size:.9rem;
+    }
+
+    .hero-title{
+
+        font-size:2.7rem;
+
+        line-height:1.1;
+    }
+
+    .hero-description{
+
+        margin-top:1rem;
+
+        font-size:.8rem;
+
+        line-height:1.75;
+    }
+
+    .hero-buttons{
+
+        margin-top: 1.5rem;
+    }
+
+    .hero-primary{
+        margin-bottom: -0.5rem;
+    }
+
+}
+
+
+
+@media (max-width: 340px){
+
+    .hero{
+
+        --hero-height:43rem;
+
+        --bunny-width:26rem;
+        --bunny-bottom:-1.5rem;
+    }
+
+    .hero-content{
+
+        padding:2rem 1.25rem 0;
+    }
+
+    .hero-title{
+
+        font-size:2.2rem;
+    }
+
+    .hero-description{
+
+        font-size:.65rem;
+    }
+
+    .hero-primary,
+    .hero-secondary{
+
+        height: 2.9rem;
+
+        font-size:.85rem;
+    }
+
+}

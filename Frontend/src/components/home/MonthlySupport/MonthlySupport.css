@@ -1,0 +1,486 @@
+/* ==========================================================
+   CONTROLES DA SECTION
+========================================================== */
+
+.monthly-support{
+  
+ 
+    /* Altura */
+
+    --section-height: 40rem;
+
+    /* Background */
+
+    --bg-width:100%;
+    --bg-height:100%;
+
+    --bg-top:0;
+    --bg-left:0;
+
+    /* Coelho */
+
+    --bunny-width: 66rem;
+
+    --bunny-top:auto;
+    --bunny-bottom: -5rem;
+
+    --bunny-left:auto;
+    --bunny-right: -8rem;
+
+    /* Conteúdo */
+
+    --content-width: 820px;
+
+    --content-top: 0px;
+    --content-left: 80px;
+
+    position:relative;
+
+    width:100%;
+    height:var(--section-height);
+
+    margin:8rem 0;
+
+    overflow:hidden;
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.monthly-background{
+
+    position:absolute;
+
+    width:var(--bg-width);
+    height:var(--bg-height);
+
+    top:var(--bg-top);
+    left:var(--bg-left);
+
+    object-fit:cover;
+
+    z-index:1;
+
+    user-select:none;
+    pointer-events:none;
+}
+
+/* ==========================================================
+   COELHO
+========================================================== */
+
+.monthly-bunny{
+
+    position:absolute;
+
+    width:var(--bunny-width);
+
+    top:var(--bunny-top);
+    bottom:var(--bunny-bottom);
+
+    left:var(--bunny-left);
+    right:var(--bunny-right);
+
+    z-index:2;
+
+    pointer-events:none;
+    user-select:none;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.monthly-container{
+  
+
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    z-index:20;
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.monthly-content{
+
+    max-width:var(--content-width);
+
+    margin-top:var(--content-top);
+
+    padding-left:var(--content-left);
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.monthly-badge{
+
+    display:inline-flex;
+    align-items:center;
+    gap:.55rem;
+
+    padding:.8rem 1.3rem;
+
+    margin-bottom:2rem;
+
+    border-radius:var(--radius-full);
+
+    background:rgba(255,255,255,.95);
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.monthly-badge svg{
+
+    fill:currentColor;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.monthly-title{
+
+    color:var(--color-white);
+
+    font-size: 3.8rem;
+    font-weight:800;
+
+    line-height:1.08;
+}
+
+.monthly-title span{
+
+    color:#A53E00;
+}
+
+/* ==========================================================
+   DESCRIÇÃO
+========================================================== */
+
+.monthly-description{
+
+    max-width:560px;
+
+    margin-top:2rem;
+
+    color:rgba(255,255,255,.95);
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+}
+
+/* ==========================================================
+   BOTÃO
+========================================================== */
+
+.monthly-button{
+
+    margin-top:2.5rem;
+
+    width:max-content;
+
+    height:3.5rem;
+
+    padding:0 2rem;
+
+    display:flex;
+    align-items:center;
+    gap:.8rem;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    color:var(--color-primary);
+
+    font-size:1rem;
+    font-weight:700;
+
+    transition:var(--transition);
+}
+
+.monthly-button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-md);
+}
+
+.monthly-button svg{
+
+    transition:var(--transition);
+}
+
+.monthly-button:hover svg{
+
+    transform:translateX(5px);
+}
+
+/* ==========================================================
+   BENEFÍCIOS
+========================================================== */
+
+.monthly-features{
+
+    margin-top:5rem;
+
+    padding-left:var(--content-left);
+
+    display:flex;
+    align-items:center;
+
+    gap:2.5rem;
+}
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.monthly-feature{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:1rem;
+
+    color:var(--color-white);
+
+    font-size:1.3rem;
+    font-weight:700;
+}
+
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.monthly-feature-icon{
+
+    width:80px;
+    height:80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+    color:var(--color-white);
+}
+
+/* ==========================================================
+   DIVISÓRIA
+========================================================== */
+
+.monthly-divider{
+
+    width:1px;
+    height:65px;
+
+    background:rgba(255,255,255,.25);
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width:1200px){
+
+    .monthly-support{
+
+        --section-height:48rem;
+
+        --bunny-width:52rem;
+        --bunny-right:-10rem;
+
+        --content-left:4rem;
+    }
+
+    .monthly-title{
+
+        font-size:3.2rem;
+    }
+
+}
+
+@media (max-width:992px){
+
+    .monthly-support{
+
+        --section-height:46rem;
+
+        --bunny-width:48rem;
+
+        --bunny-right:45%;
+        --bunny-bottom:-4rem;
+
+        --content-left:2rem;
+    }
+
+    .monthly-bunny{
+
+        transform:translateX(50%);
+    }
+
+    .monthly-content{
+        margin-top: -15rem;
+
+        max-width:100%;
+
+        padding-right:2rem;
+    }
+
+    .monthly-title{
+
+        font-size:2.8rem;
+    }
+
+    .monthly-description{
+
+        max-width:100%;
+
+        font-size:1rem;
+    }
+
+    .monthly-features{
+
+        padding-left:2rem;
+
+        padding-right:2rem;
+
+        justify-content:flex-start;
+
+        gap:2rem;
+
+        flex-wrap:wrap;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .monthly-support{
+
+        --section-height: 47rem;
+
+        --bunny-width: 52rem;
+
+        --bunny-bottom:0;
+    }
+
+    .monthly-content{
+     
+        padding-left:1.5rem;
+        padding-right:1.5rem;
+    }
+
+    .monthly-title{
+
+        font-size: 2.5rem;
+    }
+
+    .monthly-description{
+
+        font-size:.75rem;
+
+        line-height:1.7;
+    }
+
+    .monthly-button{
+
+        width:100%;
+
+        justify-content:center;
+    }
+
+    .monthly-features{
+
+        margin-top:3rem;
+
+        padding:0 1.5rem;
+
+        flex-direction:column;
+        align-items:flex-start;
+
+        gap:1.75rem;
+    }
+
+    .monthly-feature{
+
+        width:100%;
+
+        flex-direction:row;
+
+        align-items:center;
+
+        font-size:1rem;
+    }
+
+    .monthly-feature-icon{
+
+        width:64px;
+        height:64px;
+
+        flex-shrink:0;
+    }
+
+    .monthly-divider{
+
+        display:none;
+    }
+
+}
+
+@media (max-width:340px){
+
+    .monthly-support{
+
+        --section-height: 43rem;
+
+        --bunny-width: 36rem;
+        --bunny-bottom: -2rem;
+    }
+
+    .monthly-content{
+        margin-top: -9rem;
+        padding-left:1rem;
+        padding-right:1rem;
+    }
+
+    .monthly-title{
+
+        font-size:2rem;
+    }
+
+    .monthly-description{
+
+        font-size:.9rem;
+    }
+
+    .monthly-features{
+
+        padding:0 1rem;
+    }
+
+}

@@ -1,0 +1,2108 @@
+/* ==========================================================
+   CONTROLES
+========================================================== */
+
+.about-hero{
+
+    --hero-height:47rem;
+
+    --bg-width:100%;
+    --bg-height:100%;
+    --bg-top:0;
+    --bg-left:0;
+
+    --bunny-width:70rem;
+    --bunny-bottom:-7.5rem;
+    --bunny-right: -10rem;
+
+    position:relative;
+
+    width:100%;
+    height:var(--hero-height);
+
+    padding-top:8.5rem;
+
+    overflow:visible;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.about-background{
+
+    position:absolute;
+
+    width:var(--bg-width);
+    height:var(--bg-height);
+
+    top:var(--bg-top);
+    left:var(--bg-left);
+
+    object-fit:cover;
+
+    pointer-events:none;
+    user-select:none;
+
+    z-index:1;
+}
+
+/* ==========================================================
+   COELHO
+========================================================== */
+
+.about-bunny{
+
+    position:absolute;
+
+    width:var(--bunny-width);
+    height:auto;
+
+    right:var(--bunny-right);
+    bottom:var(--bunny-bottom);
+
+    z-index:2;
+
+    pointer-events:none;
+    user-select:none;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.about-container{
+
+    position:relative;
+
+    height:100%;
+
+    display:flex;
+    align-items:center;
+
+    z-index:20;
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.about-content{
+
+   margin-top: 60px;
+
+    padding-left:130px;
+
+    max-width:720px;
+}
+
+.about-tag{
+
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+
+    margin-bottom:1rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.about-title{
+
+    color:var(--color-title);
+
+    font-size:4.5rem;
+    font-weight:800;
+
+    line-height:1.05;
+}
+
+.about-title span{
+
+    display:block;
+
+    color:var(--color-primary);
+}
+
+.about-description{
+
+    max-width:720px;
+
+    margin-top:2rem;
+
+    color:var(--color-text);
+
+    font-size:1rem;
+
+    line-height:1.8;
+}
+
+/* ==========================================================
+   BOTÃO
+========================================================== */
+
+.about-button{
+
+    margin-top:2rem;
+
+    height:4rem;
+
+    padding:0 2rem;
+
+    display:inline-flex;
+    align-items:center;
+    gap:.75rem;
+
+    border:none;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-primary);
+
+    color:#FFF;
+
+    font-size:1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.about-button:hover{
+
+    background:var(--color-primary-hover);
+}
+
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .about-hero{
+
+        --hero-height:38rem;
+
+        --bunny-width:52rem;
+        --bunny-right:-16rem;
+        --bunny-bottom:-6rem;
+    }
+
+    .about-content{
+        margin-top: 10px;
+        padding-left:4rem;
+
+        max-width:420px;
+    }
+
+    .about-title{
+
+        font-size:3.6rem;
+    }
+
+    .about-description{
+        font-size: 0.8rem;
+        max-width:520px;
+    }
+
+}
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .about-hero{
+
+        --hero-height:48rem;
+
+        --bunny-width: 34rem;
+        --bunny-right:50%;
+        --bunny-bottom:-3rem;
+
+        padding-top:9rem;
+    }
+
+    .about-content{
+
+        margin-top:0;
+
+        padding-left:2rem;
+        padding-right:2rem;
+
+        max-width:100%;
+    }
+
+    .about-title{
+
+        font-size:3rem;
+    }
+
+    .about-description{
+
+        max-width:100%;
+    }
+
+
+    .about-button{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+    .about-bunny{
+
+        left:50%;
+
+        right:auto;
+
+        transform:translateX(-50%);
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .about-hero{
+
+        --hero-height:42rem;
+
+        --bunny-width:22rem;
+        --bunny-right:50%;
+        --bunny-bottom:-2rem;
+    }
+
+    .about-content{
+
+        margin-top:0;
+
+        padding-left:2rem;
+        padding-right:1rem;
+
+        max-width:100%;
+    }
+
+    .about-title{
+
+        font-size:2.2rem;
+    }
+
+    .about-description{
+
+        max-width:100%;
+
+        font-size:.7rem;
+
+        line-height:1.8;
+    }
+
+    .about-button{
+
+        width:100%;
+        height:3.75rem;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        padding:0 1rem;
+    }
+
+    .about-bunny{
+
+        left:50%;
+
+        right:auto;
+
+        transform:translateX(-50%);
+    }
+
+}
+
+
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.mission{
+
+    position:relative;
+
+    z-index:10;
+
+    padding: 8rem 0 5rem;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.mission .container{
+
+    width:100%;
+    max-width:1440px;
+
+    margin:0 auto;
+    margin-top: -30px;
+   
+
+    padding:0 4rem;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.mission-header{
+
+    max-width:1220px;
+
+    margin-bottom:4rem;
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.mission-badge{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:.6rem;
+
+    margin-bottom:1.4rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.mission-badge svg{
+
+    width:18px;
+    height:18px;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.mission-header h2{
+
+    color:var(--color-title);
+
+    font-size:3.3rem;
+    font-weight:800;
+
+    line-height:1.1;
+
+    letter-spacing:-1px;
+}
+
+.mission-header h2 span{
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   DESCRIÇÃO
+========================================================== */
+
+.mission-header p{
+
+    margin-top:2rem;
+
+    max-width:1440px;
+
+    color:var(--color-text);
+
+    font-size:.8rem;
+
+    line-height:1.9;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.mission-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:2rem;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.mission-card{
+
+    background:var(--color-white);
+
+    border-radius:var(--radius-lg);
+
+    padding:2rem;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+}
+
+.mission-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-md);
+}
+
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.card-icon{
+
+     width: 72px;
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:2rem;
+
+    border-radius:50%;
+
+    background:rgba(244,124,32,.10);
+
+    color:var(--color-primary);
+}
+
+.card-icon svg{
+
+    width:36px;
+    height:36px;
+
+    stroke-width:2.2;
+}
+
+/* ==========================================================
+   TÍTULO CARD
+========================================================== */
+
+.mission-card h3{
+
+    color:var(--color-title);
+
+    font-size:1.35rem;
+    font-weight:700;
+
+    line-height:1.35;
+
+    min-height:55px;
+    margin-bottom: -0.5rem;
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.mission-card p{
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+
+    line-height:1.9;
+}
+
+/* ==========================================================
+   LISTA
+========================================================== */
+
+.mission-list{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:.9rem;
+
+    margin-top: 0rem;
+
+    padding:0;
+
+    list-style:none;
+}
+
+.mission-list li{
+
+    display:flex;
+    align-items:flex-start;
+
+    gap:.7rem;
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+
+    line-height:1.8;
+}
+
+.mission-list svg{
+
+    width:18px;
+    height:18px;
+
+    flex-shrink:0;
+
+    margin-top:3px;
+
+    color:var(--color-primary);
+}
+
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .mission{
+
+        padding: 4rem 0 4rem;
+    }
+
+    .mission .container{
+
+        padding:0 2rem;
+
+        margin-top:0;
+    }
+
+    .mission-header{
+
+        margin-bottom:3rem;
+    }
+
+    .mission-header h2{
+
+        font-size:2.8rem;
+    }
+
+    .mission-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .mission{
+
+        padding: 3rem 0 4rem;
+    }
+
+    .mission .container{
+
+        padding:0 2rem;
+    }
+
+    .mission-header{
+
+        margin-bottom:2.5rem;
+    }
+
+    .mission-header h2{
+
+        font-size:2.4rem;
+    }
+
+    .mission-header p{
+
+        max-width:100%;
+    }
+
+    .mission-grid{
+
+        grid-template-columns:1fr;
+
+        gap:1.5rem;
+    }
+
+    .mission-card{
+
+        padding:1.75rem;
+    }
+
+    .mission-card h3{
+
+        min-height:auto;
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .mission{
+
+        padding:3rem 0 3rem;
+    }
+
+    .mission .container{
+
+        padding:0 1rem;
+    }
+
+    .mission-header h2{
+
+        font-size:2rem;
+    }
+
+    .mission-header p{
+
+        font-size:.7rem;
+    }
+
+    .mission-card{
+
+        padding:1.5rem;
+    }
+
+    .card-icon{
+
+        width:64px;
+        height:64px;
+
+        margin-bottom:1.5rem;
+    }
+
+    .card-icon svg{
+
+        width:32px;
+        height:32px;
+    }
+
+    .mission-card h3{
+
+        font-size:1.2rem;
+    }
+
+    .mission-card p,
+    .mission-list li{
+
+        font-size:.85rem;
+    }
+
+}
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.history{
+
+    position:relative;
+
+    z-index:10;
+
+    padding:4rem 0 6rem;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.history .container{
+
+    width:100%;
+    max-width:1440px;
+
+    margin:0 auto;
+
+    padding:0 4rem;
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.history-badge{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:.6rem;
+
+    margin-bottom:2rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+
+   
+}
+
+.history-badge svg{
+
+    width:18px;
+    height:18px;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.history-content{
+
+    display:grid;
+
+    grid-template-columns:430px 1fr;
+
+    gap:5rem;
+
+    align-items:flex-start;
+}
+
+/* ==========================================================
+   ESQUERDA
+========================================================== */
+
+.history-left h2{
+
+    color:var(--color-title);
+
+    font-size:3.1rem;
+    font-weight:800;
+
+    line-height:1.15;
+
+    letter-spacing:-1px;
+}
+
+
+.history-left h2 span{
+
+    color:var(--color-primary);
+}
+
+.history-left p{
+
+    margin-top:2rem;
+
+    color:var(--color-text);
+
+    font-size:.8rem;
+
+    line-height:1.9;
+}
+
+/* ==========================================================
+   DIREITA
+========================================================== */
+
+.history-right{
+
+    position:relative;
+
+    padding-top:1rem;
+}
+
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
+.timeline{
+
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:2rem;
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:48px;
+
+    height:2px;
+
+    background:var(--color-primary);
+
+    z-index:1;
+}
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.timeline-item{
+
+    position:relative;
+  
+
+    z-index:2;
+}
+
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.timeline-icon{
+
+    width:64px;
+    height:64px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:0 auto 4.5rem;
+    margin-top: -2rem;
+
+    border-radius:50%;
+
+    background:#FFF;
+
+    border:2px solid rgba(244,124,32,.12);
+
+    color:var(--color-primary);
+}
+
+.timeline-icon svg{
+
+    width:28px;
+    height:28px;
+}
+
+/* ==========================================================
+   PONTO
+========================================================== */
+
+.timeline-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:44px;
+
+    transform:translateX(-50%);
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#FFF;
+
+    border:2px solid var(--color-primary);
+
+    z-index:5;
+}
+
+/* ==========================================================
+   ANO
+========================================================== */
+
+.timeline-year{
+
+    display:block;
+
+    margin-bottom:.6rem;
+
+    color:var(--color-primary);
+
+    font-size:1rem;
+    font-weight:800;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.timeline-item h4{
+
+    margin-bottom:.8rem;
+
+    color:var(--color-title);
+
+    font-size:1.1rem;
+    font-weight:700;
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.timeline-item p{
+
+    color:var(--color-text);
+
+    font-size:.88rem;
+
+    line-height:1.8;
+}
+
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .history{
+
+        padding:3rem 0 5rem;
+    }
+
+    .history .container{
+
+        padding:0 2rem;
+    }
+
+    .history-content{
+
+        grid-template-columns:1fr;
+
+        gap:4rem;
+    }
+
+    .history-left{
+
+        max-width:700px;
+    }
+
+    .history-left h2{
+
+        font-size:2.8rem;
+    }
+
+    .timeline{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:3rem 2rem;
+    }
+
+    .timeline::before{
+
+        display:none;
+    }
+
+    .timeline-icon{
+
+        margin:0 0 2rem;
+    }
+
+    .timeline-item::before{
+
+        display:none;
+    }
+
+}
+
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .history{
+
+        padding:3rem 0 4rem;
+    }
+
+    .history .container{
+
+        padding:0 2rem;
+    }
+
+    .history-content{
+
+        gap:3rem;
+    }
+
+    .history-left h2{
+
+        font-size:2.4rem;
+    }
+
+    .history-left p{
+
+        max-width:100%;
+    }
+
+    .timeline{
+
+        grid-template-columns:1fr;
+
+        gap:2rem;
+    }
+
+    .timeline-item{
+
+        text-align:center;
+    }
+
+    .timeline-icon{
+
+        width:60px;
+        height:60px;
+
+        margin:0 auto 1.5rem;
+    }
+
+    .timeline-icon svg{
+
+        width:26px;
+        height:26px;
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .history{
+
+        padding:2rem 0 3rem;
+    }
+
+    .history .container{
+
+        padding:0 1rem;
+    }
+
+    .history-left h2{
+
+        font-size:2rem;
+    }
+
+    .history-left p{
+
+        font-size:.7rem;
+    }
+
+    .history-badge{
+
+        font-size:.85rem;
+    }
+
+    .timeline{
+
+        gap:1.75rem;
+    }
+
+    .timeline-item{
+
+        text-align:center;
+    }
+
+    .timeline-icon{
+
+        margin:0 auto 1.25rem;
+    }
+
+    .timeline-year{
+
+        font-size:.9rem;
+    }
+
+    .timeline-item h4{
+
+        font-size:1rem;
+    }
+
+    .timeline-item p{
+
+        font-size:.85rem;
+    }
+
+}
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.stats{
+
+    padding:0 0 6rem;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.stats .container{
+
+    width:100%;
+    max-width:1440px;
+
+    margin:0 auto;
+
+    padding:0 4rem;
+}
+
+/* ==========================================================
+   WRAPPER
+========================================================== */
+
+.stats-wrapper{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    background:#FFF;
+
+    border-radius: var(--radius-lg);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-sm);
+
+    border:1px solid #F3ECE7;
+}
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.stat-item{
+
+    display:flex;
+    align-items:center;
+
+    gap:1rem;
+
+    padding:2rem;
+
+    position:relative;
+}
+
+.stat-item:not(:last-child)::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+    right:0;
+
+    transform:translateY(-50%);
+
+    width:1px;
+    height:55%;
+
+    background:#EFE8E2;
+}
+
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.stat-item svg{
+
+    color:var(--color-primary);
+
+    flex-shrink:0;
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.stat-item h3{
+
+    color:var(--color-title);
+
+    font-size:1.6rem;
+    font-weight:800;
+
+    line-height:1.2;
+}
+
+.stat-item p{
+
+    margin-top:.35rem;
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+}
+
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .stats{
+
+        padding:0 0 5rem;
+    }
+
+    .stats .container{
+
+        padding:0 2rem;
+    }
+
+    .stats-wrapper{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stat-item:nth-child(2)::after{
+
+        display:none;
+    }
+
+}
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .stats{
+
+        padding:0 0 4rem;
+    }
+
+    .stats .container{
+
+        padding:0 2rem;
+    }
+
+    .stats-wrapper{
+
+        grid-template-columns:1fr;
+    }
+
+    .stat-item{
+
+        padding:1.75rem;
+    }
+
+    .stat-item::after{
+
+        display:none;
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .stats .container{
+
+        padding:0 1rem;
+    }
+
+    .stat-item{
+
+        padding:1.5rem;
+
+        gap:.85rem;
+    }
+
+    .stat-item svg{
+
+        width:28px;
+        height:28px;
+    }
+
+    .stat-item h3{
+
+        font-size:1.35rem;
+    }
+
+    .stat-item p{
+
+        font-size:.85rem;
+    }
+
+}
+
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.workflow{
+
+    position:relative;
+
+    z-index:10;
+
+    padding: 0rem 0 6rem;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.workflow .container{
+
+    width:100%;
+    max-width:1440px;
+
+    margin:0 auto;
+
+    padding:0 4rem;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.workflow-header{
+
+    max-width: 1200px;
+
+    margin-bottom:5rem;
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.workflow-badge{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:.6rem;
+
+    margin-bottom:1.25rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.workflow-badge svg{
+
+    width:18px;
+    height:18px;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.workflow-header h2{
+
+    color:var(--color-title);
+
+    font-size:3.25rem;
+    font-weight:800;
+
+    line-height:1.15;
+
+    letter-spacing:-1px;
+}
+
+.workflow-header h2 span{
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.workflow-header p{
+
+    max-width: 1200px;
+
+    margin-top:2rem;
+
+    color:var(--color-text);
+
+    font-size:1rem;
+
+    line-height:1.8;
+}
+/* ==========================================================
+   GRID
+========================================================== */
+
+.workflow-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:4rem 3rem;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.workflow-card{
+
+    position:relative;
+}
+
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.workflow-icon{
+
+    width:72px;
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:1.5rem;
+
+    border-radius:50%;
+
+    background:rgba(244,124,32,.10);
+
+    color:var(--color-primary);
+}
+
+.workflow-icon svg{
+
+    width:34px;
+    height:34px;
+}
+
+/* ==========================================================
+   NÚMERO
+========================================================== */
+
+.workflow-number{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:30px;
+    height:30px;
+
+    margin-bottom:1rem;
+
+    border-radius:50%;
+
+    background:var(--color-primary);
+
+    color:#FFF;
+
+    font-size:.9rem;
+    font-weight:700;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.workflow-card h3{
+
+    min-height:58px;
+
+    color:var(--color-title);
+
+    font-size:1.3rem;
+    font-weight:700;
+
+    line-height:1.35;
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.workflow-card p{
+
+    margin-top:1rem;
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+
+    line-height:1.8;
+}
+
+/* ==========================================================
+   SETAS
+========================================================== */
+
+.workflow-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:34px;
+    left: 9rem;
+
+    width:70px;
+
+    border-top:3px dotted var(--color-primary);
+
+    opacity:.7;
+}
+
+.workflow-card::before{
+
+    content:"➜";
+
+    position:absolute;
+
+    top:21px;
+    left: 14rem;
+
+    color:var(--color-primary);
+
+    font-size:1.2rem;
+
+    font-weight:700;
+}
+
+/* Remove seta do 4º e do último */
+
+.workflow-card:nth-child(4)::after,
+.workflow-card:nth-child(4)::before,
+.workflow-card:last-child::after,
+.workflow-card:last-child::before{
+
+    display:none;
+}
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .workflow{
+
+        padding:0 0 5rem;
+    }
+
+    .workflow .container{
+
+        padding:0 2rem;
+    }
+
+    .workflow-header{
+
+        margin-bottom:4rem;
+    }
+
+    .workflow-header h2{
+
+        font-size:2.8rem;
+    }
+
+    .workflow-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:3rem 2rem;
+    }
+
+    .workflow-card::before,
+    .workflow-card::after{
+
+        display:none;
+    }
+
+}
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .workflow{
+
+        padding:0 0 4rem;
+    }
+
+    .workflow .container{
+
+        padding:0 2rem;
+    }
+
+    .workflow-header{
+
+        margin-bottom:3rem;
+    }
+
+    .workflow-header h2{
+
+        font-size:1.8rem;
+    }
+
+    .workflow-header p{
+        font-size:0.8rem;
+
+        max-width:100%;
+    }
+
+    .workflow-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:2.5rem 2rem;
+    }
+
+    .workflow-card h3{
+
+        min-height:auto;
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .workflow{
+
+        padding:0 0 3rem;
+    }
+
+    .workflow .container{
+
+        padding:0 1rem;
+    }
+
+    .workflow-header h2{
+
+        font-size:1.5rem;
+    }
+
+    .workflow-header p{
+
+        font-size:.7rem;
+    }
+
+    .workflow-badge{
+
+        font-size:.85rem;
+    }
+
+    .workflow-grid{
+
+        grid-template-columns:1fr;
+
+        gap:2rem;
+    }
+
+    .workflow-card{
+
+        text-align:center;
+    }
+
+    .workflow-icon{
+
+        width:58px;
+        height:58px;
+
+        margin:0 auto 1.5rem;
+    }
+
+    .workflow-icon svg{
+
+        width:28px;
+        height:28px;
+    }
+
+    .workflow-number{
+
+        width:28px;
+        height:28px;
+
+        font-size:.8rem;
+    }
+
+    .workflow-card h3{
+
+        font-size:1.15rem;
+    }
+
+    .workflow-card p{
+
+        font-size:.85rem;
+    }
+
+}
+
+
+/* ==========================================================
+   CTA
+========================================================== */
+
+.about-cta{
+
+    position:relative;
+
+    width:100%;
+
+    height:36rem;
+
+    overflow:hidden;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.about-cta-background{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    pointer-events:none;
+    user-select:none;
+
+    z-index:1;
+}
+
+/* ==========================================================
+   COELHO
+========================================================== */
+
+.about-cta-bunny{
+
+    position:absolute;
+
+    right:  -5rem;
+    bottom: -7.5rem;
+
+    width: 64rem;
+    height:auto;
+
+    z-index:2;
+
+    pointer-events:none;
+    user-select:none;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.about-cta-container{
+
+    position:relative;
+
+    height:100%;
+
+    display:flex;
+    align-items:center;
+
+    z-index:10;
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.about-cta-content{
+
+    max-width: 720px;
+
+    padding-left:130px;
+
+    margin-top: 70px;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.about-cta-content h2{
+
+    color:var(--color-title);
+
+    font-size:4rem;
+    font-weight:800;
+
+    line-height:1.08;
+}
+
+.about-cta-content h2 span{
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   DESCRIÇÃO
+========================================================== */
+
+.about-cta-content p{
+
+    margin-top:2rem;
+
+    max-width:580px;
+
+    color:var(--color-text);
+
+    font-size:0.85rem;
+
+    line-height:1.8;
+}
+
+/* ==========================================================
+   BOTÃO
+========================================================== */
+
+.about-cta-content button{
+
+    margin-top:2rem;
+
+    height:4rem;
+
+    padding:0 2rem;
+
+    display:inline-flex;
+    align-items:center;
+    gap:.75rem;
+
+    border:none;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-primary);
+
+    color:#FFF;
+
+    font-size:1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.about-cta-content button:hover{
+
+    background:var(--color-primary-hover);
+}
+
+.about-cta-content button svg{
+
+    width:18px;
+    height:18px;
+}
+
+
+/* ==========================================================
+   992px
+========================================================== */
+
+@media (max-width:992px){
+
+    .about-cta{
+
+        height:auto;
+
+        padding:5rem 0;
+    }
+
+    .about-cta-container{
+
+        align-items:flex-start;
+    }
+
+    .about-cta-content{
+
+        max-width: 500px;
+
+        padding-left:2rem;
+
+        margin-top:0;
+    }
+
+    .about-cta-content h2{
+
+        font-size:3rem;
+    }
+
+    .about-cta-content p{
+
+        max-width: 400px; /* ajuste aqui */
+    }
+
+    .about-cta-bunny{
+
+        width: 48rem;
+
+        right:-10rem;
+        bottom:-6rem;
+    }
+
+}
+
+
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .about-cta{
+
+        height: 37rem;
+
+        padding:0;
+    }
+
+    .about-cta-container{
+
+        align-items:flex-start;
+    }
+
+    .about-cta-content{
+
+        max-width:100%;
+
+        padding:3rem 2rem 0;
+
+        margin-top:0;
+    }
+
+    .about-cta-content h2{
+
+        font-size:2.4rem;
+    }
+
+    .about-cta-content p{
+
+        max-width:100%;
+    }
+
+    .about-cta-bunny{
+
+        width: 34rem;
+
+        right: 1rem;
+        bottom:-3.5rem;
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .about-cta{
+
+        height:36rem;
+    }
+
+    .about-cta-content{
+
+        padding:2.5rem 1rem 0;
+    }
+
+    .about-cta-content h2{
+
+        font-size:2rem;
+    }
+
+    .about-cta-content p{
+
+        font-size:.85rem;
+    }
+
+    .about-cta-content button{
+
+        width:100%;
+
+        justify-content:center;
+    }
+
+    .about-cta-bunny{
+
+        width:29rem;
+
+        right:1rem;
+        bottom:-2.5rem;
+    }
+
+}

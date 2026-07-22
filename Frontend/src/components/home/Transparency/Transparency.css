@@ -1,0 +1,354 @@
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.transparency{
+
+    position:relative;
+
+    z-index:10;
+
+    padding: 0rem 0 5rem;
+
+    background:var(--color-background);
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.transparency .container{
+
+    width:100%;
+    max-width:1440px;
+
+    margin:0 auto;
+    margin-top: -70px;
+
+    padding:0 4rem;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.transparency-header{
+
+    max-width: 1220px;
+
+    margin-bottom: 4rem;
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.transparency-badge{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:.6rem;
+
+    margin-bottom:1.4rem;
+
+    color:var(--color-primary);
+
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.transparency-badge svg{
+
+    width:18px;
+    height:18px;
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.transparency-header h2{
+
+    color:var(--color-title);
+
+    font-size:3.3rem;
+    font-weight:800;
+
+    line-height:1.1;
+
+    letter-spacing:-1px;
+}
+
+.transparency-header h2 span{
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   DESCRIÇÃO
+========================================================== */
+
+.transparency-header p{
+
+    margin-top:2rem;
+
+    max-width: 1440px;
+
+    color:var(--color-text);
+
+    font-size: 0.95rem;
+
+    line-height:1.9;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.transparency-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:2rem;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.transparency-card{
+
+    background:var(--color-white);
+
+    border-radius:var(--radius-lg);
+
+    padding:2rem;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+}
+
+.transparency-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-md);
+}
+
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.card-icon{
+
+    width: 72px;
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:2rem;
+
+    border-radius:50%;
+
+    background:rgba(244,124,32,.10);
+
+    color:var(--color-primary);
+}
+
+.card-icon svg{
+
+    width:36px;
+    height:36px;
+}
+
+/* ==========================================================
+   TÍTULO CARD
+========================================================== */
+
+.transparency-card h3{
+
+    color:var(--color-title);
+
+    font-size:1.35rem;
+    font-weight:700;
+
+    line-height:1.35;
+
+    min-height: 55px;
+}
+
+/* ==========================================================
+   LINHA
+========================================================== */
+
+.card-line{
+
+    display:block;
+
+    width:46px;
+    height:4px;
+
+    margin:1.6rem 0;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.transparency-card p{
+
+    color:var(--color-text);
+
+    font-size: 0.9rem;
+
+    line-height:1.9;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width:1200px){
+
+    .transparency .container{
+
+        padding:0 3rem;
+    }
+
+    .transparency-header h2{
+
+        font-size:2.9rem;
+    }
+
+    .transparency-grid{
+
+        gap:1.5rem;
+    }
+
+}
+
+@media (max-width:992px){
+
+    .transparency{
+
+        padding:0 0 4rem;
+    }
+
+    .transparency .container{
+
+        padding:0 2rem;
+    }
+
+    .transparency-header{
+
+        margin-bottom:3rem;
+    }
+
+    .transparency-header h2{
+
+        font-size:2.5rem;
+    }
+
+    .transparency-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:1.5rem;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .transparency .container{
+
+        padding:0 1.5rem;
+    }
+
+    .transparency-header{
+        
+
+        margin-bottom:2.5rem;
+    }
+
+    .transparency-header h2{
+
+        font-size: 1.7rem;
+    }
+
+    .transparency-header p{
+
+        font-size:.82rem;
+
+        line-height:1.8;
+    }
+
+    .transparency-grid{
+
+        grid-template-columns:1fr;
+
+        gap:1.5rem;
+    }
+
+    .transparency-card{
+
+        padding:1.5rem;
+    }
+
+    .card-icon{
+
+        width:64px;
+        height:64px;
+
+        margin-bottom:1.5rem;
+    }
+
+    .card-icon svg{
+
+        width:30px;
+        height:30px;
+    }
+
+    .transparency-card h3{
+
+        min-height:auto;
+
+        font-size:1.2rem;
+    }
+
+}
+
+@media (max-width:340px){
+
+    .transparency .container{
+
+        padding:0 1rem;
+    }
+
+    .transparency-header h2{
+
+        font-size: 1.5rem;
+    }
+
+    .transparency-header p{
+
+        font-size:.7rem;
+    }
+
+    .transparency-card{
+
+        padding:1.25rem;
+    }
+
+}

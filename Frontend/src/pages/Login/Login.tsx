@@ -189,17 +189,7 @@ function Login() {
 
                     </form>
 
-                    {/* Divider */}
-
-                    <div className="login-divider">
-
-                        <span>
-
-                            ou continue com
-
-                        </span>
-
-                    </div>
+                   
 
                    
 

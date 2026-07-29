@@ -25,7 +25,7 @@ ENV/
 # ==========================
 # Firebase Credentials
 # ==========================
-
+Backend/app/firebase-key.json
 firebase-key.json
 serviceAccountKey.json
 firebase/serviceAccountKey.json

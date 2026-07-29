@@ -26,6 +26,7 @@ class PixPayment(BaseModel):
 
     donor_name: str
 
+
 class CardPayment(BaseModel):
 
     token: str
@@ -47,6 +48,10 @@ class CardPayment(BaseModel):
     donor_name: str
 
     cpf: str
+
+    expiration_month: int
+
+    expiration_year: int
 
 
 @router.post("/payments/create-pix")
@@ -447,7 +452,12 @@ def create_card_payment(
         "installments":
             data.installments,
 
+        "expiration_month":
+            data.expiration_month,
 
+
+        "expiration_year":
+            data.expiration_year,
 
         "payer": {
 
@@ -606,8 +616,6 @@ def create_card_payment(
                 datetime.utcnow()
 
         })
-
-
 
 
     return {

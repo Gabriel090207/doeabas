@@ -569,6 +569,7 @@ async function handleCreateCard(){
 
     try{
 
+        setShowLoading(true);
 
         if(!mpRef.current){
 
@@ -719,8 +720,6 @@ async function handleCreateCard(){
             response.status === "approved"
         ) {
 
-            setShowLoading(true);
-
             setTimeout(() => {
 
                 navigate(
@@ -730,6 +729,8 @@ async function handleCreateCard(){
             }, 2500);
 
         } else {
+
+            setShowLoading(false);
 
             show({
 
@@ -743,10 +744,9 @@ async function handleCreateCard(){
 
         }
 
+   }catch{
 
-    }catch(error){
-
-  
+        setShowLoading(false);
 
         show({
 

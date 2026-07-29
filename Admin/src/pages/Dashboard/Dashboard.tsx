@@ -19,6 +19,7 @@ import {
 
 import {
     collection,
+    limit,
     onSnapshot,
     orderBy,
     query,
@@ -141,7 +142,9 @@ export function Dashboard() {
                     orderBy(
                         "createdAt",
                         "desc"
-                    )
+                    ),
+
+                    limit(5)
 
                 ),
 

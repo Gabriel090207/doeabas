@@ -111,7 +111,7 @@ const [cardExpiration, setCardExpiration] = useState("");
 
 const [cardCvv, setCardCvv] = useState("");
 
-const [installments, setInstallments] = useState(1);
+const [installments] = useState(1);
 
 const mpRef = useRef<any>(null);
 

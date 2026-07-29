@@ -1,0 +1,43 @@
+# Backend secrets
+
+Backend/app/firebase-key.json
+Backend/.env
+
+
+# Frontend secrets
+
+Frontend/.env
+Frontend/.env.local
+
+
+# Dependencies
+
+Frontend/node_modules/
+Backend/venv/
+
+
+# Python
+
+__pycache__/
+*.py[cod]
+
+
+# Build
+
+Frontend/dist/
+
+
+# Logs
+
+*.log
+
+
+# OS
+
+.DS_Store
+
+
+# IDE
+
+.vscode/
+.idea/

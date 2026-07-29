@@ -5,6 +5,10 @@ import {
     useState
 } from "react";
 
+import {
+    useNavigate
+} from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import { SiPix } from "react-icons/si";
 
@@ -28,9 +32,14 @@ import {
 
 import { useToast } from "../../hooks/useToast";
 
-import { createPixPayment } from "../../services/payments";
+import {
+    createPixPayment,
+    getPaymentStatus
+} from "../../services/payments";
 
 function Checkout() {
+
+const navigate = useNavigate();
 
 const { slug } = useParams();
 
@@ -68,6 +77,9 @@ const [loadingPix, setLoadingPix] = useState(false);
 
 const [pixGenerated, setPixGenerated] = useState(false);
 
+const [paymentId, setPaymentId] = useState<string | null>(null);
+
+const [waitingPayment, setWaitingPayment] = useState(false);
 
 useEffect(() => {
 
@@ -396,6 +408,15 @@ async function handleCreatePix(){
         });
 
 
+        setPaymentId(
+            response.id
+        );
+
+        setWaitingPayment(
+            true
+        );
+
+
 
         setPixCode(
             response.qr_code
@@ -428,6 +449,9 @@ async function handleCreatePix(){
     }
 
 }
+
+
+
 
     return (
 

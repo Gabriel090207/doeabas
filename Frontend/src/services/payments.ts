@@ -56,3 +56,29 @@ export async function createPixPayment(
     return await response.json();
 
 }
+
+
+
+export async function getPaymentStatus(
+    paymentId: string
+){
+
+    const response = await fetch(
+
+        `${API_URL}/payments/payment-status/${paymentId}`
+
+    );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Erro ao consultar pagamento"
+        );
+
+    }
+
+
+    return await response.json();
+
+}

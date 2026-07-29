@@ -377,3 +377,23 @@ async def mercadopago_webhook(
                 False
 
         }
+
+
+@router.get("/payments/payment-status/{payment_id}")
+def payment_status(
+    payment_id: str
+):
+
+    payment_response = sdk.payment().get(
+        payment_id
+    )
+
+    payment = payment_response["response"]
+
+
+    return {
+
+        "status":
+            payment.get("status")
+
+    }

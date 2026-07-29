@@ -1,0 +1,215 @@
+/* ==========================================================
+   OVERLAY
+========================================================== */
+
+.loading-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:2rem;
+
+    background:rgba(16,10,7,.82);
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    animation:loadingOverlayIn .25s ease both;
+}
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.loading-modal{
+
+    width:100%;
+    max-width:420px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:1rem;
+
+    padding:2.5rem;
+
+    border:1px solid rgba(255,255,255,.45);
+    border-radius:var(--radius-lg);
+
+    background:#FFF;
+
+    box-shadow:0 30px 80px rgba(0,0,0,.30);
+
+    text-align:center;
+
+    animation:loadingModalIn .35s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* ==========================================================
+   SPINNER
+========================================================== */
+
+.loading-spinner{
+
+    width:70px;
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.loading-spinner span{
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    border:4px solid rgba(244,124,32,.18);
+
+    border-top-color:var(--color-primary);
+
+    animation:loadingSpin .9s linear infinite;
+}
+
+/* ==========================================================
+   TEXTOS
+========================================================== */
+
+.loading-modal h2{
+
+    color:var(--color-title);
+
+    font-size:1.4rem;
+    font-weight:800;
+}
+
+.loading-modal p{
+
+    max-width:280px;
+
+    color:var(--color-text);
+
+    font-size:.95rem;
+
+    line-height:1.7;
+}
+
+/* ==========================================================
+   ANIMAÇÕES
+========================================================== */
+
+@keyframes loadingOverlayIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes loadingModalIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px) scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+@keyframes loadingSpin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ==========================================================
+   768px
+========================================================== */
+
+@media (max-width:768px){
+
+    .loading-overlay{
+
+        padding:1.5rem;
+
+    }
+
+    .loading-modal{
+
+        padding:2rem;
+
+    }
+
+}
+
+/* ==========================================================
+   340px
+========================================================== */
+
+@media (max-width:340px){
+
+    .loading-overlay{
+
+        padding:1rem;
+
+    }
+
+    .loading-modal{
+
+        padding:1.5rem;
+
+    }
+
+    .loading-spinner{
+
+        width:60px;
+        height:60px;
+
+    }
+
+    .loading-spinner span{
+
+        width:48px;
+        height:48px;
+
+    }
+
+    .loading-modal h2{
+
+        font-size:1.2rem;
+
+    }
+
+}

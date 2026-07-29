@@ -1,0 +1,309 @@
+.success-page{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding: 12rem 1.5rem;
+
+    background:#f8fafc;
+
+}
+
+
+
+.success-card{
+
+    width:100%;
+
+    max-width:520px;
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:3rem 2.5rem;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+
+}
+
+
+
+.success-icon{
+
+    width:96px;
+
+    height:96px;
+
+    margin:0 auto 1.5rem;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--color-primary);
+
+    background:rgba(255,122,0,0.12);
+
+}
+
+
+
+.success-card h1{
+
+    margin:0;
+
+    color:var(--color-title);
+
+    font-size:2rem;
+
+    font-weight:800;
+
+}
+
+
+
+.success-card p{
+
+    margin-top:1rem;
+
+    color:var(--color-text);
+
+    line-height:1.7;
+
+    font-size:1rem;
+
+}
+
+
+
+.success-info{
+
+    margin-top:2rem;
+
+    padding:1rem;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:.7rem;
+
+    background:#fff7ed;
+
+    color:var(--color-primary);
+
+    font-weight:700;
+
+}
+
+
+
+.success-actions{
+
+    margin-top:2.5rem;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1rem;
+
+}
+
+
+
+.success-primary{
+
+    height:54px;
+
+    border-radius:14px;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:.5rem;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+
+
+.success-primary:hover{
+
+    opacity:.9;
+
+}
+
+
+
+.success-secondary{
+
+    height:54px;
+
+    border-radius:14px;
+
+    border:1px solid var(--color-border);
+
+    color:var(--color-title);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:992px){
+
+
+    .success-page{
+
+        padding: 9rem 1.5rem;
+
+    }
+
+
+}
+
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:769px){
+
+
+    .success-page{
+
+        padding: 8rem 1rem;
+
+    }
+
+
+    .success-card{
+
+        padding:2.5rem 1.5rem;
+
+        border-radius:20px;
+
+    }
+
+
+    .success-icon{
+
+        width:80px;
+
+        height:80px;
+
+    }
+
+
+    .success-card h1{
+
+        font-size:1.6rem;
+
+    }
+
+
+    .success-card p{
+
+        font-size:.95rem;
+
+    }
+
+
+    .success-info{
+
+        font-size:.9rem;
+
+    }
+
+
+}
+
+
+
+/* ==========================
+   MOBILE PEQUENO
+========================== */
+
+@media(max-width:340px){
+
+
+    .success-page{
+
+        padding: 8rem .75rem;
+
+    }
+
+
+    .success-card{
+
+        padding:2rem 1rem;
+
+    }
+
+
+    .success-card h1{
+
+        font-size:1.4rem;
+
+    }
+
+
+    .success-card p{
+
+        font-size:.9rem;
+
+    }
+
+
+    .success-primary,
+    .success-secondary{
+
+        height:50px;
+
+        font-size:.9rem;
+
+    }
+
+
+}

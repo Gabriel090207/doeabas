@@ -28,11 +28,12 @@ function CampaignCard({
     const progress = Math.min(Math.round((raised / goal) * 100), 100);
 
     const formatCurrency = (value: number) =>
-        value.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-            minimumFractionDigits: 0
-        });
+    value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 
     return (
 

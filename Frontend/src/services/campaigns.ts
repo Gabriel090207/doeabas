@@ -159,3 +159,56 @@ export async function getCampaignBySlug(
     );
 
 }
+
+
+/* ==========================================================
+   OUVIR CAMPANHA EM TEMPO REAL
+========================================================== */
+
+export function listenCampaignBySlug(
+    slug: string,
+    callback: (campaign: Campaign | null) => void
+){
+
+    return onSnapshot(
+
+        query(
+
+            collection(db, "campaigns"),
+
+            where(
+                "slug",
+                "==",
+                slug
+            )
+
+        ),
+
+        (snapshot)=>{
+
+
+            if(snapshot.empty){
+
+                callback(null);
+
+                return;
+
+            }
+
+
+            const campaign =
+                snapshot.docs[0];
+
+
+            callback(
+                normalizeCampaign(
+                    campaign
+                )
+            );
+
+
+        }
+
+    );
+
+}

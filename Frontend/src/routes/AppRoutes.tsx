@@ -13,6 +13,7 @@ import Home from "../pages/Home/Home";
 import Campaigns from "../pages/Campaigns/Campaigns";
 import CampaignDetails from "../pages/CampaignDetails/CampaignDetails";
 import Checkout from "../pages/Checkout/Checkout";
+import Success from "../pages/Success/Success";
 
 import About from "../pages/About/About";
 import Transparency from "../pages/Transparency/Transparency";
@@ -65,6 +66,12 @@ function AppRoutes() {
                     <Route
                         path="/checkout/:slug"
                         element={<Checkout />}
+                    />
+
+
+                    <Route
+                        path="/sucesso"
+                        element={<Success />}
                     />
 
                     <Route

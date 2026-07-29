@@ -2,7 +2,8 @@ import "./Checkout.css";
 
 import {
     useEffect,
-    useState
+    useState,
+    useRef
 } from "react";
 
 import {
@@ -27,15 +28,36 @@ import {
 } from "react-router-dom";
 
 import {
-    getCampaignBySlug,
+    listenCampaignBySlug,
 } from "../../services/campaigns";
 
 import { useToast } from "../../hooks/useToast";
 
 import {
     createPixPayment,
+    createCardPayment,
     getPaymentStatus
 } from "../../services/payments";
+
+import { LoadingModal } from "../../components/LoadingModal/LoadingModal";
+
+import {
+    initMercadoPago
+} from "@mercadopago/sdk-react";
+
+import {
+    MP_PUBLIC_KEY
+} from "../../config/mercadopago";
+
+declare global {
+
+    interface Window {
+
+        MercadoPago: any;
+
+    }
+
+}
 
 function Checkout() {
 
@@ -79,31 +101,112 @@ const [pixGenerated, setPixGenerated] = useState(false);
 
 const [paymentId, setPaymentId] = useState<string | null>(null);
 
-const [waitingPayment, setWaitingPayment] = useState(false);
+const [showLoading, setShowLoading] = useState(false);
+
+const [cardNumber, setCardNumber] = useState("");
+
+const [cardName, setCardName] = useState("");
+
+const [cardExpiration, setCardExpiration] = useState("");
+
+const [cardCvv, setCardCvv] = useState("");
+
+const [installments, setInstallments] = useState(1);
+
+const mpRef = useRef<any>(null);
 
 useEffect(() => {
 
-    async function loadCampaign(){
+    if(!slug){
 
-        if(!slug){
-            return;
-        }
-
-
-        const data = await getCampaignBySlug(
-            slug
-        );
-
-
-        setCampaign(data);
+        return;
 
     }
 
 
-    loadCampaign();
+    const unsubscribe =
+        listenCampaignBySlug(
+            slug,
+            (data)=>{
+
+                setCampaign(data);
+
+            }
+        );
+
+
+    return ()=>{
+
+        unsubscribe();
+
+    };
 
 
 }, [slug]);
+
+useEffect(() => {
+
+    if(!paymentId){
+
+        return;
+
+    }
+
+
+    const interval = setInterval(async()=>{
+
+        try{
+
+            const response =
+                await getPaymentStatus(
+                    paymentId
+                );
+
+
+            if(response.status === "approved"){
+
+
+                clearInterval(interval);
+
+
+                setShowLoading(true);
+
+
+                setTimeout(()=>{
+
+
+                    navigate(
+                        "/sucesso"
+                    );
+
+
+                },5000);
+
+
+            }
+
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+
+    },3000);
+
+
+    return ()=>{
+
+        clearInterval(interval);
+
+    };
+
+
+},[
+    paymentId,
+    navigate
+]);
 
 function handleAmountChange(value: string) {
 
@@ -412,12 +515,6 @@ async function handleCreatePix(){
             response.id
         );
 
-        setWaitingPayment(
-            true
-        );
-
-
-
         setPixCode(
             response.qr_code
         );
@@ -451,6 +548,205 @@ async function handleCreatePix(){
 }
 
 
+async function handleCreateCard(){
+
+    if(!campaign){
+
+        show({
+
+            type:"error",
+
+            title:"Campanha não encontrada",
+
+            message:"Não foi possível identificar a campanha."
+
+        });
+
+        return;
+
+    }
+
+
+    try{
+
+
+        if(!mpRef.current){
+
+            show({
+
+                type:"error",
+
+                title:"Erro",
+
+                message:"Mercado Pago não carregado."
+
+            });
+
+            return;
+
+        }
+
+
+
+        const expiration =
+            cardExpiration.split("/");
+
+
+
+        const cardToken =
+            await mpRef.current.createCardToken({
+
+                cardNumber:
+                    cardNumber.replace(/\s/g,""),
+
+
+                cardholderName:
+                    cardName,
+
+
+                securityCode:
+                    cardCvv,
+
+
+                expirationMonth:
+                    expiration[0],
+
+
+                expirationYear:
+                    "20" + expiration[1],
+
+
+                identificationType:
+                    "CPF",
+
+
+                identificationNumber:
+                    donorCpf.replace(/\D/g,"")
+
+            });
+
+
+
+        const paymentMethod =
+            await mpRef.current.getPaymentMethods({
+
+                bin:
+                    cardNumber.replace(/\s/g,"").substring(0,6)
+
+            });
+
+
+        if(
+            !paymentMethod.results ||
+            paymentMethod.results.length === 0
+        ){
+
+            show({
+
+                type:"error",
+
+                title:"Cartão inválido",
+
+                message:"Não foi possível identificar a bandeira do cartão."
+
+            });
+
+            return;
+
+        }
+
+
+
+        console.log(
+            "TOKEN",
+            cardToken
+        );
+
+
+        const response =
+            await createCardPayment({
+
+                token:
+                    cardToken.id,
+
+
+                payment_method_id:
+                    paymentMethod.results[0].id,
+
+
+                installments,
+
+
+                amount:
+                    donationValue,
+
+
+                email:
+                    donorEmail,
+
+
+                campaign_id:
+                    campaign.id,
+
+
+                campaign_title:
+                    campaign.title,
+
+
+                donor_name:
+                    donorName,
+
+
+                cpf:
+                    donorCpf.replace(/\D/g,"")
+
+            });
+
+
+        console.log(
+            "PAGAMENTO CARTÃO",
+            response
+        );
+
+
+    }catch(error){
+
+
+        console.log(error);
+
+
+        show({
+
+            type:"error",
+
+            title:"Erro no cartão",
+
+            message:"Não foi possível validar os dados do cartão."
+
+        });
+
+    }
+
+}
+
+useEffect(()=>{
+
+    initMercadoPago(
+        MP_PUBLIC_KEY
+    );
+
+
+    if(window.MercadoPago){
+
+        mpRef.current =
+            new window.MercadoPago(
+                MP_PUBLIC_KEY
+            );
+
+    }
+
+
+},[]);
 
 
     return (
@@ -593,6 +889,8 @@ async function handleCreatePix(){
                                     setPixCode("");
 
                                     setPixQrCode("");
+
+                                    setPaymentId(null);
 
                                     setStep(1);
 
@@ -1015,78 +1313,90 @@ async function handleCreatePix(){
                                 )}
 
 
-                                {paymentMethod === "card" && (
+                              {paymentMethod === "card" && (
 
-                                    <div className="checkout-payment-form">
+                                <div className="checkout-payment-form">
 
-                                        <div className="checkout-field">
 
-                                            <label>
+                                    <div className="checkout-field">
 
-                                                Número do cartão
+                                        <label>
+                                            Número do cartão
+                                        </label>
 
-                                            </label>
-
-                                            <input
-                                                type="text"
-                                                placeholder="0000 0000 0000 0000"
-                                            />
-
-                                        </div>
-
-                                        <div className="checkout-field">
-
-                                            <label>
-
-                                                Nome impresso no cartão
-
-                                            </label>
-
-                                            <input
-                                                type="text"
-                                                placeholder="Digite o nome impresso no cartão"
-                                            />
-
-                                        </div>
-
-                                        <div className="checkout-row">
-
-                                            <div className="checkout-field">
-
-                                                <label>
-
-                                                    Validade
-
-                                                </label>
-
-                                                <input
-                                                    type="text"
-                                                    placeholder="MM/AA"
-                                                />
-
-                                            </div>
-
-                                            <div className="checkout-field">
-
-                                                <label>
-
-                                                    CVV
-
-                                                </label>
-
-                                                <input
-                                                    type="password"
-                                                    placeholder="123"
-                                                    maxLength={4}
-                                                />
-
-                                            </div>
-
-                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder="0000 0000 0000 0000"
+                                            value={cardNumber}
+                                            onChange={(e)=>setCardNumber(e.target.value)}
+                                            maxLength={19}
+                                        />
 
                                     </div>
 
-                                )}
+
+
+                                    <div className="checkout-field">
+
+                                        <label>
+                                            Nome impresso no cartão
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            placeholder="Digite o nome impresso no cartão"
+                                            value={cardName}
+                                            onChange={(e)=>setCardName(e.target.value)}
+                                        />
+
+                                    </div>
+
+
+
+                                    <div className="checkout-row">
+
+
+                                        <div className="checkout-field">
+
+                                            <label>
+                                                Validade
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                placeholder="MM/AA"
+                                                value={cardExpiration}
+                                                onChange={(e)=>setCardExpiration(e.target.value)}
+                                                maxLength={5}
+                                            />
+
+                                        </div>
+
+
+
+                                        <div className="checkout-field">
+
+                                            <label>
+                                                CVV
+                                            </label>
+
+                                            <input
+                                                type="password"
+                                                placeholder="123"
+                                                value={cardCvv}
+                                                onChange={(e)=>setCardCvv(e.target.value)}
+                                                maxLength={4}
+                                            />
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            )}
 
                                 {paymentMethod === "wallet" && (
 
@@ -1251,7 +1561,9 @@ async function handleCreatePix(){
                                         onClick={
                                             paymentMethod === "pix"
                                                 ? handleCreatePix
-                                                : undefined
+                                                : paymentMethod === "card"
+                                                    ? handleCreateCard
+                                                    : undefined
                                         }
                                     >
                                         {loadingPix
@@ -1413,6 +1725,13 @@ async function handleCreatePix(){
                 </section>
 
             </div>
+
+
+            <LoadingModal
+                open={showLoading}
+                title="Pagamento confirmado!"
+                description="Estamos preparando sua confirmação."
+            />
 
         </main>
 

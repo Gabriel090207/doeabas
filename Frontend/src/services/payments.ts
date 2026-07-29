@@ -59,6 +59,78 @@ export async function createPixPayment(
 
 
 
+
+
+interface CardPaymentData {
+
+    token: string;
+
+    payment_method_id: string;
+
+    issuer_id?: string;
+
+    installments: number;
+
+    amount: number;
+
+    email: string;
+
+    campaign_id: string;
+
+    campaign_title: string;
+
+    donor_name: string;
+
+    cpf: string;
+
+}
+
+
+
+export async function createCardPayment(
+    data: CardPaymentData
+){
+
+    const response = await fetch(
+
+        `${API_URL}/payments/create-card`,
+
+        {
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":
+                    "application/json"
+
+            },
+
+            body:
+                JSON.stringify(data)
+
+        }
+
+    );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Erro ao criar pagamento com cartão"
+        );
+
+    }
+
+
+    return await response.json();
+
+}
+
+
+
+
+
 export async function getPaymentStatus(
     paymentId: string
 ){

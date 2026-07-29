@@ -1305,13 +1305,28 @@
     .checkout-actions{
 
         flex-direction:column;
+
     }
+
 
     .checkout-next-button,
     .checkout-secondary-button{
 
         width:100%;
+
+        height:58px;
+
+        min-height:58px;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
     }
+
+ 
 
     .checkout-wallet-donation{
 

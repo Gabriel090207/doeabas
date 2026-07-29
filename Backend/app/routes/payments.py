@@ -26,7 +26,27 @@ class PixPayment(BaseModel):
 
     donor_name: str
 
+class CardPayment(BaseModel):
 
+    token: str
+
+    payment_method_id: str
+
+    issuer_id: str | None = None
+
+    installments: int
+
+    amount: float
+
+    email: str
+
+    campaign_id: str
+
+    campaign_title: str
+
+    donor_name: str
+
+    cpf: str
 
 
 @router.post("/payments/create-pix")
@@ -392,6 +412,214 @@ def payment_status(
 
 
     return {
+
+        "status":
+            payment.get("status")
+
+    }
+
+
+@router.post("/payments/create-card")
+def create_card_payment(
+    data: CardPayment
+):
+
+
+    payment_data = {
+
+
+        "transaction_amount":
+            data.amount,
+
+
+        "token":
+            data.token,
+
+
+        "description":
+            data.campaign_title,
+
+
+        "payment_method_id":
+            data.payment_method_id,
+
+
+        "installments":
+            data.installments,
+
+
+
+        "payer": {
+
+
+            "email":
+                data.email,
+
+
+            "identification": {
+
+                "type":
+                    "CPF",
+
+
+                "number":
+                    data.cpf
+
+            }
+
+        },
+
+
+        "metadata": {
+
+
+            "campaign_id":
+                data.campaign_id,
+
+
+            "campaign_title":
+                data.campaign_title,
+
+
+            "donor_name":
+                data.donor_name,
+
+
+            "donor_email":
+                data.email
+
+        }
+
+    }
+
+
+
+    if data.issuer_id:
+
+
+        payment_data["issuer_id"] = (
+            data.issuer_id
+        )
+
+
+
+    response = sdk.payment().create(
+        payment_data
+    )
+
+
+
+    print("====================")
+    print(response)
+    print("====================")
+
+
+
+    if "response" not in response:
+
+
+        return {
+
+            "success": False,
+
+            "error":
+                response
+
+        }
+
+
+
+    payment = response["response"]
+
+
+
+
+    if not payment.get("id"):
+
+
+        return {
+
+
+            "success": False,
+
+
+            "error":
+                "Pagamento sem ID retornado"
+
+        }
+
+
+
+
+
+    if payment.get("status") == "approved":
+
+
+
+        donation_ref = (
+            db.collection("donations")
+            .document()
+        )
+
+
+
+        donation_ref.set({
+
+
+            "paymentId":
+                payment.get("id"),
+
+
+            "campaignId":
+                data.campaign_id,
+
+
+            "campaignTitle":
+                data.campaign_title,
+
+
+            "amount":
+                data.amount,
+
+
+            "donorName":
+                data.donor_name,
+
+
+            "donorEmail":
+                data.email,
+
+
+            "paymentMethod":
+                "credit_card",
+
+
+            "status":
+                "approved",
+
+
+            "paymentStatus":
+                payment.get("status"),
+
+
+            "createdAt":
+                datetime.utcnow()
+
+        })
+
+
+
+
+    return {
+
+
+        "success":
+            True,
+
+
+        "id":
+            payment.get("id"),
+
 
         "status":
             payment.get("status")

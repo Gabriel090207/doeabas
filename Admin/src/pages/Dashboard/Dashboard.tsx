@@ -11,57 +11,316 @@ import { SiPix } from "react-icons/si";
 
 import "./Dashboard.css";
 
-const stats = [
-    {
-        title: "Usuários",
-        value: "248",
-        icon: Users,
-    },
-    {
-        title: "Campanhas",
-        value: "18",
-        icon: HeartHandshake,
-    },
-    {
-        title: "Arrecadado",
-        value: "R$ 82.450,00",
-        icon: CircleDollarSign,
-    },
-    {
-        title: "Doações Hoje",
-        value: "26",
-        icon: HeartHandshake,
-    },
-];
+import {
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
-const donations = [
-    {
-        donor: "João Silva",
-        campaign: "Campanha Escolar",
-        value: "R$ 150,00",
-        method: "pix",
-    },
-    {
-        donor: "Maria Souza",
-        campaign: "Natal Solidário",
-        value: "R$ 80,00",
-        method: "cartao",
-    },
-    {
-        donor: "Carlos Lima",
-        campaign: "Construção",
-        value: "R$ 500,00",
-        method: "carteira",
-    },
-    {
-        donor: "Ana Paula",
-        campaign: "Material Escolar",
-        value: "R$ 120,00",
-        method: "pix",
-    },
-];
+import {
+    collection,
+    onSnapshot,
+    orderBy,
+    query,
+} from "firebase/firestore";
+
+import { db } from "../../services/firebase";
+
+interface Donation {
+
+    id: string;
+
+    donorName: string;
+
+    campaignTitle: string;
+
+    amount: number;
+
+    paymentMethod: string;
+
+    createdAt?: any;
+
+}
+
+interface Campaign {
+
+    id: string;
+
+    raisedAmount: number;
+
+}
+
+interface User {
+
+    id: string;
+
+}
 
 export function Dashboard() {
+
+    const [campaigns, setCampaigns] =
+        useState<Campaign[]>([]);
+
+    const [users, setUsers] =
+        useState<User[]>([]);
+
+    const [donations, setDonations] =
+        useState<Donation[]>([]);
+
+    useEffect(() => {
+
+        const unsubscribeCampaigns =
+            onSnapshot(
+
+                query(
+
+                    collection(
+                        db,
+                        "campaigns"
+                    ),
+
+                    orderBy(
+                        "createdAt",
+                        "desc"
+                    )
+
+                ),
+
+                (snapshot) => {
+
+                    const data =
+                        snapshot.docs.map(doc => ({
+
+                            id: doc.id,
+
+                            ...doc.data()
+
+                        })) as Campaign[];
+
+                    setCampaigns(data);
+
+                }
+
+            );
+
+        const unsubscribeUsers =
+            onSnapshot(
+
+                collection(
+                    db,
+                    "users"
+                ),
+
+                (snapshot) => {
+
+                    const data =
+                        snapshot.docs.map(doc => ({
+
+                            id: doc.id,
+
+                            ...doc.data()
+
+                        })) as User[];
+
+                    setUsers(data);
+
+                }
+
+            );
+
+        const unsubscribeDonations =
+            onSnapshot(
+
+                query(
+
+                    collection(
+                        db,
+                        "donations"
+                    ),
+
+                    orderBy(
+                        "createdAt",
+                        "desc"
+                    )
+
+                ),
+
+                (snapshot) => {
+
+                    console.log("Doações:", snapshot.size);
+
+                    const data =
+                        snapshot.docs.map(doc => ({
+
+                            id: doc.id,
+
+                            ...doc.data()
+
+                        })) as Donation[];
+
+                    console.log(data);
+
+                    setDonations(data);
+
+                },
+
+                (error) => {
+
+                    console.error(error);
+
+                }
+
+            );
+
+        return () => {
+
+            unsubscribeCampaigns();
+
+            unsubscribeUsers();
+
+            unsubscribeDonations();
+
+        };
+
+    }, []);
+
+    const totalRaised =
+        useMemo(() => {
+
+            return campaigns.reduce(
+
+                (total, campaign) =>
+
+                    total +
+                    (campaign.raisedAmount || 0),
+
+                0
+
+            );
+
+        }, [
+
+            campaigns
+
+        ]);
+
+    const donationsToday =
+        useMemo(() => {
+
+            const today =
+                new Date();
+
+            return donations.filter(
+
+                donation => {
+
+                    if(
+                        !donation.createdAt
+                    ){
+
+                        return false;
+
+                    }
+
+                    const date =
+                        donation.createdAt.toDate();
+
+                    return (
+
+                        date.getDate() ===
+                        today.getDate()
+
+                        &&
+
+                        date.getMonth() ===
+                        today.getMonth()
+
+                        &&
+
+                        date.getFullYear() ===
+                        today.getFullYear()
+
+                    );
+
+                }
+
+            ).length;
+
+        }, [
+
+            donations
+
+        ]);
+
+    const stats = [
+
+        {
+
+            title:
+                "Usuários",
+
+            value:
+                users.length.toString(),
+
+            icon:
+                Users
+
+        },
+
+        {
+
+            title:
+                "Campanhas",
+
+            value:
+                campaigns.length.toString(),
+
+            icon:
+                HeartHandshake
+
+        },
+
+        {
+
+            title:
+                "Arrecadado",
+
+            value:
+                totalRaised.toLocaleString(
+
+                    "pt-BR",
+
+                    {
+
+                        style:
+                            "currency",
+
+                        currency:
+                            "BRL"
+
+                    }
+
+                ),
+
+            icon:
+                CircleDollarSign
+
+        },
+
+        {
+
+            title:
+                "Doações Hoje",
+
+            value:
+                donationsToday.toString(),
+
+            icon:
+                HeartHandshake
+
+        }
+
+    ];
 
     return (
 
@@ -69,10 +328,16 @@ export function Dashboard() {
 
             <div className="dashboard-header">
 
-                <h1>Dashboard</h1>
+                <h1>
+
+                    Dashboard
+
+                </h1>
 
                 <p>
+
                     Bem-vindo ao painel administrativo da ABAS.
+
                 </p>
 
             </div>
@@ -99,11 +364,15 @@ export function Dashboard() {
                             <div>
 
                                 <span>
+
                                     {item.title}
+
                                 </span>
 
                                 <h2>
+
                                     {item.value}
+
                                 </h2>
 
                             </div>
@@ -121,17 +390,29 @@ export function Dashboard() {
                 <div className="dashboard-card-header">
 
                     <h2>
+
                         Últimas doações
+
                     </h2>
 
                 </div>
 
                 <div className="dashboard-table">
 
-                    {donations.map((donation, index) => (
+                    {donations.length === 0 && (
+
+                        <p>
+
+                            Nenhuma doação encontrada.
+
+                        </p>
+
+                    )}
+
+                    {donations.map((donation) => (
 
                         <div
-                            key={index}
+                            key={donation.id}
                             className="dashboard-row"
                         >
 
@@ -140,44 +421,77 @@ export function Dashboard() {
                                 <UserRound size={18} />
 
                                 <span>
-                                    {donation.donor}
+
+                                    {donation.donorName}
+
                                 </span>
 
                             </div>
 
                             <span className="dashboard-campaign">
-                                {donation.campaign}
+
+                                {donation.campaignTitle}
+
                             </span>
 
                             <div
-                                className={`dashboard-method ${donation.method}`}
+                                className={`dashboard-method ${donation.paymentMethod}`}
                             >
 
-                                {donation.method === "pix" && (
+                                {donation.paymentMethod === "pix" && (
+
                                     <>
+
                                         <SiPix />
+
                                         PIX
+
                                     </>
+
                                 )}
 
-                                {donation.method === "cartao" && (
+                                {donation.paymentMethod === "credit_card" && (
+
                                     <>
+
                                         <CreditCard size={16} />
+
                                         Cartão
+
                                     </>
+
                                 )}
 
-                                {donation.method === "carteira" && (
+                                {donation.paymentMethod === "wallet" && (
+
                                     <>
+
                                         <Wallet size={16} />
+
                                         Carteira
+
                                     </>
+
                                 )}
 
                             </div>
 
                             <strong className="dashboard-value">
-                                {donation.value}
+
+                                {(donation.amount || 0).toLocaleString(
+
+                                    "pt-BR",
+
+                                    {
+
+                                        style: "currency",
+
+                                        currency: "BRL"
+
+                                    }
+
+                                )}
+
                             </strong>
 
                         </div>

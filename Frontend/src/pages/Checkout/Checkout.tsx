@@ -82,7 +82,7 @@ const [step, setStep] = useState(1);
 
 const [paymentMethod, setPaymentMethod] = useState("pix");
 
-const walletBalance = 42.3;
+const walletBalance = 0;
 
 const donationValue =
     Number(amount.replace(/\./g, "").replace(",", ".")) || 0;

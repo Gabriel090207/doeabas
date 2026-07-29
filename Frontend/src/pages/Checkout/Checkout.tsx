@@ -589,7 +589,26 @@ async function handleCreateCard(){
 
 
         const expiration =
-            cardExpiration.split("/");
+            cardExpiration.replace(/\s/g,"").split("/");
+
+
+        if(
+            expiration.length !== 2
+        ){
+
+            show({
+
+                type:"error",
+
+                title:"Validade inválida",
+
+                message:"Digite a validade no formato MM/AA."
+
+            });
+
+            return;
+
+        }
 
 
 

@@ -1,10 +1,19 @@
 import "./Campaigns.css";
 
-import { useState } from "react";
+import {
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
-import { Search, ChevronDown } from "lucide-react";
+import {
+    Search,
+    ChevronDown,
+} from "lucide-react";
 
 import CampaignCard from "../../components/home/CampaignCard/CampaignCard";
+
+import { getCampaigns } from "../../services/campaigns";
 
 function Campaigns() {
 
@@ -14,72 +23,94 @@ function Campaigns() {
 
     const [sort, setSort] = useState("");
 
-    const campaigns = [
-        {
-            image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
-            category: "Saúde",
-            title: "Ajude Dona Maria a continuar seu tratamento",
-            description: "Dona Maria precisa realizar um tratamento especializado para seguir lutando pela vida.",
-            raised: 5240,
-            goal: 10000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-            category: "Educação",
-            title: "Vamos garantir um futuro melhor para o João",
-            description: "Ajude João a continuar seus estudos e realizar o sonho de ser engenheiro.",
-            raised: 7800,
-            goal: 10000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
-            category: "Animais",
-            title: "Ajude a Luna a se recuperar",
-            description: "Luna foi atropelada e precisa de uma cirurgia urgente.",
-            raised: 3150,
-            goal: 10500
-        },
-        {
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-            category: "Saúde",
-            title: "Karine esperança depois dos exames",
-            description: "Karine pede apoio para um tratamento que irá salvar sua vida.",
-            raised: 13592,
-            goal: 397000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8",
-            category: "Emergências",
-            title: "Ajuda para famílias atingidas pelas enchentes",
-            description: "Doe e ajude famílias que perderam tudo e precisam de itens básicos.",
-            raised: 13200,
-            goal: 20000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74",
-            category: "Educação",
-            title: "Transporte escolar para crianças",
-            description: "Precisamos de apoio para garantir o transporte diário dessas crianças.",
-            raised: 4400,
-            goal: 10000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-            category: "Saúde",
-            title: "Seu Carlos precisa de uma cirurgia cardíaca",
-            description: "Vamos nos unir para ajudar Seu Carlos a realizar sua cirurgia.",
-            raised: 18200,
-            goal: 20000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
-            category: "Moradia",
-            title: "Vamos construir um lar digno para essa família",
-            description: "Esta família sonha com um lar seguro para recomeçar com dignidade.",
-            raised: 9600,
-            goal: 16000
-        }
-    ];
+    const [campaigns, setCampaigns] = useState<any[]>([]);
+
+    const [status, setStatus] = useState("");
+
+    const ITEMS_PER_PAGE = 8;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+
+        const unsubscribe = getCampaigns((data) => {
+
+            setCampaigns(data);
+
+        });
+
+        return () => unsubscribe();
+
+    }, []);
+
+    const filteredCampaigns = useMemo(() => {
+
+            let data = campaigns.filter((campaign) => {
+
+                const matchesSearch =
+                    campaign.title
+                        .toLowerCase()
+                        .includes(search.toLowerCase());
+
+                const matchesCategory =
+                    !category ||
+                    campaign.category === category;
+
+                const matchesStatus =
+                    !status ||
+                    campaign.status === status;
+
+                return (
+                    matchesSearch &&
+                    matchesCategory &&
+                    matchesStatus
+                );
+
+            });
+
+            if (sort === "antigas") {
+
+                data = [...data].reverse();
+
+            }
+
+            if (sort === "arrecadacao") {
+
+                data = [...data].sort(
+                    (a, b) => b.raisedAmount - a.raisedAmount
+                );
+
+            }
+
+            return data;
+
+        }, [
+            campaigns,
+            search,
+            category,
+            status,
+            sort,
+        ]);
+
+        const totalPages = Math.ceil(
+            filteredCampaigns.length / ITEMS_PER_PAGE
+        );
+
+        const paginatedCampaigns = filteredCampaigns.slice(
+            (currentPage - 1) * ITEMS_PER_PAGE,
+            currentPage * ITEMS_PER_PAGE
+        );
+
+        useEffect(() => {
+
+            setCurrentPage(1);
+
+        }, [
+            search,
+            category,
+            status,
+            sort,
+        ]);
 
     return (
 
@@ -138,12 +169,24 @@ function Campaigns() {
                                 Educação
                             </option>
 
-                            <option value="Moradia">
-                                Moradia
-                            </option>
-
                             <option value="Animais">
                                 Animais
+                            </option>
+
+                            <option value="Emergência">
+                                Emergência
+                            </option>
+
+                            <option value="Social">
+                                Social
+                            </option>
+
+                            <option value="Esporte">
+                                Esporte
+                            </option>
+
+                            <option value="Outro">
+                                Outro
                             </option>
 
                         </select>
@@ -151,6 +194,35 @@ function Campaigns() {
                         <ChevronDown size={18} />
 
                     </div>
+
+                    <div className="campaign-select">
+
+                    <select
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                    >
+
+                        <option value="">
+                            Todos os status
+                        </option>
+
+                        <option value="Ativa">
+                            Ativa
+                        </option>
+
+                        <option value="Pausada">
+                            Pausada
+                        </option>
+
+                        <option value="Encerrada">
+                            Encerrada
+                        </option>
+
+                    </select>
+
+                    <ChevronDown size={18} />
+
+                </div>
 
                     <div className="campaign-select">
 
@@ -163,16 +235,8 @@ function Campaigns() {
                                 Mais recentes
                             </option>
 
-                            <option value="recentes">
-                                Mais recentes
-                            </option>
-
                             <option value="antigas">
                                 Mais antigas
-                            </option>
-
-                            <option value="arrecadacao">
-                                Maior arrecadação
                             </option>
 
                         </select>
@@ -185,37 +249,84 @@ function Campaigns() {
 
                 <div className="campaigns-grid">
 
-                    {campaigns.map((campaign, index) => (
+                {filteredCampaigns.length > 0 ? (
+
+                    paginatedCampaigns.map((campaign) => (
 
                         <CampaignCard
-                            key={index}
-                            image={campaign.image}
+                            key={campaign.id}
+                            slug={campaign.slug}
+                            image={campaign.coverImage}
                             category={campaign.category}
                             title={campaign.title}
-                            description={campaign.description}
-                            raised={campaign.raised}
-                            goal={campaign.goal}
+                            description={campaign.story}
+                            raised={campaign.raisedAmount}
+                            goal={campaign.goalAmount}
+                            duration={campaign.duration}
                         />
 
-                    ))}
+                    ))
 
-                </div>
+                ) : (
+
+                    <div className="campaigns-empty">
+
+                        <h3>Nenhuma campanha encontrada</h3>
+
+                        <p>
+
+                            Tente alterar os filtros ou pesquisar por outro termo.
+
+                        </p>
+
+                    </div>
+
+                )}
+
+            </div>
 
                 <div className="campaigns-pagination">
 
-                    <button>&lt;</button>
+                <button
+                    onClick={() =>
+                        setCurrentPage((page) => Math.max(page - 1, 1))
+                    }
+                    disabled={currentPage === 1}
+                >
+                    &lt;
+                </button>
 
-                    <button className="active">1</button>
+                {Array.from(
+                    { length: totalPages },
+                    (_, index) => index + 1
+                ).map((page) => (
 
-                    <button>2</button>
+                    <button
+                        key={page}
+                        className={
+                            currentPage === page
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() => setCurrentPage(page)}
+                    >
+                        {page}
+                    </button>
 
-                    <button>3</button>
-                   
+                ))}
 
-                    <button>&gt;</button>
+                <button
+                    onClick={() =>
+                        setCurrentPage((page) =>
+                            Math.min(page + 1, totalPages)
+                        )
+                    }
+                    disabled={currentPage === totalPages}
+                >
+                    &gt;
+                </button>
 
-                </div>
-
+            </div>
             </div>
 
         </section>

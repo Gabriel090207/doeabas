@@ -1,0 +1,329 @@
+/* ==========================================================
+   PÁGINA
+========================================================== */
+
+.my-donations{
+
+    padding:13rem 0 10rem;
+
+}
+
+.my-donations-header{
+
+    width:min(1400px,92%);
+
+    margin:0 auto 2.5rem;
+
+}
+
+.my-donations-header h1{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    color:var(--color-title);
+
+    margin-bottom:.75rem;
+
+}
+
+.my-donations-header p{
+
+    color:var(--color-text-light);
+
+    line-height:1.7;
+
+}
+
+/* ==========================================================
+   TABS
+========================================================== */
+
+.my-donations-tabs{
+
+    width:min(1400px,92%);
+
+    margin:0 auto 2rem;
+
+    display:flex;
+
+    gap:1rem;
+
+}
+
+.my-donations-tabs button{
+
+    height:56px;
+
+    padding:0 2rem;
+
+    border:none;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    color:var(--color-title);
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    box-shadow:var(--shadow-sm);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.my-donations-tabs button:hover{
+
+    background:#FFF5EF;
+
+    color:var(--color-primary);
+
+}
+
+.my-donations-tabs button.active{
+
+    background:#FFF5EF;
+
+    color:var(--color-primary);
+
+}
+
+/* ==========================================================
+   FILTROS
+========================================================== */
+
+.my-donations-filters{
+
+    width:min(1400px,92%);
+
+    margin:0 auto 2rem;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    gap:1rem;
+
+}
+
+.my-donations-filters input{
+
+    width:100%;
+
+    height:56px;
+
+    padding:0 1rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    color:var(--color-text);
+
+    font-size:.95rem;
+
+    transition:var(--transition);
+
+}
+
+.my-donations-filters input:focus{
+
+    outline:none;
+
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 4px rgba(255,119,51,.12);
+
+}
+
+.donation-select{
+
+    position:relative;
+
+}
+
+.donation-select select{
+
+    width:100%;
+
+    height:56px;
+
+    padding:0 3rem 0 1rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    -moz-appearance:none;
+
+    cursor:pointer;
+
+    font-size:.95rem;
+
+    color:var(--color-text);
+
+    transition:var(--transition);
+
+}
+
+.donation-select select:focus{
+
+    outline:none;
+
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 4px rgba(255,119,51,.12);
+
+}
+
+.donation-select svg{
+
+    position:absolute;
+
+    top:50%;
+
+    right:1rem;
+
+    transform:translateY(-50%);
+
+    pointer-events:none;
+
+    color:#777;
+
+}
+
+/* ==========================================================
+   LISTA
+========================================================== */
+
+.my-donations-list{
+
+    width:min(1400px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1rem;
+
+}
+
+.donation-item{
+
+    background:var(--color-white);
+
+    border-radius:var(--radius-xl);
+
+    box-shadow:var(--shadow-md);
+
+    padding:1.6rem 2rem;
+
+    transition:var(--transition);
+
+}
+
+.donation-item:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.donation-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.donation-row:first-child{
+
+    margin-bottom:1rem;
+
+}
+
+.donation-row h3{
+
+    font-size:1.2rem;
+
+    font-weight:700;
+
+    color:var(--color-title);
+
+}
+
+.donation-value{
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    color:var(--color-primary);
+
+}
+
+.donation-row:last-child span:first-child{
+
+    color:var(--color-text-light);
+
+    font-size:.95rem;
+
+}
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.status{
+
+    padding:.45rem 1rem;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+}
+
+.status.success{
+
+    background:#EAF8F0;
+
+    color:#1B8F4D;
+
+}
+
+.status.pending{
+
+    background:#FFF6DD;
+
+    color:#B7791F;
+
+}
+
+.status.cancelled{
+
+    background:#FDECEC;
+
+    color:#D33A2C;
+
+}

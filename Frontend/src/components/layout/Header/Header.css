@@ -543,3 +543,237 @@
     }
 
 }
+
+
+.header-account {
+
+    position: relative;
+
+}
+
+.header-account-menu {
+
+    position: absolute;
+
+    top: calc(100% + 12px);
+
+    right: 0;
+
+    width: 240px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(0, 0, 0, .06);
+
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, .10);
+
+    padding: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    z-index: 999;
+
+    animation: accountMenuFade .22s ease;
+
+    transform-origin: top right;
+
+}
+
+.header-account-menu a,
+.header-account-menu button {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border: none;
+
+    background: transparent;
+
+    text-decoration: none;
+
+    color: #444;
+
+    font-size: .95rem;
+
+    font-weight: 500;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s,
+        color .2s,
+        transform .18s;
+
+}
+
+.header-account-menu svg {
+
+    width: 18px;
+
+    height: 18px;
+
+    color: var(--color-primary);
+
+    flex-shrink: 0;
+
+    transition: color .2s;
+
+}
+
+.header-account-menu a:hover,
+.header-account-menu button:hover {
+
+    background: rgba(245, 126, 32, .12);
+
+    color: var(--color-primary);
+
+    transform: translateX(3px);
+
+}
+
+.header-account-menu a:hover svg,
+.header-account-menu button:hover svg {
+
+    color: var(--color-primary);
+
+}
+
+.header-account-menu button {
+
+    font: inherit;
+
+    text-align: left;
+
+}
+
+.header-account-menu::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -7px;
+
+    right: 26px;
+
+    width: 14px;
+
+    height: 14px;
+
+    background: #ffffff;
+
+    border-left: 1px solid rgba(0, 0, 0, .06);
+
+    border-top: 1px solid rgba(0, 0, 0, .06);
+
+    transform: rotate(45deg);
+
+}
+
+@keyframes accountMenuFade {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px)
+            scale(.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+.header-account-divider {
+
+    border: none;
+
+    height: 1px;
+
+    background: rgba(0, 0, 0, .08);
+
+    margin: 6px 0;
+
+}
+
+
+.mobile-menu-divider{
+
+    margin: .5rem 2rem;
+
+    border: none;
+
+    border-top: 1px solid var(--color-border);
+
+}
+
+.mobile-menu-logout{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+
+    padding:1rem 2rem;
+
+    width:100%;
+
+    border:none;
+
+    background:none;
+
+    color:var(--color-title);
+
+    font:inherit;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:background .25s ease,
+               color .25s ease;
+
+}
+
+.mobile-menu-logout svg{
+
+    color:var(--color-primary);
+
+}
+
+.mobile-menu-logout:hover{
+
+    background:#FFF6EF;
+
+    color:var(--color-primary);
+
+}

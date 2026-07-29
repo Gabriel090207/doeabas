@@ -222,9 +222,9 @@
 
     border:1px solid var(--color-border);
 
-    border-radius: var(--radius-lg);
+    border-radius:var(--radius-lg);
 
-    background:#fff;
+    background:var(--color-white);
 
     transition:var(--transition);
 }
@@ -232,6 +232,8 @@
 .input-control:focus-within{
 
     border-color:var(--color-primary);
+
+    box-shadow:0 0 0 4px rgba(244,124,32,.12);
 }
 
 .input-control svg{
@@ -425,13 +427,27 @@
     color:var(--color-text);
 }
 
-.login-register a{
+.login-register-button{
+
+    padding:0;
+
+    border:none;
+
+    background:none;
 
     color:var(--color-primary);
 
     font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
 }
 
+.login-register-button:hover{
+
+    filter:brightness(1.1);
+}
 
 /* ==========================================================
    TABLET

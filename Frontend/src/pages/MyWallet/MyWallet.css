@@ -1,0 +1,739 @@
+/* ==========================================================
+   PÁGINA
+========================================================== */
+
+.my-wallet{
+
+    padding:12rem 0 5rem;
+
+    background:var(--color-background);
+}
+
+.my-wallet-container{
+
+    max-width:1400px;
+
+    margin:0 auto;
+
+    padding:0 2rem;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.my-wallet-header{
+
+    margin-bottom:2.2rem;
+}
+
+.my-wallet-header h1{
+
+    margin-bottom:1rem;
+
+    color:var(--color-title);
+
+    font-size:3.2rem;
+}
+
+.my-wallet-header h1 span{
+
+    color:var(--color-primary);
+}
+
+.my-wallet-header p{
+
+    max-width:850px;
+
+    color:var(--color-text);
+
+    line-height:1.8;
+}
+
+/* ==========================================================
+   SALDO
+========================================================== */
+
+.wallet-balance-card{
+
+    min-height:180px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:2rem;
+
+    padding:2rem 2.5rem;
+
+    border:1px solid rgba(255, 119, 51, .18);
+
+    border-radius:var(--radius-xl);
+
+    background:#FFF5EF;
+
+    box-shadow:var(--shadow-sm);
+}
+
+.wallet-balance-content span{
+
+    display:block;
+
+    margin-bottom:.6rem;
+
+    color:var(--color-text);
+}
+
+.wallet-balance-content h2{
+
+    margin-bottom:.5rem;
+
+    color:var(--color-primary);
+
+    font-size:2.8rem;
+}
+
+.wallet-balance-content small{
+
+    color:var(--color-text);
+}
+
+.wallet-balance-icon{
+
+    width:74px;
+    height:74px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:var(--color-primary);
+
+    color:var(--color-white);
+}
+
+/* ==========================================================
+   TABS
+========================================================== */
+
+.wallet-tabs{
+
+    display:flex;
+
+    gap:1rem;
+
+    margin-bottom:2rem;
+}
+
+.wallet-tabs button{
+
+    height:56px;
+
+    display:flex;
+    align-items:center;
+
+    gap:.7rem;
+
+    padding:0 2rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    color:var(--color-title);
+
+    font-size:.95rem;
+    font-weight:600;
+
+    box-shadow:var(--shadow-sm);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.wallet-tabs button:hover{
+
+    border-color:var(--color-primary);
+
+    background:#FFF5EF;
+
+    color:var(--color-primary);
+}
+
+.wallet-tabs button.active{
+
+    border-color:var(--color-primary);
+
+    background:var(--color-primary);
+
+    color:var(--color-white);
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.wallet-content{
+
+    width:100%;
+}
+
+.wallet-list{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:1rem;
+}
+
+/* ==========================================================
+   DOAÇÃO MENSAL
+========================================================== */
+
+.wallet-item{
+
+    padding:1.7rem 2rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-xl);
+
+    background:var(--color-white);
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+}
+
+.wallet-item:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-md);
+}
+
+.wallet-item-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:2rem;
+
+    padding-bottom:1.4rem;
+
+    border-bottom:1px solid var(--color-border);
+}
+
+.wallet-item-label{
+
+    display:block;
+
+    margin-bottom:.45rem;
+
+    color:var(--color-text);
+
+    font-size:.85rem;
+}
+
+.wallet-item-header h3{
+
+    color:var(--color-title);
+
+    font-size:1.2rem;
+}
+
+.wallet-donation-control{
+
+    display:flex;
+    align-items:center;
+
+    gap:1rem;
+}
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.wallet-status{
+
+    padding:.45rem .9rem;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+    font-weight:700;
+}
+
+.wallet-status.active{
+
+    background:#EAF8F0;
+
+    color:#1B8F4D;
+}
+
+.wallet-status.inactive{
+
+    background:#FDECEC;
+
+    color:#D33A2C;
+}
+
+/* ==========================================================
+   TOGGLE
+========================================================== */
+
+.wallet-toggle{
+
+    position:relative;
+
+    width:52px;
+    height:28px;
+
+    padding:0;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#D6D6D6;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.wallet-toggle span{
+
+    position:absolute;
+
+    top:4px;
+    left:4px;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:var(--color-white);
+
+    box-shadow:0 2px 5px rgba(0, 0, 0, .2);
+
+    transition:var(--transition);
+}
+
+.wallet-toggle.active{
+
+    background:var(--color-primary);
+}
+
+.wallet-toggle.active:hover{
+
+    background:var(--color-primary-hover);
+}
+
+.wallet-toggle.active span{
+
+    transform:translateX(24px);
+}
+
+.wallet-toggle:focus-visible{
+
+    outline:3px solid #FFF5EF;
+
+    outline-offset:3px;
+}
+
+/* ==========================================================
+   RODAPÉ DA DOAÇÃO
+========================================================== */
+
+.wallet-item-footer{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding-top:1.4rem;
+}
+
+.wallet-item-footer span{
+
+    color:var(--color-text);
+}
+
+.wallet-item-footer strong{
+
+    color:var(--color-primary);
+
+    font-size:1.1rem;
+}
+
+/* ==========================================================
+   CARTÕES
+========================================================== */
+
+.wallet-cards-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2, 1fr);
+
+    gap:1.5rem;
+}
+
+.saved-card{
+
+    min-height:230px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    padding:1.8rem 2rem;
+
+    border:1px solid rgba(255, 119, 51, .18);
+
+    border-radius:var(--radius-xl);
+
+    background:#FFF5EF;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+}
+
+.saved-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-md);
+}
+
+.saved-card-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:var(--color-title);
+}
+
+.saved-card-header strong{
+
+    font-size:1.05rem;
+}
+
+.saved-card-icon{
+
+    width:46px;
+    height:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-primary);
+
+    color:var(--color-white);
+}
+
+.saved-card-number{
+
+    color:var(--color-title);
+
+    font-size:1.35rem;
+    font-weight:700;
+
+    letter-spacing:.08rem;
+}
+
+.saved-card-footer{
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:2rem;
+}
+
+.saved-card-footer div{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:.35rem;
+}
+
+.saved-card-footer div:last-child{
+
+    align-items:flex-end;
+}
+
+.saved-card-footer span{
+
+    color:var(--color-text);
+
+    font-size:.8rem;
+}
+
+.saved-card-footer strong{
+
+    color:var(--color-title);
+
+    font-size:.95rem;
+}
+
+
+/* ==========================================================
+   992
+========================================================== */
+
+@media (max-width:992px){
+
+    .my-wallet{
+
+        padding:10rem 0 4rem;
+
+    }
+
+    .my-wallet-header h1{
+
+        font-size:2.7rem;
+
+    }
+
+    .wallet-balance-card{
+
+        padding:1.8rem 2rem;
+
+    }
+
+    .wallet-cards-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* ==========================================================
+   768
+========================================================== */
+
+@media (max-width:768px){
+
+    .my-wallet{
+
+        padding:8.5rem 0 3rem;
+
+    }
+
+    .my-wallet-container{
+
+        padding:0 1rem;
+
+    }
+
+    .my-wallet-header{
+
+        margin-bottom:2rem;
+
+    }
+
+    .my-wallet-header h1{
+
+        font-size:2rem;
+
+    }
+
+    .my-wallet-header p{
+
+        font-size:.95rem;
+
+    }
+
+    .wallet-balance-card{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:1.5rem;
+
+        padding:1.5rem;
+
+    }
+
+    .wallet-balance-content h2{
+
+        font-size:2.2rem;
+
+    }
+
+    .wallet-tabs{
+
+        flex-direction:column;
+
+    }
+
+    .wallet-tabs button{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .wallet-item{
+
+        padding:1.4rem;
+
+    }
+
+    .wallet-item-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:1rem;
+
+    }
+
+    .wallet-donation-control{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .wallet-item-footer{
+
+        gap:1rem;
+
+    }
+
+    .saved-card{
+
+        min-height:auto;
+
+        padding:1.5rem;
+
+    }
+
+}
+
+/* ==========================================================
+   340
+========================================================== */
+
+@media (max-width:340px){
+
+    .my-wallet{
+
+        padding:8rem 0 2rem;
+
+    }
+
+    .my-wallet-container{
+
+        padding:0 .8rem;
+
+    }
+
+    .my-wallet-header h1{
+
+        font-size:1.6rem;
+
+    }
+
+    .my-wallet-header p{
+
+        font-size:.85rem;
+
+    }
+
+    .wallet-balance-card{
+
+        padding:1.2rem;
+
+    }
+
+    .wallet-balance-content h2{
+
+        font-size:1.8rem;
+
+    }
+
+    .wallet-tabs button{
+
+        height:50px;
+
+        padding:0 1rem;
+
+        font-size:.85rem;
+
+    }
+
+    .wallet-item{
+
+        padding:1.2rem;
+
+    }
+
+    .wallet-item-header h3{
+
+        font-size:1rem;
+
+    }
+
+    .wallet-item-footer{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:.8rem;
+
+    }
+
+    .saved-card{
+
+        padding:1.2rem;
+
+    }
+
+    .saved-card-number{
+
+        font-size:1.05rem;
+
+        word-break:break-word;
+
+    }
+
+    .saved-card-footer{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:1rem;
+
+    }
+
+    .saved-card-footer div:last-child{
+
+        align-items:flex-start;
+
+    }
+
+}

@@ -1,49 +1,32 @@
 import "./FeaturedCampaigns.css";
 
+import { useEffect, useState } from "react";
+
 import { ArrowRight, BookOpen } from "lucide-react";
+
+import { Link } from "react-router-dom";
 
 import CampaignCard from "../CampaignCard/CampaignCard";
 
+import { getFeaturedCampaigns } from "../../../services/campaigns";
+
 function FeaturedCampaigns() {
 
-    const campaigns = [
-        {
-            image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
-            category: "Saúde",
-            title: "Ajude a Luna a voltar a andar",
-            description:
-                "Luna foi atropelada e precisa de uma cirurgia urgente para recuperar seus movimentos.",
-            raised: 3560,
-            goal: 8000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1542838132-92c53300491e",
-            category: "Alimentação",
-            title: "Cestas básicas para famílias",
-            description:
-                "Sua doação leva alimento e esperança para famílias que mais precisam.",
-            raised: 7890,
-            goal: 15000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-            category: "Educação",
-            title: "Material escolar transforma",
-            description:
-                "Ajude a garantir materiais escolares para crianças e adolescentes estudarem.",
-            raised: 2410,
-            goal: 6000
-        },
-        {
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-            category: "Educação",
-            title: "Material escolar transforma",
-            description:
-                "Ajude a garantir materiais escolares para crianças e adolescentes estudarem.",
-            raised: 2410,
-            goal: 6000
-        }
-    ];
+    const [campaigns, setCampaigns] = useState<any[]>([]);
+
+    useEffect(() => {
+
+        const unsubscribe = getFeaturedCampaigns(
+            (data) => {
+
+                setCampaigns(data);
+
+            }
+        );
+
+        return () => unsubscribe();
+
+    }, []);
 
     return (
 
@@ -71,28 +54,33 @@ function FeaturedCampaigns() {
 
                     </div>
 
-                    <button className="featured-button">
+                    <Link
+                        to="/campanhas"
+                        className="featured-button"
+                    >
 
                         Ver todas as campanhas
 
                         <ArrowRight size={20} />
 
-                    </button>
+                    </Link>
 
                 </div>
 
                 <div className="featured-grid">
 
-                    {campaigns.map((campaign, index) => (
+                    {campaigns.map((campaign) => (
 
                         <CampaignCard
-                            key={index}
-                            image={campaign.image}
+                            key={campaign.id}
+                            slug={campaign.slug}
+                            image={campaign.coverImage}
                             category={campaign.category}
                             title={campaign.title}
-                            description={campaign.description}
-                            raised={campaign.raised}
-                            goal={campaign.goal}
+                            description={campaign.story}
+                            raised={campaign.raisedAmount}
+                            goal={campaign.goalAmount}
+                            duration={campaign.duration}
                         />
 
                     ))}

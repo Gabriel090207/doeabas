@@ -1,23 +1,28 @@
 import "./CampaignCard.css";
+import { Link } from "react-router-dom";
 
 import { Heart } from "lucide-react";
 
 interface CampaignCardProps {
+    slug: string;
     image: string;
     category: string;
     title: string;
     description: string;
     raised: number;
     goal: number;
+    duration: string;
 }
 
 function CampaignCard({
+    slug,
     image,
     category,
     title,
     description,
     raised,
-    goal
+    goal,
+    duration
 }: CampaignCardProps) {
 
     const progress = Math.min(Math.round((raised / goal) * 100), 100);
@@ -70,9 +75,17 @@ function CampaignCard({
 
                 <div className="campaign-progress">
 
-                    <span className="campaign-progress-value">
-                        {progress}%
-                    </span>
+                    <div className="campaign-progress-info">
+
+                        <span className="campaign-duration">
+                            Tempo restante: {duration}
+                        </span>
+
+                        <span className="campaign-progress-value">
+                            {progress}%
+                        </span>
+
+                    </div>
 
                     <div className="campaign-progress-bar">
 
@@ -125,9 +138,12 @@ function CampaignCard({
 
                 <div className="campaign-actions">
 
-                    <button className="campaign-button">
+                    <Link
+                        to={`/campanha/${slug}`}
+                        className="campaign-button"
+                    >
                         Apoiar campanha
-                    </button>
+                    </Link>
 
                     <button className="campaign-favorite">
 

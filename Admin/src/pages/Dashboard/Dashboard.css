@@ -1,0 +1,194 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    color: var(--color-title);
+    margin-bottom: 6px;
+}
+
+.dashboard-header p {
+    color: var(--color-text);
+    font-size: .95rem;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 24px;
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition: .25s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.dashboard-card-icon {
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius-full);
+
+    background: rgba(255, 98, 0, .12);
+
+    color: var(--color-primary);
+
+    flex-shrink: 0;
+}
+
+.dashboard-card span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--color-text);
+
+    font-size: .9rem;
+}
+
+.dashboard-card h2 {
+    font-size: 1.3rem;
+    color: var(--color-title);
+    font-weight: 700;
+}
+
+.dashboard-donations {
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    overflow: hidden;
+}
+
+.dashboard-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 28px;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-card-header h2 {
+    font-size: 1.1rem;
+    color: var(--color-title);
+}
+
+.dashboard-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px 28px;
+
+    border-bottom: 1px solid var(--color-border);
+
+    transition: .2s;
+}
+
+.dashboard-row:last-child {
+    border-bottom: none;
+}
+
+.dashboard-row:hover {
+    background: rgba(255, 98, 0, .03);
+}
+
+.dashboard-donor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--color-title);
+
+    font-weight: 600;
+}
+
+.dashboard-donor svg {
+    color: var(--color-primary);
+}
+
+.dashboard-campaign {
+    color: var(--color-text);
+}
+
+.dashboard-method {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    padding: 8px 14px;
+
+    border-radius: var(--radius-full);
+
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.dashboard-method.pix {
+    background: rgba(0, 184, 148, .12);
+    color: #00B894;
+}
+
+.dashboard-method.cartao {
+    background: rgba(255, 98, 0, .12);
+    color: var(--color-primary);
+}
+
+.dashboard-method.carteira {
+    background: rgba(37, 99, 235, .12);
+    color: #2563EB;
+}
+
+.dashboard-method svg {
+    font-size: 16px;
+}
+
+.dashboard-value {
+    color: var(--color-title);
+    font-size: 1rem;
+    font-weight: 700;
+
+    text-align: right;
+}

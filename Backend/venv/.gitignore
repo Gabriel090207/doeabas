@@ -1,0 +1,82 @@
+# ==========================
+# Python
+# ==========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==========================
+# Virtual Environment
+# ==========================
+
+venv/
+env/
+.venv/
+ENV/
+
+# ==========================
+# Environment Variables
+# ==========================
+
+.env
+
+
+# ==========================
+# Firebase Credentials
+# ==========================
+
+firebase-key.json
+serviceAccountKey.json
+firebase/serviceAccountKey.json
+app/firebase/firebase-key.json
+
+
+# ==========================
+# Logs
+# ==========================
+
+*.log
+logs/
+
+
+# ==========================
+# Test / Cache
+# ==========================
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+
+# ==========================
+# IDE
+# ==========================
+
+.vscode/
+.idea/
+
+
+# ==========================
+# Sistema
+# ==========================
+
+.DS_Store
+Thumbs.db
+
+
+# ==========================
+# Banco local
+# ==========================
+
+*.sqlite3
+*.db
+
+
+# ==========================
+# Arquivos temporários
+# ==========================
+
+*.tmp
+*.swp
+*.bak

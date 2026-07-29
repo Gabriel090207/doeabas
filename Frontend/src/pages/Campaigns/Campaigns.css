@@ -56,12 +56,17 @@
 .campaigns-filters{
 
     display:grid;
-    grid-template-columns:2fr 1fr 1fr;
+
+    grid-template-columns:2fr 1fr 1fr 1fr;
 
     gap:1rem;
 
+    align-items:center;
+
     margin-bottom:3rem;
+
 }
+
 
 .campaign-search{
 
@@ -78,11 +83,25 @@
     border:1px solid var(--color-border);
 
     border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-sm);
+
+    transition:.25s;
+
+}
+
+.campaign-search:focus-within{
+
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 4px rgba(255,98,0,.08);
+
 }
 
 .campaign-search svg{
 
-    color:#8a8a8a;
+    color:var(--color-text);
+
 }
 
 .campaign-search input{
@@ -90,21 +109,33 @@
     flex:1;
 
     border:none;
+
     outline:none;
 
-    background:none;
+    background:transparent;
+
+    color:var(--color-title);
 
     font-size:.95rem;
+
+}
+
+.campaign-search input::placeholder{
+
+    color:#9ca3af;
+
 }
 
 .campaign-select{
 
     position:relative;
+
 }
 
 .campaign-select select{
 
     width:100%;
+
     height:56px;
 
     padding:0 3rem 0 1rem;
@@ -115,11 +146,30 @@
 
     background:var(--color-white);
 
+    color:var(--color-title);
+
+    font-size:.95rem;
+
     appearance:none;
+
+    -webkit-appearance:none;
+
+    -moz-appearance:none;
 
     cursor:pointer;
 
-    font-size:.95rem;
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.campaign-select select:focus{
+
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 4px rgba(255,98,0,.08);
+
 }
 
 .campaign-select svg{
@@ -127,14 +177,17 @@
     position:absolute;
 
     top:50%;
+
     right:1rem;
 
     transform:translateY(-50%);
 
     pointer-events:none;
 
-    color:#777;
+    color:var(--color-text);
+
 }
+
 
 /* ==========================================================
    GRID
@@ -235,14 +288,16 @@
         max-width:700px;
     }
 
-    .campaigns-filters{
+   .campaigns-filters{
 
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(3,1fr);
+
     }
 
     .campaign-search{
 
         grid-column:1 / -1;
+
     }
 
     .campaigns-grid{
@@ -291,9 +346,23 @@
 
         display:grid;
 
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr;
 
         gap:.8rem;
+
+    }
+
+    .campaign-search{
+
+        grid-column:auto;
+
+    }
+
+    .campaign-search,
+    .campaign-select select{
+
+        height:52px;
+
     }
 
     .campaign-search{
@@ -385,5 +454,52 @@
 
         font-size:.8rem;
     }
+
+}
+
+
+.campaigns-empty{
+
+    grid-column:1 / -1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:.75rem;
+
+    padding:5rem 2rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-white);
+
+    box-shadow:var(--shadow-sm);
+
+    text-align:center;
+
+}
+
+.campaigns-empty h3{
+
+    color:var(--color-title);
+
+    font-size:1.4rem;
+
+}
+
+.campaigns-empty p{
+
+    color:var(--color-text);
+
+    max-width:420px;
+
+    line-height:1.7;
 
 }

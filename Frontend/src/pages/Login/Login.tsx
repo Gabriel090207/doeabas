@@ -1,10 +1,15 @@
 import "./Login.css";
 
+import { useState } from "react";
+
+import RegisterModal from "./components/RegisterModal";
+
 import { Link } from "react-router-dom";
 
 import {
     ArrowLeft,
     Eye,
+    EyeOff,
     Lock,
     Mail,
 } from "lucide-react";
@@ -13,8 +18,121 @@ import background from "../../assets/images/login-background.png";
 import bunny from "../../assets/images/login-bunny.png";
 import logo from "../../assets/images/logo.png";
 
+import { useNavigate } from "react-router-dom";
+
+import { useToast } from "../../hooks/useToast";
+
+import { useAuth } from "../../hooks/useAuth";
 
 function Login() {
+
+const [registerOpen, setRegisterOpen] = useState(false);
+
+const [email, setEmail] = useState("");
+
+const [password, setPassword] = useState("");
+
+const navigate = useNavigate();
+
+const { show } = useToast();
+
+const { login, loading } = useAuth();
+
+const [showPassword, setShowPassword] =
+    useState(false);
+
+function handleRegisterSuccess(
+    email: string,
+    password: string,
+) {
+
+    setEmail(email);
+
+    setPassword(password);
+
+}
+
+async function handleLogin(
+    event: React.FormEvent<HTMLFormElement>,
+) {
+
+    event.preventDefault();
+
+    if (!email.trim()) {
+
+        show({
+
+            type: "error",
+
+            title: "E-mail obrigatório",
+
+            message: "Informe seu e-mail.",
+
+        });
+
+        return;
+
+    }
+
+    if (!password.trim()) {
+
+        show({
+
+            type: "error",
+
+            title: "Senha obrigatória",
+
+            message: "Informe sua senha.",
+
+        });
+
+        return;
+
+    }
+
+    try {
+
+        await login(
+
+            email,
+
+            password,
+
+        );
+
+        show({
+
+            type: "success",
+
+            title: "Login realizado",
+
+            message: "Bem-vindo de volta!",
+
+        });
+
+        navigate("/");
+
+    } catch (error) {
+
+        show({
+
+            type: "error",
+
+            title: "Erro ao entrar",
+
+            message:
+
+                error instanceof Error
+
+                    ? error.message
+
+                    : "Não foi possível entrar.",
+
+        });
+
+    }
+
+}
 
     return (
 
@@ -99,7 +217,7 @@ function Login() {
 
                     </h2>
 
-                    <form>
+                    <form onSubmit={handleLogin}>
 
                         {/* Email */}
 
@@ -118,6 +236,8 @@ function Login() {
                                 <input
                                     type="email"
                                     placeholder="seu@email.com"
+                                    value={email}
+                                    onChange={(event) => setEmail(event.target.value)}
                                 />
 
                             </div>
@@ -139,16 +259,45 @@ function Login() {
                                 <Lock size={20} />
 
                                 <input
-                                    type="password"
+                                    type={
+                                        showPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     placeholder="Sua senha"
+                                    value={password}
+                                    onChange={(event) => setPassword(event.target.value)}
                                 />
 
                                 <button
                                     type="button"
                                     className="show-password"
+                                    onClick={() =>
+                                        setShowPassword(
+                                            (currentValue) =>
+                                                !currentValue
+                                        )
+                                    }
+                                    aria-label={
+                                        showPassword
+                                            ? "Ocultar senha"
+                                            : "Mostrar senha"
+                                    }
                                 >
 
-                                    <Eye size={20} />
+                                    {
+
+                                        showPassword ? (
+
+                                            <EyeOff size={20} />
+
+                                        ) : (
+
+                                            <Eye size={20} />
+
+                                        )
+
+                                    }
 
                                 </button>
 
@@ -181,9 +330,18 @@ function Login() {
                         <button
                             type="submit"
                             className="login-button"
+                            disabled={loading}
                         >
 
-                            Entrar
+                            {
+
+                                loading
+
+                                    ? "Entrando..."
+
+                                    : "Entrar"
+
+                            }
 
                         </button>
 
@@ -203,17 +361,28 @@ function Login() {
 
                         </span>
 
-                        <Link to="">
+                        <button
+                            type="button"
+                            className="login-register-button"
+                            onClick={() => setRegisterOpen(true)}
+                        >
 
                             Criar conta
 
-                        </Link>
+                        </button>
 
                     </div>
 
                 </div>
 
             </div>
+
+
+            <RegisterModal
+                open={registerOpen}
+                onClose={() => setRegisterOpen(false)}
+                onSuccess={handleRegisterSuccess}
+            />
 
         </section>
 

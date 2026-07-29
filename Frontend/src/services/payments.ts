@@ -83,6 +83,10 @@ interface CardPaymentData {
 
     cpf: string;
 
+    expiration_month: number;
+
+    expiration_year: number;
+
 }
 
 

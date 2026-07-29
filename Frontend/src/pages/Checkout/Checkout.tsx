@@ -717,7 +717,14 @@ async function handleCreateCard(){
 
 
                 cpf:
-                    donorCpf.replace(/\D/g,"")
+                    donorCpf.replace(/\D/g,""),
+
+                expiration_month:
+                    Number(expiration[0]),
+
+
+                expiration_year:
+                    Number("20" + expiration[1])
 
             });
 

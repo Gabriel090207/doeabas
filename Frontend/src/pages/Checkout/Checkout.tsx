@@ -696,7 +696,7 @@ async function handleCreateCard(){
                 cardToken.id,
 
             issuer_id:
-                paymentMethods.results[0]?.issuer?.id,
+                paymentMethods.results[0]?.issuer?.id?.toString(),
 
             payment_method_id:
                 paymentMethods.results[0]?.id,

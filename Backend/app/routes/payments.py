@@ -115,9 +115,6 @@ def create_pix(
 
 
 
-    print("====================")
-    print(response)
-    print("====================")
 
 
 
@@ -136,9 +133,7 @@ def create_pix(
 
     payment = response["response"]
 
-    print("========== MERCADO PAGO ==========")
-    print(response)
-    print("==================================")
+ 
 
     if not payment.get("id"):
 
@@ -283,14 +278,6 @@ async def mercadopago_webhook(
 
         payment = payment_response["response"]
 
-
-
-        print("====================")
-        print(payment)
-        print("====================")
-
-
-
         if payment.get("status") != "approved":
 
             return {
@@ -395,7 +382,7 @@ async def mercadopago_webhook(
     except Exception as error:
 
 
-        print(error)
+     
 
 
         return {
@@ -431,12 +418,6 @@ def payment_status(
 def create_card_payment(
     data: CardPayment
 ):
-
-    import json
-
-    print("\n========== CARD DATA ==========")
-    print(json.dumps(data.model_dump(), indent=2, ensure_ascii=False))
-    print("================================\n")
 
     payment_data = {
 
@@ -505,19 +486,10 @@ def create_card_payment(
 
     }
 
-    print("\n========== PAYMENT DATA ==========")
-    print(json.dumps(payment_data, indent=2, ensure_ascii=False))
-    print("==================================\n")
 
     response = sdk.payment().create(
         payment_data
     )
-
-
-
-    print("\n========== MERCADO PAGO RESPONSE ==========")
-    print(json.dumps(response, indent=2, ensure_ascii=False))
-    print("===========================================\n")
 
 
 
@@ -604,27 +576,6 @@ def create_card_payment(
                 datetime.utcnow()
 
         })
-
-
-
-        campaign_ref = (
-            db.collection("campaigns")
-            .document(
-                data.campaign_id
-            )
-        )
-
-
-        campaign_ref.update({
-
-            "raisedAmount":
-                Increment(
-                    data.amount
-                )
-
-        })
-
-
 
     return {
 

@@ -186,9 +186,9 @@ useEffect(() => {
             }
 
 
-        }catch(error){
+        }catch{
 
-            console.log(error);
+           
 
         }
 
@@ -588,14 +588,10 @@ async function handleCreateCard(){
 
 
 
-        console.log("CARD EXPIRATION:", cardExpiration);
-
+        
         const expiration =
             cardExpiration.replace(/\s/g,"").split("/");
 
-        console.log("EXPIRATION ARRAY:", expiration);
-        console.log("MONTH:", expiration[0]);
-        console.log("YEAR:", expiration[1]);
 
 
         if(
@@ -652,17 +648,6 @@ async function handleCreateCard(){
 
             });
 
-        console.log(
-            "BANDEIRA",
-            paymentMethods
-        );
-
-        console.log(
-            "TOKEN",
-            cardToken
-        );
-
-
         if(
             !paymentMethods.results ||
             paymentMethods.results.length === 0
@@ -681,12 +666,6 @@ async function handleCreateCard(){
 
         }
 
-
-
-        console.log(
-            "TOKEN",
-            cardToken
-        );
 
         const payload = {
 
@@ -727,21 +706,13 @@ async function handleCreateCard(){
 
         };
 
-        console.log(
-            "PAYLOAD",
-            payload
-        );
+
 
         const response =
             await createCardPayment(
                 payload
             );
 
-
-        console.log(
-            "PAGAMENTO CARTÃO",
-            response
-        );
 
 
         if (
@@ -775,7 +746,7 @@ async function handleCreateCard(){
 
     }catch(error){
 
-        console.log(error);
+  
 
         show({
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from pydantic import BaseModel
 
@@ -8,6 +8,7 @@ from datetime import datetime
 
 from app.config.firebase import db
 
+from google.cloud.firestore_v1 import Increment
 
 router = APIRouter()
 
@@ -226,3 +227,153 @@ def create_pix(
             )
 
     }
+
+
+@router.post("/webhook")
+async def mercadopago_webhook(
+    request: Request
+):
+
+    try:
+
+        payment_id = request.query_params.get(
+            "data.id"
+        )
+
+
+        if not payment_id:
+
+            return {
+                "success": True
+            }
+
+
+
+        payment_response = sdk.payment().get(
+            payment_id
+        )
+
+
+        payment = payment_response["response"]
+
+
+
+        print("====================")
+        print(payment)
+        print("====================")
+
+
+
+        if payment.get("status") != "approved":
+
+            return {
+
+                "success": True,
+
+                "status":
+                    payment.get("status")
+
+            }
+
+
+
+        donations = (
+            db.collection("donations")
+            .where(
+                "paymentId",
+                "==",
+                int(payment_id)
+            )
+            .limit(1)
+            .get()
+        )
+
+
+
+        if len(donations) == 0:
+
+            return {
+
+                "success": False,
+
+                "message":
+                    "Doação não encontrada"
+
+            }
+
+
+
+        donation_doc = donations[0]
+
+
+        donation = donation_doc.to_dict()
+
+
+
+        if donation.get("status") == "approved":
+
+            return {
+
+                "success": True,
+
+                "message":
+                    "Doação já aprovada"
+
+            }
+
+
+
+        donation_doc.reference.update({
+
+            "status":
+                "approved",
+
+            "paymentStatus":
+                "approved",
+
+            "approvedAt":
+                datetime.utcnow()
+
+        })
+
+
+
+        campaign_ref = (
+            db.collection("campaigns")
+            .document(
+                donation["campaignId"]
+            )
+        )
+
+
+        campaign_ref.update({
+
+            "raisedAmount":
+                Increment(
+                    donation["amount"]
+                )
+
+        })
+
+
+        return {
+
+            "success":
+                True
+
+        }
+
+
+
+    except Exception as error:
+
+
+        print(error)
+
+
+        return {
+
+            "success":
+                False
+
+        }

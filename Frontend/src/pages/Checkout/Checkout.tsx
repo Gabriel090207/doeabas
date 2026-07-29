@@ -616,42 +616,32 @@ async function handleCreateCard(){
 
         }
 
-
-        
-
-
+       
         const cardToken =
             await mpRef.current.createCardToken({
 
                 cardNumber:
-                    cardNumber.replace(/\s/g,""),
-
+                    cardNumber.replace(/\s/g, ""),
 
                 cardholderName:
                     cardName,
 
-
                 securityCode:
                     cardCvv,
 
-
-                expirationMonth:
+                cardExpirationMonth:
                     expiration[0],
 
-
-                expirationYear:
+                cardExpirationYear:
                     "20" + expiration[1],
-
 
                 identificationType:
                     "CPF",
 
-
                 identificationNumber:
-                    donorCpf.replace(/\D/g,"")
+                    donorCpf.replace(/\D/g, "")
 
             });
-
 
 
         const paymentMethods =

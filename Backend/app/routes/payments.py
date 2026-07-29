@@ -136,7 +136,9 @@ def create_pix(
 
     payment = response["response"]
 
-
+    print("========== MERCADO PAGO ==========")
+    print(response)
+    print("==================================")
 
     if not payment.get("id"):
 
@@ -144,8 +146,8 @@ def create_pix(
 
             "success": False,
 
-            "error":
-                "Pagamento sem ID retornado"
+            "mercadopago_response": response,
+            "payment": payment
 
         }
 

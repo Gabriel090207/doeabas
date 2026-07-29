@@ -424,6 +424,7 @@ def payment_status(
     }
 
 
+
 @router.post("/payments/create-card")
 def create_card_payment(
     data: CardPayment
@@ -432,9 +433,8 @@ def create_card_payment(
 
     payment_data = {
 
-
         "transaction_amount":
-            data.amount,
+            float(data.amount),
 
 
         "token":
@@ -445,43 +445,19 @@ def create_card_payment(
             data.campaign_title,
 
 
+        "installments":
+            data.installments,
+
+
         "payment_method_id":
             data.payment_method_id,
 
 
-        "installments":
-            data.installments,
-
-        "expiration_month":
-            data.expiration_month,
-
-
-        "expiration_year":
-            data.expiration_year,
-
-        "payer": {
-
-
-            "email":
-                data.email,
-
-
-            "identification": {
-
-                "type":
-                    "CPF",
-
-
-                "number":
-                    data.cpf
-
-            }
-
-        },
+        "issuer_id":
+            data.issuer_id,
 
 
         "metadata": {
-
 
             "campaign_id":
                 data.campaign_id,
@@ -498,18 +474,29 @@ def create_card_payment(
             "donor_email":
                 data.email
 
+        },
+
+
+        "payer": {
+
+            "email":
+                data.email,
+
+
+            "identification": {
+
+                "type":
+                    "CPF",
+
+
+                "number":
+                    data.cpf
+
+            }
+
         }
 
     }
-
-
-
-    if data.issuer_id:
-
-
-        payment_data["issuer_id"] = (
-            data.issuer_id
-        )
 
 
 
@@ -543,15 +530,12 @@ def create_card_payment(
 
 
 
-
     if not payment.get("id"):
 
 
         return {
 
-
             "success": False,
-
 
             "error":
                 "Pagamento sem ID retornado"
@@ -560,10 +544,7 @@ def create_card_payment(
 
 
 
-
-
     if payment.get("status") == "approved":
-
 
 
         donation_ref = (
@@ -572,9 +553,7 @@ def create_card_payment(
         )
 
 
-
         donation_ref.set({
-
 
             "paymentId":
                 payment.get("id"),
@@ -616,6 +595,26 @@ def create_card_payment(
                 datetime.utcnow()
 
         })
+
+
+
+        campaign_ref = (
+            db.collection("campaigns")
+            .document(
+                data.campaign_id
+            )
+        )
+
+
+        campaign_ref.update({
+
+            "raisedAmount":
+                Increment(
+                    data.amount
+                )
+
+        })
+
 
 
     return {

@@ -646,20 +646,19 @@ async function handleCreateCard(){
 
 
 
-        const paymentMethod =
+        const paymentMethods =
             await mpRef.current.getPaymentMethods({
 
                 bin:
-                    cardNumber.replace(/\s/g,"").substring(0,6)
+                    cardToken.first_six_digits
 
             });
 
 
         if(
-            !paymentMethod.results ||
-            paymentMethod.results.length === 0
+            !paymentMethods.results ||
+            paymentMethods.results.length === 0
         ){
-
             show({
 
                 type:"error",
@@ -689,8 +688,12 @@ async function handleCreateCard(){
                     cardToken.id,
 
 
+                issuer_id:
+                    paymentMethods.results[0]?.issuer?.id,
+
+
                 payment_method_id:
-                    paymentMethod.results[0].id,
+                    paymentMethods.results[0]?.id,
 
 
                 installments,

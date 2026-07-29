@@ -654,6 +654,16 @@ async function handleCreateCard(){
 
             });
 
+        console.log(
+            "BANDEIRA",
+            paymentMethods
+        );
+
+        console.log(
+            "TOKEN",
+            cardToken
+        );
+
 
         if(
             !paymentMethods.results ||
@@ -680,56 +690,54 @@ async function handleCreateCard(){
             cardToken
         );
 
+        const payload = {
+
+            token:
+                cardToken.id,
+
+            issuer_id:
+                paymentMethods.results[0]?.issuer?.id,
+
+            payment_method_id:
+                paymentMethods.results[0]?.id,
+
+            installments,
+
+            amount:
+                donationValue,
+
+            email:
+                donorEmail,
+
+            campaign_id:
+                campaign.id,
+
+            campaign_title:
+                campaign.title,
+
+            donor_name:
+                donorName,
+
+            cpf:
+                donorCpf.replace(/\D/g,""),
+
+            expiration_month:
+                Number(expiration[0]),
+
+            expiration_year:
+                Number("20" + expiration[1])
+
+        };
+
+        console.log(
+            "PAYLOAD",
+            payload
+        );
 
         const response =
-            await createCardPayment({
-
-                token:
-                    cardToken.id,
-
-
-                issuer_id:
-                    paymentMethods.results[0]?.issuer?.id,
-
-
-                payment_method_id:
-                    paymentMethods.results[0]?.id,
-
-
-                installments,
-
-
-                amount:
-                    donationValue,
-
-
-                email:
-                    donorEmail,
-
-
-                campaign_id:
-                    campaign.id,
-
-
-                campaign_title:
-                    campaign.title,
-
-
-                donor_name:
-                    donorName,
-
-
-                cpf:
-                    donorCpf.replace(/\D/g,""),
-
-                expiration_month:
-                    Number(expiration[0]),
-
-
-                expiration_year:
-                    Number("20" + expiration[1])
-
-            });
+            await createCardPayment(
+                payload
+            );
 
 
         console.log(
@@ -738,19 +746,46 @@ async function handleCreateCard(){
         );
 
 
+        if (
+            response.status === "approved"
+        ) {
+
+            setShowLoading(true);
+
+            setTimeout(() => {
+
+                navigate(
+                    "/sucesso"
+                );
+
+            }, 2500);
+
+        } else {
+
+            show({
+
+                type: "error",
+
+                title: "Pagamento recusado",
+
+                message: "O cartão não foi aprovado."
+
+            });
+
+        }
+
+
     }catch(error){
 
-
         console.log(error);
-
 
         show({
 
             type:"error",
 
-            title:"Erro no cartão",
+            title:"Erro no pagamento",
 
-            message:"Não foi possível validar os dados do cartão."
+            message:"Não foi possível processar o pagamento do cartão."
 
         });
 

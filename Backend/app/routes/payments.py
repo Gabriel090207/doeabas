@@ -619,16 +619,16 @@ def create_card_payment(
 
     return {
 
+        "success": True,
 
-        "success":
-            True,
+        "id": payment.get("id"),
 
+        "status": payment.get("status"),
 
-        "id":
-            payment.get("id"),
+        "payment_method":
+            payment.get("payment_method_id"),
 
-
-        "status":
-            payment.get("status")
+        "payment_type":
+            payment.get("payment_type_id")
 
     }

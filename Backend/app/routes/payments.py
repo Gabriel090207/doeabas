@@ -432,6 +432,11 @@ def create_card_payment(
     data: CardPayment
 ):
 
+    import json
+
+    print("\n========== CARD DATA ==========")
+    print(json.dumps(data.model_dump(), indent=2, ensure_ascii=False))
+    print("================================\n")
 
     payment_data = {
 
@@ -500,7 +505,9 @@ def create_card_payment(
 
     }
 
-
+    print("\n========== PAYMENT DATA ==========")
+    print(json.dumps(payment_data, indent=2, ensure_ascii=False))
+    print("==================================\n")
 
     response = sdk.payment().create(
         payment_data
@@ -508,9 +515,9 @@ def create_card_payment(
 
 
 
-    print("====================")
-    print(response)
-    print("====================")
+    print("\n========== MERCADO PAGO RESPONSE ==========")
+    print(json.dumps(response, indent=2, ensure_ascii=False))
+    print("===========================================\n")
 
 
 

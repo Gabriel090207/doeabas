@@ -588,8 +588,14 @@ async function handleCreateCard(){
 
 
 
+        console.log("CARD EXPIRATION:", cardExpiration);
+
         const expiration =
             cardExpiration.replace(/\s/g,"").split("/");
+
+        console.log("EXPIRATION ARRAY:", expiration);
+        console.log("MONTH:", expiration[0]);
+        console.log("YEAR:", expiration[1]);
 
 
         if(
@@ -610,6 +616,8 @@ async function handleCreateCard(){
 
         }
 
+
+        
 
 
         const cardToken =

@@ -22,6 +22,9 @@ import {
 
 import { db } from "../../services/firebase";
 
+import { DeleteUserModal } from "../../components/DeleteUserModal/DeleteUserModal";
+import { deleteUser } from "../../services/api";
+
 interface User {
 
     id: string;
@@ -53,6 +56,15 @@ export function Users() {
 
     const [orderFilter, setOrderFilter] =
         useState("recent");
+
+    const [selectedUser, setSelectedUser] =
+    useState<User | null>(null);
+
+    const [deleteModalOpen, setDeleteModalOpen] =
+        useState(false);
+
+    const [deleteLoading, setDeleteLoading] =
+        useState(false);
 
     useEffect(() => {
 
@@ -150,6 +162,36 @@ export function Users() {
             orderFilter,
 
         ]);
+
+        async function handleDelete() {
+
+            if (!selectedUser) {
+
+                return;
+
+            }
+
+            try {
+
+                setDeleteLoading(true);
+
+                await deleteUser(selectedUser.id);
+
+                setDeleteModalOpen(false);
+
+                setSelectedUser(null);
+
+            } catch (error) {
+
+                console.error(error);
+
+            } finally {
+
+                setDeleteLoading(false);
+
+            }
+
+        }
 
     return (
 
@@ -298,12 +340,22 @@ export function Users() {
                                 </div>
 
                                 <button
-                                    className="user-delete"
-                                >
 
-                                    <Trash2 size={18} />
+                                className="user-delete"
 
-                                </button>
+                                onClick={() => {
+
+                                    setSelectedUser(user);
+
+                                    setDeleteModalOpen(true);
+
+                                }}
+
+                            >
+
+                                <Trash2 size={18} />
+
+                            </button>
 
                             </div>
 
@@ -370,6 +422,27 @@ export function Users() {
                 }
 
             </div>
+
+
+            <DeleteUserModal
+
+            open={deleteModalOpen}
+
+            loading={deleteLoading}
+
+            userName={selectedUser?.fullName}
+
+            onCancel={() => {
+
+                setDeleteModalOpen(false);
+
+                setSelectedUser(null);
+
+            }}
+
+            onConfirm={handleDelete}
+
+        />
 
         </section>
 

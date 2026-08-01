@@ -6,6 +6,7 @@ from app.config.firebase import db
 
 from app.routes.donations import router as donations_router
 from app.routes.payments import router as payments_router
+from app.routes.users import router as users_router
 
 from app.config.mp import sdk
 
@@ -28,7 +29,7 @@ app.add_middleware(
     allow_origins=[
 
         "http://localhost:5173",
-
+        "http://localhost:5174",
         "https://doeabas.netlify.app"
 
     ],
@@ -62,8 +63,9 @@ app.include_router(
     payments_router
 )
 
-
-
+app.include_router(
+    users_router
+)
 
 # ==========================
 # TESTE API

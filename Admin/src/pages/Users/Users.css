@@ -443,6 +443,28 @@
 
     }
 
+    .user-top{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:16px;
+
+    }
+
+    .user-info{
+
+        width:100%;
+
+    }
+
+    .user-delete{
+
+        align-self:flex-end;
+
+    }
+
     .user-bottom{
 
         grid-template-columns:1fr;

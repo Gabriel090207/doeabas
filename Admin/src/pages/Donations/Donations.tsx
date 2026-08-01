@@ -19,12 +19,20 @@ import { SiPix } from "react-icons/si";
 
 import {
     collection,
+    doc,
     onSnapshot,
-    query,
     orderBy,
+    query,
+    runTransaction,
 } from "firebase/firestore";
 
 import { db } from "../../services/firebase";
+
+
+
+import { DeleteDonationModal } from "../../components/DeleteDonationModal/DeleteDonationModal";
+
+import { useToast } from "../../hooks/useToast";
 
 interface Donation {
 
@@ -44,6 +52,8 @@ interface Donation {
 
     createdAt: any;
 
+    campaignId: string;
+
 }
 
 export function Donations() {
@@ -62,6 +72,15 @@ export function Donations() {
 
     const [sort, setSort] =
         useState("recent");
+
+
+    const { show } = useToast();
+
+    const [donationToDelete, setDonationToDelete] =
+        useState<Donation | null>(null);
+
+    const [deleting, setDeleting] =
+        useState(false);
 
     useEffect(() => {
 
@@ -204,6 +223,164 @@ export function Donations() {
             sort
 
         ]);
+
+
+    async function handleDeleteDonation() {
+
+    if (!donationToDelete) return;
+
+    try {
+
+        setDeleting(true);
+
+        const donationRef = doc(
+
+            db,
+
+            "donations",
+
+            donationToDelete.id
+
+        );
+
+        await runTransaction(
+
+            db,
+
+            async (transaction) => {
+
+                const donationSnapshot =
+                    await transaction.get(donationRef);
+
+                if (!donationSnapshot.exists()) {
+
+                    throw new Error(
+                        "A doação não foi encontrada."
+                    );
+
+                }
+
+                const donationData =
+                    donationSnapshot.data();
+
+                const campaignId =
+                    donationData.campaignId;
+
+                const amount =
+                    Number(donationData.amount || 0);
+
+                const donationStatus =
+                    donationData.status;
+
+                /*
+                 * Se a doação estiver aprovada,
+                 * precisamos descontar seu valor
+                 * da campanha.
+                 */
+
+                if (
+                    donationStatus === "approved" &&
+                    campaignId
+                ) {
+
+                    const campaignRef = doc(
+
+                        db,
+
+                        "campaigns",
+
+                        campaignId
+
+                    );
+
+                    const campaignSnapshot =
+                        await transaction.get(campaignRef);
+
+                    if (!campaignSnapshot.exists()) {
+
+                        throw new Error(
+                            "A campanha vinculada não foi encontrada."
+                        );
+
+                    }
+
+                    const campaignData =
+                        campaignSnapshot.data();
+
+                    const currentRaisedAmount =
+                        Number(
+                            campaignData.raisedAmount || 0
+                        );
+
+                    const newRaisedAmount =
+                        Math.max(
+
+                            currentRaisedAmount - amount,
+
+                            0
+
+                        );
+
+                    transaction.update(
+
+                        campaignRef,
+
+                        {
+
+                            raisedAmount:
+                                newRaisedAmount
+
+                        }
+
+                    );
+
+                }
+
+                transaction.delete(
+                    donationRef
+                );
+
+            }
+
+        );
+
+        show({
+
+            type: "success",
+
+            title: "Doação excluída",
+
+            message:
+                "A doação foi excluída e o valor arrecadado da campanha foi atualizado.",
+
+        });
+
+        setDonationToDelete(null);
+
+    } catch (error) {
+
+        console.error(error);
+
+        show({
+
+            type: "error",
+
+            title: "Erro ao excluir",
+
+            message:
+                error instanceof Error
+                    ? error.message
+                    : "Não foi possível excluir a doação.",
+
+        });
+
+    } finally {
+
+        setDeleting(false);
+
+    }
+
+}
 
     return (
 
@@ -434,8 +611,13 @@ export function Donations() {
 
                                     <div className="donation-actions">
 
-                                        <button
+                                       <button
+                                            type="button"
                                             className="donation-delete"
+                                            onClick={() =>
+                                                setDonationToDelete(donation)
+                                            }
+                                            aria-label={`Excluir doação de ${donation.donorName}`}
                                         >
 
                                             <Trash2 size={18} />
@@ -586,6 +768,17 @@ export function Donations() {
                 )}
 
             </div>
+
+
+            <DeleteDonationModal
+                open={donationToDelete !== null}
+                loading={deleting}
+                donorName={donationToDelete?.donorName}
+                onCancel={() =>
+                    setDonationToDelete(null)
+                }
+                onConfirm={handleDeleteDonation}
+            />
 
         </section>
 

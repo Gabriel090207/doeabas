@@ -13,6 +13,7 @@ import { CreateCampaign } from "../pages/CreateCampaign/CreateCampaign";
 import { EditCampaign } from "../pages/EditCampaign/EditCampaign";
 
 import { AdminLayout } from "../layouts/AdminLayout";
+import { PrivateRoute } from "./PrivateRoute";
 
 export function AppRoutes() {
 
@@ -25,7 +26,13 @@ export function AppRoutes() {
                 element={<Login />}
             />
 
-            <Route element={<AdminLayout />}>
+            <Route
+                element={
+                    <PrivateRoute>
+                        <AdminLayout />
+                    </PrivateRoute>
+                }
+            >
 
                 <Route
                     path="/"

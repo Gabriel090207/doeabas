@@ -16,6 +16,7 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
+
 import {
     collection,
     deleteDoc,
@@ -53,6 +54,8 @@ interface Campaign {
 
     status: string;
 
+    donationsCount: number;
+
 }
 
 export function Campaigns() {
@@ -62,6 +65,10 @@ export function Campaigns() {
     const { show } = useToast();
 
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+
+    const [donationsCount, setDonationsCount] = useState<
+        Record<string, number>
+    >({});
 
     const [search, setSearch] = useState("");
 
@@ -179,9 +186,51 @@ export function Campaigns() {
 
         }
 
-        const unsubscribe = loadCampaigns();
 
-        return () => unsubscribe();
+        function listenDonationsCount() {
+
+            return onSnapshot(
+
+                collection(db, "donations"),
+
+                (snapshot) => {
+
+                    const counts: Record<string, number> = {};
+
+                    snapshot.docs.forEach((doc) => {
+
+                        const donation = doc.data();
+
+                        if (!donation.campaignId) return;
+
+                        counts[donation.campaignId] =
+                            (counts[donation.campaignId] || 0) + 1;
+
+                    });
+
+                    setDonationsCount(counts);
+
+                }
+
+            );
+
+        }
+
+        const unsubscribeDonations =
+            listenDonationsCount();
+
+        const unsubscribe =
+            loadCampaigns();
+
+      
+
+       return () => {
+
+            unsubscribe();
+
+            unsubscribeDonations();
+
+        };
 
     }, []);
 
@@ -453,7 +502,7 @@ export function Campaigns() {
                                 <span>Doações</span>
 
                                 <strong className="campaign-value">
-                                    0
+                                    {donationsCount[campaign.id] || 0}
                                 </strong>
 
                             </div>

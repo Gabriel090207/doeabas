@@ -12,7 +12,7 @@ export function PrivateRoute({ children }: PrivateRouteProps) {
     const { authenticated, loading } = useAuth();
 
     if (loading) {
-        return null;
+        return <>{children}</>;
     }
 
     if (!authenticated) {

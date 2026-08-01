@@ -107,6 +107,22 @@ const remainingDays = Math.max(
 
 );
 
+
+let remainingText = `${remainingDays} dias restantes`;
+
+if (campaign.status === "Pausada") {
+
+    remainingText = "Campanha pausada";
+
+} else if (
+    campaign.status === "Encerrada" ||
+    remainingDays === 0
+) {
+
+    remainingText = "Campanha encerrada";
+
+}
+
     return (
 
         <section className="campaign-details">
@@ -434,7 +450,7 @@ const remainingDays = Math.max(
 
                                 <span className="campaign-details-duration">
 
-                                    {remainingDays} dias restantes
+                                    {remainingText}
 
                                 </span>
 

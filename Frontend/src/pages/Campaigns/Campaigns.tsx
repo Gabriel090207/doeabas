@@ -56,9 +56,32 @@ function Campaigns() {
                     !category ||
                     campaign.category === category;
 
+                const createdAt = campaign.createdAt?.toDate();
+
+                const endDate = new Date(createdAt);
+
+                endDate.setDate(
+                    endDate.getDate() + parseInt(campaign.duration, 10)
+                );
+
+                const remainingDays = Math.max(
+                    Math.ceil(
+                        (endDate.getTime() - Date.now()) /
+                        (1000 * 60 * 60 * 24)
+                    ),
+                    0
+                );
+
+                const currentStatus =
+                    campaign.status === "Pausada"
+                        ? "Pausada"
+                        : campaign.status === "Encerrada" || remainingDays === 0
+                        ? "Encerrada"
+                        : "Ativa";
+
                 const matchesStatus =
                     !status ||
-                    campaign.status === status;
+                    currentStatus === status;
 
                 return (
                     matchesSearch &&
@@ -263,6 +286,8 @@ function Campaigns() {
                             raised={campaign.raisedAmount}
                             goal={campaign.goalAmount}
                             duration={campaign.duration}
+                            createdAt={campaign.createdAt}
+                            status={campaign.status}
                         />
 
                     ))

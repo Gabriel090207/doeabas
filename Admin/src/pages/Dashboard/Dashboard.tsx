@@ -150,7 +150,7 @@ export function Dashboard() {
 
                 (snapshot) => {
 
-                    console.log("Doações:", snapshot.size);
+                 
 
                     const data =
                         snapshot.docs.map(doc => ({
@@ -161,7 +161,7 @@ export function Dashboard() {
 
                         })) as Donation[];
 
-                    console.log(data);
+                    
 
                     setDonations(data);
 
@@ -404,13 +404,20 @@ export function Dashboard() {
 
                     {donations.length === 0 && (
 
-                        <p>
+                            <div className="dashboard-empty">
 
-                            Nenhuma doação encontrada.
+                                <HeartHandshake size={42} />
 
-                        </p>
+                                <h3>Nenhuma doação encontrada</h3>
 
-                    )}
+                                <p>
+                                    Assim que uma nova doação for realizada,
+                                    ela aparecerá aqui automaticamente.
+                                </p>
+
+                            </div>
+
+                        )}
 
                     {donations.map((donation) => (
 

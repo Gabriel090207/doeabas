@@ -103,11 +103,9 @@ export function getCampaigns(
 
             callback(
 
-                snapshot.docs
-                    .map(normalizeCampaign)
-                    .filter(campaign =>
-                        campaign.status === "Ativa"
-                    )
+                
+                    snapshot.docs
+                        .map(normalizeCampaign)
 
             );
 

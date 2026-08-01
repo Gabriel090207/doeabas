@@ -1,5 +1,4 @@
 import {
-    Navigate,
     Route,
     Routes,
 } from "react-router-dom";
@@ -11,9 +10,12 @@ import { Dashboard } from "../pages/Dashboard/Dashboard";
 import { Campaigns } from "../pages/Campaigns/Campaigns";
 import { CreateCampaign } from "../pages/CreateCampaign/CreateCampaign";
 import { EditCampaign } from "../pages/EditCampaign/EditCampaign";
+import { Users } from "../pages/Users/Users";
+import { Donations } from "../pages/Donations/Donations";
 
 import { AdminLayout } from "../layouts/AdminLayout";
 import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoute } from "./PublicRoute";
 
 export function AppRoutes() {
 
@@ -23,7 +25,11 @@ export function AppRoutes() {
 
             <Route
                 path="/login"
-                element={<Login />}
+                element={
+                    <PublicRoute>
+                        <Login />
+                    </PublicRoute>
+                }
             />
 
             <Route
@@ -54,17 +60,17 @@ export function AppRoutes() {
                     element={<EditCampaign />}
                 />
 
-            </Route>
+                <Route
+                    path="/usuarios"
+                    element={<Users />}
+                />
 
-            <Route
-                path="*"
-                element={
-                    <Navigate
-                        to="/login"
-                        replace
-                    />
-                }
-            />
+                <Route
+                    path="/doacoes"
+                    element={<Donations />}
+                />
+
+            </Route>
 
         </Routes>
 

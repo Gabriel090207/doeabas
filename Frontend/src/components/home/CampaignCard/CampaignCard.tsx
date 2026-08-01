@@ -12,6 +12,8 @@ interface CampaignCardProps {
     raised: number;
     goal: number;
     duration: string;
+    createdAt: any;
+    status: string;
 }
 
 function CampaignCard({
@@ -22,10 +24,43 @@ function CampaignCard({
     description,
     raised,
     goal,
-    duration
+    duration,
+    createdAt,
+    status
 }: CampaignCardProps) {
 
     const progress = Math.min(Math.round((raised / goal) * 100), 100);
+
+    const createdDate = createdAt?.toDate();
+
+    const endDate = new Date(createdDate);
+
+    endDate.setDate(
+        endDate.getDate() + parseInt(duration, 10)
+    );
+
+    const remainingDays = Math.max(
+        Math.ceil(
+            (endDate.getTime() - Date.now()) /
+            (1000 * 60 * 60 * 24)
+        ),
+        0
+);
+
+let remainingText = `${remainingDays} dias restantes`;
+
+if (status === "Pausada") {
+
+    remainingText = "Campanha pausada";
+
+} else if (
+    status === "Encerrada" ||
+    remainingDays === 0
+) {
+
+    remainingText = "Campanha encerrada";
+
+}
 
     const formatCurrency = (value: number) =>
     value.toLocaleString("pt-BR", {
@@ -79,7 +114,7 @@ function CampaignCard({
                     <div className="campaign-progress-info">
 
                         <span className="campaign-duration">
-                            Tempo restante: {duration}
+                            {remainingText}
                         </span>
 
                         <span className="campaign-progress-value">

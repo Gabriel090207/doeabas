@@ -112,35 +112,65 @@
 
 }
 
-.my-donations-filters input{
-
-    width:100%;
+.donation-search{
 
     height:56px;
 
-    padding:0 1rem;
+    display:flex;
+
+    align-items:center;
+
+    gap:.8rem;
+
+    padding:0 1.2rem;
+
+    background:var(--color-white);
 
     border:1px solid var(--color-border);
 
     border-radius:var(--radius-lg);
 
-    background:var(--color-white);
+    box-shadow:var(--shadow-sm);
 
-    color:var(--color-text);
-
-    font-size:.95rem;
-
-    transition:var(--transition);
+    transition:.25s;
 
 }
 
-.my-donations-filters input:focus{
-
-    outline:none;
+.donation-search:focus-within{
 
     border-color:var(--color-primary);
 
-    box-shadow:0 0 0 4px rgba(255,119,51,.12);
+    box-shadow:0 0 0 4px rgba(255,98,0,.08);
+
+}
+
+.donation-search svg{
+
+    color:var(--color-text);
+
+    flex-shrink:0;
+
+}
+
+.donation-search input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:var(--color-title);
+
+    font-size:.95rem;
+
+}
+
+.donation-search input::placeholder{
+
+    color:#9ca3af;
 
 }
 
@@ -216,11 +246,11 @@
 
     margin:0 auto;
 
-    display:flex;
+    display:grid;
 
-    flex-direction:column;
+    grid-template-columns:repeat(3,1fr);
 
-    gap:1rem;
+    gap:1.5rem;
 
 }
 
@@ -325,5 +355,317 @@
     background:#FDECEC;
 
     color:#D33A2C;
+
+}
+
+
+/* ==========================================================
+   ESTADO VAZIO
+========================================================== */
+
+.my-donations-empty{
+
+    grid-column:1 / -1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:1rem;
+
+    min-height:320px;
+
+    padding:4rem 2rem;
+
+    background:var(--color-white);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-xl);
+
+    box-shadow:var(--shadow-md);
+
+    text-align:center;
+
+}
+
+.my-donations-empty svg{
+
+    width:62px;
+
+    height:62px;
+
+    color:var(--color-primary);
+
+    opacity:.9;
+
+}
+
+.my-donations-empty h3{
+
+    margin:0;
+
+    font-size:1.45rem;
+
+    font-weight:700;
+
+    color:var(--color-title);
+
+}
+
+.my-donations-empty p{
+
+    max-width:420px;
+
+    margin:0;
+
+    color:var(--color-text-light);
+
+    line-height:1.7;
+
+    font-size:.95rem;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
+@media (max-width:992px){
+
+    .my-donations{
+
+        padding:11rem 0 8rem;
+
+    }
+
+    .my-donations-header h1{
+
+        font-size:2.5rem;
+
+    }
+
+    .my-donations-filters{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .donation-search{
+
+        grid-column:1 / -1;
+
+    }
+
+    .my-donations-list{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .donation-item{
+
+        padding:1.5rem;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .my-donations{
+
+        padding:10rem 0 7rem;
+
+    }
+
+    .my-donations-header{
+
+        margin-bottom:2rem;
+
+    }
+
+    .my-donations-header h1{
+
+        font-size:2rem;
+
+    }
+
+    .my-donations-header p{
+
+        font-size:.92rem;
+
+    }
+
+    .my-donations-tabs{
+
+        flex-direction:column;
+
+    }
+
+    .my-donations-tabs button{
+
+        width:100%;
+
+    }
+
+    .my-donations-filters{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .donation-search{
+
+        grid-column:auto;
+
+    }
+
+    .my-donations-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .donation-item{
+
+        padding:1.35rem;
+
+    }
+
+    .donation-row{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:.8rem;
+
+    }
+
+    .donation-row:first-child{
+
+        margin-bottom:1.2rem;
+
+    }
+
+    .donation-row h3{
+
+        font-size:1.05rem;
+
+    }
+
+    .donation-value{
+
+        font-size:1rem;
+
+    }
+
+    .status{
+
+        font-size:.78rem;
+
+    }
+
+    .my-donations-empty{
+
+        min-height:260px;
+
+        padding:3rem 1.5rem;
+
+    }
+
+}
+
+@media (max-width:340px){
+
+    .my-donations{
+
+        padding:9rem 0 6rem;
+
+    }
+
+    .my-donations-header h1{
+
+        font-size:1.6rem;
+
+    }
+
+    .my-donations-header p{
+
+        font-size:.85rem;
+
+    }
+
+    .my-donations-tabs button{
+
+        height:50px;
+
+        padding:0 1rem;
+
+        font-size:.85rem;
+
+    }
+
+    .donation-search,
+
+    .donation-select select{
+
+        height:50px;
+
+        font-size:.85rem;
+
+    }
+
+    .donation-item{
+
+        padding:1.1rem;
+
+    }
+
+    .donation-row h3{
+
+        font-size:.95rem;
+
+    }
+
+    .donation-value{
+
+        font-size:.95rem;
+
+    }
+
+    .status{
+
+        padding:.4rem .8rem;
+
+        font-size:.72rem;
+
+    }
+
+    .my-donations-empty{
+
+        min-height:220px;
+
+        padding:2.5rem 1rem;
+
+    }
+
+    .my-donations-empty h3{
+
+        font-size:1.2rem;
+
+    }
+
+    .my-donations-empty p{
+
+        font-size:.85rem;
+
+    }
 
 }

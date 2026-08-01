@@ -110,7 +110,7 @@
 
 .dashboard-row {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr auto;
+    grid-template-columns: minmax(180px, 2fr) minmax(220px, 1.7fr) 190px 140px;
 
     align-items: center;
 
@@ -150,9 +150,12 @@
 }
 
 .dashboard-method {
+
+    width: 120px;
+
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     gap: 8px;
 
@@ -164,6 +167,8 @@
 
     font-size: .82rem;
     font-weight: 600;
+
+    justify-self: start;
 }
 
 .dashboard-method.pix {
@@ -186,13 +191,14 @@
 }
 
 .dashboard-value {
+    width: 120px;
+
     color: var(--color-title);
     font-size: 1rem;
     font-weight: 700;
 
-    text-align: right;
+    text-align: left;
 }
-
 
 /* ===========================
    RESPONSIVO
@@ -348,5 +354,54 @@
         font-size: .95rem;
 
     }
+
+}
+
+
+.dashboard-empty {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 60px 24px;
+
+    text-align: center;
+
+}
+
+.dashboard-empty svg {
+
+    color: var(--color-primary);
+    opacity: .9;
+
+}
+
+.dashboard-empty h3 {
+
+    margin: 0;
+
+    color: var(--color-title);
+
+    font-size: 1.2rem;
+
+    font-weight: 700;
+
+}
+
+.dashboard-empty p {
+
+    max-width: 380px;
+
+    margin: 0;
+
+    color: var(--color-text);
+
+    line-height: 1.6;
+
+    font-size: .95rem;
 
 }

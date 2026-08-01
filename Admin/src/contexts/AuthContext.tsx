@@ -220,6 +220,8 @@ export function AuthProvider({
 
         setLoading(true);
 
+
+
         try {
 
             const userCredential =
@@ -228,6 +230,8 @@ export function AuthProvider({
                     email,
                     password,
                 );
+
+            
 
             const userRef = doc(
                 db,
@@ -301,6 +305,8 @@ export function AuthProvider({
 
         } finally {
 
+           
+
             setLoading(false);
 
         }
@@ -321,6 +327,7 @@ export function AuthProvider({
 
             (currentUser) => {
 
+              
                 setUser(currentUser);
 
                 setLoading(false);

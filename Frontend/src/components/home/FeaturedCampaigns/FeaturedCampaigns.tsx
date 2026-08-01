@@ -81,6 +81,8 @@ function FeaturedCampaigns() {
                             raised={campaign.raisedAmount}
                             goal={campaign.goalAmount}
                             duration={campaign.duration}
+                            createdAt={campaign.createdAt}
+                            status={campaign.status}
                         />
 
                     ))}

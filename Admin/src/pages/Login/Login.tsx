@@ -6,8 +6,6 @@ import bunny from "../../assets/images/bunny.png";
 
 import "./Login.css";
 
-import { useNavigate } from "react-router-dom";
-
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
 
@@ -16,12 +14,10 @@ const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [showPassword, setShowPassword] = useState(false);
 
-const navigate = useNavigate();
 
 const { login, loading } = useAuth();
 
 const { show } = useToast();
-
 
 async function handleLogin(
     event: FormEvent<HTMLFormElement>,
@@ -62,8 +58,6 @@ async function handleLogin(
             title: "Login realizado",
             message: "Bem-vindo ao painel.",
         });
-
-        navigate("/");
 
     } catch (error) {
 

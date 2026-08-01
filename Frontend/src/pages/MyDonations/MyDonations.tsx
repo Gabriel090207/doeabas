@@ -1,9 +1,269 @@
 import "./MyDonations.css";
 
-import { ChevronDown } from "lucide-react";
+import {
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
+import {
+    Search,
+    ChevronDown,
+} from "lucide-react";
+
+import {
+    collection,
+    onSnapshot,
+    query,
+    where,
+} from "firebase/firestore";
+
+import { db } from "../../services/firebase";
+
+import { AuthContext } from "../../contexts/AuthContext";
+
+interface Donation {
+
+    id: string;
+
+    campaignTitle: string;
+
+    amount: number;
+
+    status: string;
+
+    paymentMethod: string;
+
+    createdAt: any;
+
+}
 
 function MyDonations() {
+
+const { user } =
+    useContext(AuthContext);
+
+const [donations, setDonations] =
+    useState<Donation[]>([]);
+
+const [activeTab, setActiveTab] =
+    useState<"single" | "monthly">("single");
+
+const [search, setSearch] =
+    useState("");
+
+const [statusFilter, setStatusFilter] =
+    useState("");
+
+const [sort, setSort] =
+    useState("recent");
+
+useEffect(() => {
+
+    if (!user?.email) {
+
+        setDonations([]);
+
+        
+
+        return;
+
+    }
+
+    const collectionName =
+
+        activeTab === "single"
+            ? "donations"
+            : "monthlyDonations";
+
+    const unsubscribe = onSnapshot(
+
+        query(
+
+            collection(
+                db,
+                collectionName
+            ),
+
+            where(
+                "donorEmail",
+                "==",
+                user.email
+            )
+
+        ),
+
+        (snapshot) => {
+
+           const data =
+            snapshot.docs
+                .map(doc => ({
+
+                    id: doc.id,
+
+                    ...doc.data()
+
+                }))
+                .sort(
+
+                    (a: any, b: any) =>
+
+                        b.createdAt?.seconds -
+                        a.createdAt?.seconds
+
+                ) as Donation[];
+
+            setDonations(data);
+
+        },
+
+        (error) => {
+
+            console.error(error);
+
+        }
+
+    );
+
+    return () => {
+
+        unsubscribe();
+
+    };
+
+}, [
+
+    user,
+
+    activeTab
+
+]);
+
+
+useEffect(() => {
+
+    setSearch("");
+
+    setStatusFilter("");
+
+    setSort("recent");
+
+}, [
+
+    activeTab
+
+]);
+
+
+const filteredDonations = useMemo(() => {
+
+    let data = donations.filter((donation) => {
+
+        const matchesSearch =
+
+            donation.campaignTitle
+                .toLowerCase()
+                .includes(
+                    search.toLowerCase()
+                );
+
+        const matchesStatus =
+
+            !statusFilter ||
+
+            donation.status === statusFilter;
+
+        return (
+
+            matchesSearch &&
+
+            matchesStatus
+
+        );
+
+    });
+
+    if (sort === "oldest") {
+
+        data = [...data].reverse();
+
+    }
+
+    if (sort === "highest") {
+
+        data = [...data].sort(
+
+            (a, b) =>
+
+                b.amount - a.amount
+
+        );
+
+    }
+
+    if (sort === "lowest") {
+
+        data = [...data].sort(
+
+            (a, b) =>
+
+                a.amount - b.amount
+
+        );
+
+    }
+
+    return data;
+
+}, [
+
+    donations,
+
+    search,
+
+    statusFilter,
+
+    sort
+
+]);
+
+const donationStatus = {
+
+    approved: {
+
+        label: "Aprovada",
+
+        className: "success"
+
+    },
+
+    pending: {
+
+        label: "Pendente",
+
+        className: "pending"
+
+    },
+
+    cancelled: {
+
+        label: "Cancelada",
+
+        className: "cancelled"
+
+    },
+
+    rejected: {
+
+        label: "Recusada",
+
+        className: "cancelled"
+
+    }
+
+};
+
     return (
         <section className="my-donations">
 
@@ -19,13 +279,31 @@ function MyDonations() {
 
             <div className="my-donations-tabs">
 
-                <button className="active">
+                <button
+                    className={
+                        activeTab === "single"
+                            ? "active"
+                            : ""
+                    }
+                    onClick={() =>
+                        setActiveTab("single")
+                    }
+                >
 
                     Doações Avulsas
 
                 </button>
 
-                <button>
+                <button
+                    className={
+                        activeTab === "monthly"
+                            ? "active"
+                            : ""
+                    }
+                    onClick={() =>
+                        setActiveTab("monthly")
+                    }
+                >
 
                     Doações Mensais
 
@@ -35,16 +313,45 @@ function MyDonations() {
 
             <div className="my-donations-filters">
 
-                <input
-                    type="text"
-                    placeholder="Buscar campanha..."
-                />
+                <div className="donation-search">
+
+                    <Search size={18} />
+
+                    <input
+                        type="text"
+                        placeholder="Buscar campanha..."
+                        value={search}
+                        onChange={(e) =>
+                            setSearch(e.target.value)
+                        }
+                    />
+
+                </div>
 
                 <div className="donation-select">
 
-                    <select>
+                    <select
+                        value={statusFilter}
+                        onChange={(e) =>
+                            setStatusFilter(e.target.value)
+                        }
+                    >
 
-                        <option>Todos os status</option>
+                        <option value="">
+                            Todos os status
+                        </option>
+
+                        <option value="approved">
+                            Aprovada
+                        </option>
+
+                        <option value="pending">
+                            Pendente
+                        </option>
+
+                        <option value="cancelled">
+                            Cancelada
+                        </option>
 
                     </select>
 
@@ -54,9 +361,28 @@ function MyDonations() {
 
                <div className="donation-select">
 
-                    <select>
+                    <select
+                        value={sort}
+                        onChange={(e) =>
+                            setSort(e.target.value)
+                        }
+                    >
 
-                        <option>Mais recentes</option>
+                        <option value="recent">
+                            Mais recentes
+                        </option>
+
+                        <option value="oldest">
+                            Mais antigas
+                        </option>
+
+                        <option value="highest">
+                            Maior valor
+                        </option>
+
+                        <option value="lowest">
+                            Menor valor
+                        </option>
 
                     </select>
 
@@ -66,87 +392,103 @@ function MyDonations() {
 
             </div>
 
-            <div className="my-donations-list">
+                <div className="my-donations-list">
 
-                <div className="donation-item">
+                    {filteredDonations.length === 0 ? (
 
-                    <div className="donation-row">
+                        <div className="my-donations-empty">
 
-                        <h3>Campanha Esperança</h3>
+                            <h3>
 
-                        <span className="donation-value">
-                            R$ 50,00
-                        </span>
+                                Nenhuma doação encontrada
 
-                    </div>
+                            </h3>
 
-                    <div className="donation-row">
+                            <p>
 
-                        <span>
-                            10/06/2025
-                        </span>
+                                Você ainda não possui doações nesta categoria.
 
-                        <span className="status success">
-                            Concluída
-                        </span>
+                            </p>
 
-                    </div>
+                        </div>
+
+                    ) : (
+
+                        filteredDonations.map((donation) => (
+
+                            <div
+                                key={donation.id}
+                                className="donation-item"
+                            >
+
+                                <div className="donation-row">
+
+                                    <h3>
+
+                                        {donation.campaignTitle}
+
+                                    </h3>
+
+                                    <span className="donation-value">
+
+                                        {(donation.amount || 0).toLocaleString(
+
+                                            "pt-BR",
+
+                                            {
+
+                                                style: "currency",
+
+                                                currency: "BRL"
+
+                                            }
+
+                                        )}
+
+                                    </span>
+
+                                </div>
+
+                                <div className="donation-row">
+
+                                    <span>
+
+                                        {donation.createdAt?.toDate().toLocaleDateString(
+                                            "pt-BR"
+                                        )}
+
+                                    </span>
+
+                                   <span
+                                        className={`status ${
+
+                                            donationStatus[
+                                                donation.status as keyof typeof donationStatus
+                                            ]?.className || "pending"
+
+                                        }`}
+                                    >
+
+                                        {
+
+                                            donationStatus[
+                                                donation.status as keyof typeof donationStatus
+                                            ]?.label || donation.status
+
+                                        }
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        ))
+
+                    )}
 
                 </div>
-
-                <div className="donation-item">
-
-                    <div className="donation-row">
-
-                        <h3>Natal Solidário</h3>
-
-                        <span className="donation-value">
-                            R$ 100,00
-                        </span>
-
-                    </div>
-
-                    <div className="donation-row">
-
-                        <span>
-                            03/06/2025
-                        </span>
-
-                        <span className="status pending">
-                            Pendente
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div className="donation-item">
-
-                    <div className="donation-row">
-
-                        <h3>Casa da Criança</h3>
-
-                        <span className="donation-value">
-                            R$ 25,00
-                        </span>
-
-                    </div>
-
-                    <div className="donation-row">
-
-                        <span>
-                            28/05/2025
-                        </span>
-
-                        <span className="status success">
-                            Concluída
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
+            
 
         </section>
     );

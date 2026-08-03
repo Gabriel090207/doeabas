@@ -30,7 +30,10 @@ app.add_middleware(
 
         "http://localhost:5173",
         "http://localhost:5174",
-        "https://doeabas.netlify.app"
+
+        "https://doeabas.netlify.app",
+        "https://doeabas.com.br",
+        "https://www.doeabas.com.br",
 
     ],
 

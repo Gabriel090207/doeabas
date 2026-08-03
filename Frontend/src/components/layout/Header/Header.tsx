@@ -28,7 +28,7 @@ import {
 
 import { useAuth } from "../../../hooks/useAuth";
 
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo.webp";
 import { useToast } from "../../../hooks/useToast";
 
 function Header() {

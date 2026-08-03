@@ -1,6 +1,6 @@
 import "./SectionDivider.css";
 
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo.webp";
 
 function SectionDivider() {
     return (

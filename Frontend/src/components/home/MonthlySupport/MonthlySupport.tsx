@@ -7,8 +7,8 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-import monthlyBackground from "../../../assets/images/monthly-background.png";
-import monthlyBunny from "../../../assets/images/monthly-bunny.png";
+import monthlyBackground from "../../../assets/images/monthly-background.webp";
+import monthlyBunny from "../../../assets/images/monthly-bunny.webp";
 
 function MonthlySupport() {
 

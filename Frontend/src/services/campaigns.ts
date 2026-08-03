@@ -88,30 +88,18 @@ export function getFeaturedCampaigns(
    TODAS AS CAMPANHAS
 ========================================================== */
 
-export function getCampaigns(
-    callback: (campaigns: Campaign[]) => void
-) {
+export async function getCampaigns(): Promise<Campaign[]> {
 
-    return onSnapshot(
+    const snapshot = await getDocs(
 
         query(
             collection(db, "campaigns"),
             orderBy("createdAt", "desc")
-        ),
-
-        (snapshot) => {
-
-            callback(
-
-                
-                    snapshot.docs
-                        .map(normalizeCampaign)
-
-            );
-
-        }
+        )
 
     );
+
+    return snapshot.docs.map(normalizeCampaign);
 
 }
 

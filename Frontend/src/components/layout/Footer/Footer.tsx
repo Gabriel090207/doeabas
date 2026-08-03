@@ -14,7 +14,7 @@ import {
     FaWhatsapp,
 } from "react-icons/fa";
 
-import logo from "../../../assets/images/logo-white.png";
+import logo from "../../../assets/images/logo-white.webp";
 
 function Footer() {
 

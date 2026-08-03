@@ -14,9 +14,9 @@ import {
     Mail,
 } from "lucide-react";
 
-import background from "../../assets/images/login-background.png";
-import bunny from "../../assets/images/login-bunny.png";
-import logo from "../../assets/images/logo.png";
+import background from "../../assets/images/login-background.webp";
+import bunny from "../../assets/images/login-bunny.webp";
+import logo from "../../assets/images/logo.webp";
 
 import { useNavigate } from "react-router-dom";
 

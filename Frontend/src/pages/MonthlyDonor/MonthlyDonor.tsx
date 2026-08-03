@@ -13,8 +13,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useToast } from "../../hooks/useToast";
 
-import heroBackground from "../../assets/images/hero-background.png";
-import monthlyBunny from "../../assets/images/monthly-bunny.png";
+import heroBackground from "../../assets/images/hero-background.webp";
+import monthlyBunny from "../../assets/images/monthly-bunny.webp";
 
 import SectionDivider from "../../components/home/SectionDivider/SectionDivider";
 

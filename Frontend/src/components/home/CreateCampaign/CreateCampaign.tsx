@@ -9,7 +9,7 @@ import {
     BarChart3,
 } from "lucide-react";
 
-import bunny from "../../../assets/images/create-campaign-bunny.png";
+import bunny from "../../../assets/images/create-campaign-bunny.webp";
 
 function CreateCampaign() {
     return (

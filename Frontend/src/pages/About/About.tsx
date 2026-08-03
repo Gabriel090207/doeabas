@@ -20,9 +20,9 @@ import {
     HandHeart,
 } from "lucide-react";
 
-import heroBackground from "../../assets/images/hero-background.png";
-import bunny from "../../assets/images/about-bunny.png";
-import ctaBunny from "../../assets/images/about-cta-bunny.png";
+import heroBackground from "../../assets/images/hero-background.webp";
+import bunny from "../../assets/images/about-bunny.webp";
+import ctaBunny from "../../assets/images/about-cta-bunny.webp";
 import SectionDivider from "../../components/home/SectionDivider/SectionDivider";
 
 function About() {

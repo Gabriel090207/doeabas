@@ -8,8 +8,8 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-import heroBackground from "../../../assets/images/hero-background.png";
-import heroBunny from "../../../assets/images/hero-bunny.png";
+import heroBackground from "../../../assets/images/hero-background.webp";
+import heroBunny from "../../../assets/images/hero-bunny.webp";
 
 function Hero() {
 

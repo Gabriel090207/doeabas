@@ -33,15 +33,17 @@ function Campaigns() {
 
     useEffect(() => {
 
-        const unsubscribe = getCampaigns((data) => {
+    async function loadCampaigns() {
 
-            setCampaigns(data);
+        const data = await getCampaigns();
 
-        });
+        setCampaigns(data);
 
-        return () => unsubscribe();
+    }
 
-    }, []);
+    loadCampaigns();
+
+}, []);
 
     const filteredCampaigns = useMemo(() => {
 

@@ -312,6 +312,7 @@ function Header() {
                     <button
                         className="header-menu-button"
                         onClick={() => setMenuOpen(true)}
+                        aria-label="Abrir menu"
                     >
 
                         <Menu size={28} />

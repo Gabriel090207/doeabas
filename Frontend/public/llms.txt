@@ -1,0 +1,33 @@
+# ABAS - Plataforma de Doações Solidárias
+
+> A ABAS é uma plataforma brasileira de arrecadação solidária que conecta pessoas que precisam de ajuda a doadores por meio de campanhas verificadas, transparentes e seguras.
+
+A ABAS permite criar campanhas solidárias, realizar doações via Pix e Cartão de Crédito, acompanhar arrecadações em tempo real e participar do programa de doadores mensais.
+
+## Páginas principais
+
+- [Página Inicial](https://doeabas.com.br/) - Conheça a plataforma ABAS.
+- [Campanhas](https://doeabas.com.br/campanhas) - Lista de campanhas solidárias disponíveis.
+- [Sobre a ABAS](https://doeabas.com.br/sobre) - Conheça nossa história, missão e valores.
+- [Transparência](https://doeabas.com.br/transparencia) - Informações sobre taxas e funcionamento da plataforma.
+- [Seja Doador Mensal](https://doeabas.com.br/seja-doador-mensal) - Programa de apoio recorrente.
+- [Login](https://doeabas.com.br/login) - Área de acesso dos usuários.
+
+## Serviços
+
+- Criação de campanhas solidárias.
+- Doações via Pix.
+- Doações via Cartão de Crédito.
+- Programa de Doação Mensal.
+- Acompanhamento de arrecadações.
+- Prestação de contas das campanhas.
+
+## Contato
+
+- Site: https://doeabas.com.br
+- WhatsApp: https://wa.me/5586921427920
+- Instagram: https://www.instagram.com/doe.abas/
+
+## Informações
+
+A ABAS realiza análise das campanhas antes da publicação para aumentar a segurança dos doadores e beneficiários. As campanhas disponíveis na plataforma passam por um processo de verificação e acompanhamento durante todo o período de arrecadação.

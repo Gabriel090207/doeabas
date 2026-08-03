@@ -59,6 +59,8 @@ function Footer() {
                                 href="https://www.instagram.com/doe.abas/"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Instagram da ABAS"
+
                             >
                                 <FaInstagram />
                             </a>
@@ -67,6 +69,7 @@ function Footer() {
                                 href="https://wa.me/5586921427920"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="WhatsApp da ABAS"
                             >
                                 <FaWhatsapp />
                             </a>

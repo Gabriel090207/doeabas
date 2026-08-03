@@ -330,6 +330,7 @@ function Header() {
             <div
                 className={`mobile-overlay ${menuOpen ? "active" : ""}`}
                 onClick={() => setMenuOpen(false)}
+                aria-label="Fechar menu"
             />
 
             {/* ===========================

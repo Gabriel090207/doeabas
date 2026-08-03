@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://doeabas.com.br/sitemap.xml

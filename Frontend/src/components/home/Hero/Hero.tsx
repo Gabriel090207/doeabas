@@ -6,10 +6,15 @@ import {
    
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 import heroBackground from "../../../assets/images/hero-background.png";
 import heroBunny from "../../../assets/images/hero-bunny.png";
 
 function Hero() {
+
+const navigate = useNavigate();
+
     return (
         <section className="hero">
 
@@ -48,12 +53,18 @@ function Hero() {
 
                     <div className="hero-buttons">
 
-                        <button className="hero-primary">
+                        <button
+                            className="hero-primary"
+                            onClick={() => navigate("/campanhas")}
+                        >
                             <Heart size={20} fill="currentColor" />
                             Quero ajudar
                         </button>
 
-                        <button className="hero-secondary">
+                        <button
+                            className="hero-secondary"
+                            onClick={() => navigate("/sobre")}
+                        >
                             <Info size={20} />
                             Conhecer sobre
                         </button>

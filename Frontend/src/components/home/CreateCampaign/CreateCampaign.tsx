@@ -171,7 +171,16 @@ function CreateCampaign() {
 
                     </div>
 
-                    <button className="create-button">
+                    <button
+                        className="create-button"
+                        onClick={() =>
+                            window.open(
+                                "https://wa.me/5586921427920",
+                                "_blank",
+                                "noopener,noreferrer"
+                            )
+                        }
+                    >
 
                         Criar minha vaquinha agora
 

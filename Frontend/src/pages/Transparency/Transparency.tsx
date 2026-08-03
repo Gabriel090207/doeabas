@@ -70,17 +70,53 @@ export default function Transparency() {
                         </h1>
 
                         <p className="transparency-intro">
-                            Somos uma plataforma comprometida com a transparência e ficamos felizes pelo seu interesse em entender como tudo funciona por aqui.
+                            <strong>Por que a ABAS possui uma taxa operacional?</strong>
+
                             <br /><br />
-                            A Abas é uma empresa com propósito social. Não somos uma organização sem fins lucrativos, mas uma equipe que acredita no poder da solidariedade para transformar vidas por meio da tecnologia. Nosso objetivo é conectar pessoas que precisam de ajuda àquelas que desejam fazer a diferença, oferecendo uma plataforma segura, confiável e acessível.
+
+                            Na ABAS, acreditamos que uma doação vai muito além de um Pix.
+
                             <br /><br />
-                            Para manter essa estrutura funcionando com qualidade, contamos com uma taxa administrativa aplicada sobre o valor arrecadado. Esse recurso é destinado à manutenção da plataforma, investimentos em tecnologia, segurança, atendimento, infraestrutura e melhorias contínuas, garantindo uma experiência cada vez melhor para toda a comunidade.
+
+                            Nosso compromisso não é apenas arrecadar recursos, mas garantir que cada campanha seja conduzida com responsabilidade, transparência e cuidado com as pessoas envolvidas.
+
                             <br /><br />
-                            Antes de uma campanha ser publicada, nossa equipe realiza uma análise cuidadosa das informações enviadas. Esse processo ajuda a reduzir fraudes, aumentar a confiança dos doadores e proporcionar mais segurança para todos os envolvidos.
+
+                            Por isso, <strong>20% de cada doação</strong> são destinados à manutenção da plataforma e de toda a estrutura necessária para que esse trabalho aconteça.
+
                             <br /><br />
-                            Também investimos constantemente em inovação, desenvolvimento da plataforma, proteção de dados, suporte aos usuários e ferramentas que ampliam a visibilidade das campanhas, aumentando suas oportunidades de arrecadação.
+
+                            Essa estrutura inclui:
+
                             <br /><br />
-                            Nossa política é baseada na clareza. Todas as informações sobre taxas e funcionamento da plataforma são apresentadas de forma transparente, sem cobranças ocultas ou custos inesperados. Acreditamos que confiança, segurança e transparência são essenciais para criar uma comunidade forte e fazer com que cada contribuição tenha ainda mais impacto.
+
+                            ✅ Verificação e análise das histórias antes da publicação.
+                            <br />
+                            ✅ Produção de fotos e vídeos para apresentar cada caso com respeito e transparência.
+                            <br />
+                            ✅ Acompanhamento da campanha do início ao fim.
+                            <br />
+                            ✅ Prestação de contas aos doadores e à sociedade.
+                            <br />
+                            ✅ Tecnologia, hospedagem, segurança e manutenção da plataforma.
+                            <br />
+                            ✅ Atendimento aos beneficiários e aos doadores.
+                            <br />
+                            ✅ Remuneração dos Anjos e colaboradores que acompanham as famílias.
+                            <br />
+                            ✅ Cumprimento das obrigações fiscais e administrativas da ABAS.
+
+                            <br /><br />
+
+                            Além disso, acreditamos que cuidar de uma pessoa é muito mais do que entregar um recurso financeiro.
+
+                            <br /><br />
+
+                            Muitas famílias chegam até nós enfrentando momentos de extrema fragilidade emocional. Por isso, a ABAS busca oferecer acolhimento e apoio durante toda a campanha. Sempre que disponível, disponibilizamos acompanhamento psicológico por meio da nossa equipe ou de parceiros, porque entendemos que recuperar a esperança também faz parte da transformação de uma vida.
+
+                            <br /><br />
+
+                            <strong>Não basta apenas doar. É preciso cuidar de pessoas.</strong>
                         </p>
 
                       
@@ -161,7 +197,17 @@ export default function Transparency() {
                             </div>
                         </div>
 
-                        <button type="button" className="contact-button">
+                        <button
+                            type="button"
+                            className="contact-button"
+                            onClick={() =>
+                                window.open(
+                                    "https://wa.me/5586921427920",
+                                    "_blank",
+                                    "noopener,noreferrer"
+                                )
+                            }
+                        >
                             <MessageCircle aria-hidden="true" />
                             Falar com atendimento
                         </button>

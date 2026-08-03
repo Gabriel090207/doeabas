@@ -6,6 +6,8 @@ import {
     useRef
 } from "react";
 
+import { useContext } from "react";
+
 import {
     useNavigate
 } from "react-router-dom";
@@ -41,6 +43,8 @@ import {
 
 import { LoadingModal } from "../../components/LoadingModal/LoadingModal";
 
+import { AuthContext } from "../../contexts/AuthContext";
+
 import {
     initMercadoPago
 } from "@mercadopago/sdk-react";
@@ -62,6 +66,8 @@ declare global {
 function Checkout() {
 
 const navigate = useNavigate();
+
+const { user } = useContext(AuthContext);
 
 const { slug } = useParams();
 
@@ -114,6 +120,25 @@ const [cardCvv, setCardCvv] = useState("");
 const [installments] = useState(1);
 
 const mpRef = useRef<any>(null);
+
+
+useEffect(() => {
+
+    if (!user) {
+
+        return;
+
+    }
+
+    setDonorName((user as any).fullName || "");
+
+    setDonorEmail(user.email || "");
+
+    setDonorCpf((user as any).cpf || "");
+
+    setDonorPhone((user as any).phone || "");
+
+}, [user]);
 
 useEffect(() => {
 
@@ -789,7 +814,7 @@ useEffect(()=>{
             <div className="checkout-container">
 
                 <Link
-                    to="/campanha"
+                    to={`/campanha/${slug}`}
                     className="checkout-back"
                 >
 
@@ -1741,15 +1766,7 @@ useEffect(()=>{
 
                             </div>
 
-                            <div className="checkout-summary-footer">
-
-                                <strong>
-
-                                    184 doadores
-
-                                </strong>
-
-                            </div>
+                            
 
                         </div>
 

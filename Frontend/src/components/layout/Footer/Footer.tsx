@@ -7,10 +7,10 @@ import {
     Heart,
 } from "lucide-react";
 
+import { Link } from "react-router-dom";
+
 import {
     FaInstagram,
-    FaFacebookF,
-    FaYoutube,
     FaWhatsapp,
 } from "react-icons/fa";
 
@@ -55,19 +55,19 @@ function Footer() {
 
                         <div className="footer-social">
 
-                            <a href="">
+                            <a
+                                href="https://www.instagram.com/doe.abas/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <FaInstagram />
                             </a>
 
-                            <a href="">
-                                <FaFacebookF />
-                            </a>
-
-                            <a href="">
-                                <FaYoutube />
-                            </a>
-
-                            <a href="">
+                            <a
+                                href="https://wa.me/5586921427920"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <FaWhatsapp />
                             </a>
 
@@ -85,13 +85,11 @@ function Footer() {
 
                         <span></span>
 
-                        <a href="">Início</a>
+                        <Link to="/">Início</Link>
 
-                        <a href="">Campanhas</a>
+                        <Link to="/campanhas">Campanhas</Link>
 
-                        <a href="">Login</a>
-
-                     
+                        <Link to="/login">Login</Link>
 
                     </div>
 
@@ -105,15 +103,11 @@ function Footer() {
 
                         <span></span>
 
-                        <a href="">Sobre nós</a>
+                        <Link to="/sobre">Sobre nós</Link>
 
-                        <a href="">Transparência</a>
+                        <Link to="/transparencia">Transparência</Link>
 
-                        <a href="">Termos de Uso</a>
-
-                        <a href="">Politica de Privacidade</a>
-
-                       
+                        
 
                     </div>
 
@@ -127,11 +121,16 @@ function Footer() {
 
                         <span></span>
 
-                        <a href="">Fale conosco</a>
+                        <a
+                            href="https://wa.me/5586921427920"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Fale conosco
+                        </a>
 
-                        <a href="">Taxas</a>
+                        <Link to="/transparencia">Taxas</Link>
 
-                       
                     </div>
 
                 </div>

@@ -5,10 +5,14 @@ import {
     Star
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 import monthlyBackground from "../../../assets/images/monthly-background.png";
 import monthlyBunny from "../../../assets/images/monthly-bunny.png";
 
 function MonthlySupport() {
+
+const navigate = useNavigate();
 
     return (
 
@@ -69,7 +73,10 @@ function MonthlySupport() {
 
                     </p>
 
-                    <button className="monthly-button">
+                    <button
+                        className="monthly-button"
+                        onClick={() => navigate("/seja-doador-mensal")}
+                    >
 
                         Saiba mais
 

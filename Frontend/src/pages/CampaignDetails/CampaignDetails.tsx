@@ -36,6 +36,8 @@ const { slug } = useParams();
 
 const [campaign, setCampaign] = useState<any>(null);
 
+const [donations, setDonations] = useState<any[]>([]);
+
 useEffect(() => {
 
     if (!slug) return;
@@ -66,6 +68,68 @@ useEffect(() => {
             setCampaign(
                 snapshot.docs[0].data()
             );
+
+        
+    const campaignId = snapshot.docs[0].id;
+
+    const donationsQuery = query(
+
+        collection(db, "donations"),
+
+        where(
+            "campaignId",
+            "==",
+            campaignId
+        ),
+
+        where(
+            "status",
+            "==",
+            "approved"
+        )
+
+    );
+
+    const unsubscribeDonations = onSnapshot(
+
+        donationsQuery,
+
+        (donationsSnapshot) => {
+
+            const data = donationsSnapshot.docs
+
+                .map(doc => ({
+
+                    id: doc.id,
+
+                    ...doc.data()
+
+                }))
+
+                .sort(
+
+                    (a: any, b: any) =>
+
+                        b.createdAt?.seconds -
+                        a.createdAt?.seconds
+
+                )
+
+                .slice(0, 5);
+
+            setDonations(data);
+
+        }
+
+    );
+
+    return () => {
+
+        unsubscribe();
+
+        unsubscribeDonations();
+
+    };
 
         }
 
@@ -525,87 +589,63 @@ if (campaign.status === "Pausada") {
 
                             </h3>
 
-                            <div className="campaign-details-donor">
+                           {donations.length === 0 ? (
 
-                                <strong>
+                                <div className="campaign-details-no-donors">
 
-                                    Maria Oliveira
+                                    Ainda não há doações para esta campanha.
 
-                                </strong>
+                                </div>
 
-                                <span>
+                            ) : (
 
-                                    Doou R$ 100
+                                donations.map((donation) => (
 
-                                </span>
+                                    <div
 
-                            </div>
+                                        key={donation.id}
 
-                            <div className="campaign-details-donor">
+                                        className="campaign-details-donor"
 
-                                <strong>
+                                    >
 
-                                    João Pedro
+                                        <strong>
 
-                                </strong>
+                                            {donation.donorName}
 
-                                <span>
+                                        </strong>
 
-                                    Doou R$ 50
+                                        <span>
 
-                                </span>
+                                            Doou {
 
-                            </div>
+                                                (donation.amount || 0).toLocaleString(
 
-                            <div className="campaign-details-donor">
+                                                    "pt-BR",
 
-                                <strong>
+                                                    {
 
-                                    Fernanda Costa
+                                                        style: "currency",
 
-                                </strong>
+                                                        currency: "BRL"
 
-                                <span>
+                                                    }
 
-                                    Doou R$ 200
+                                                )
 
-                                </span>
+                                            }
 
-                            </div>
+                                        </span>
 
-                            <div className="campaign-details-donor">
+                                    </div>
 
-                                <strong>
+                                ))
 
-                                     Alexandro Silva
-
-                                </strong>
-
-                                <span>
-
-                                    Doou R$ 20
-
-                                </span>
-
-                            </div>
+                            )}
 
 
 
-                            <div className="campaign-details-donor">
-
-                                <strong>
-
-                                    Gabriela Silveira
-
-                                </strong>
-
-                                <span>
-
-                                    Doou R$ 500
-
-                                </span>
-
-                            </div>
+                          
 
                         </section>
 

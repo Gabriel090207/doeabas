@@ -18,6 +18,7 @@ import type { User } from "firebase/auth";
 import {
     collection,
     doc,
+    getDoc,
     getDocs,
     query,
     serverTimestamp,
@@ -283,9 +284,45 @@ export function AuthProvider({
 
             auth,
 
-            (currentUser) => {
+            async (currentUser) => {
 
-                setUser(currentUser);
+                if (!currentUser) {
+
+                    setUser(null);
+
+                    setLoading(false);
+
+                    return;
+
+                }
+
+                try {
+
+                    const userDoc = await getDoc(
+                        doc(db, "users", currentUser.uid)
+                    );
+
+                    if (userDoc.exists()) {
+
+                        setUser({
+
+                            ...currentUser,
+
+                            ...userDoc.data(),
+
+                        } as any);
+
+                    } else {
+
+                        setUser(currentUser);
+
+                    }
+
+                } catch {
+
+                    setUser(currentUser);
+
+                }
 
                 setLoading(false);
 

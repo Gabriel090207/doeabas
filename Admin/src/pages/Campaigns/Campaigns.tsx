@@ -203,6 +203,8 @@ export function Campaigns() {
 
                         if (!donation.campaignId) return;
 
+                        if (donation.status !== "approved") return;
+
                         counts[donation.campaignId] =
                             (counts[donation.campaignId] || 0) + 1;
 

@@ -71,10 +71,8 @@ export function getFeaturedCampaigns(
                 snapshot.docs
                     .map(normalizeCampaign)
                     .filter(campaign =>
-                        campaign.featured &&
                         campaign.status === "Ativa"
                     )
-                    .slice(0, 4)
 
             );
 

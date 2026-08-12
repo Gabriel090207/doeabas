@@ -155,24 +155,31 @@ const progress = Math.min(
 
 const createdAt = campaign.createdAt?.toDate();
 
-const endDate = new Date(createdAt);
+const durationDays = parseInt(campaign.duration, 10);
 
-endDate.setDate(
-    endDate.getDate() + parseInt(campaign.duration, 10)
-);
+let remainingDays: number | null = null;
 
-const remainingDays = Math.max(
+if (createdAt && !isNaN(durationDays)) {
 
-    Math.ceil(
-        (endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
-    ),
+    const endDate = new Date(createdAt);
 
-    0
+    endDate.setDate(
+        endDate.getDate() + durationDays
+    );
 
-);
+    remainingDays = Math.max(
+        Math.ceil(
+            (endDate.getTime() - Date.now()) /
+            (1000 * 60 * 60 * 24)
+        ),
+        0
+    );
+}
 
-
-let remainingText = `${remainingDays} dias restantes`;
+let remainingText =
+    remainingDays === null
+        ? "Sem prazo"
+        : `${remainingDays} dias restantes`;
 
 if (campaign.status === "Pausada") {
 

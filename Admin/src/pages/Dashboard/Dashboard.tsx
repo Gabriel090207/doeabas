@@ -23,6 +23,7 @@ import {
     onSnapshot,
     orderBy,
     query,
+    where,
 } from "firebase/firestore";
 
 import { db } from "../../services/firebase";
@@ -137,6 +138,12 @@ export function Dashboard() {
                     collection(
                         db,
                         "donations"
+                    ),
+
+                    where(
+                        "status",
+                        "==",
+                        "approved"
                     ),
 
                     orderBy(

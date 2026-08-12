@@ -251,6 +251,7 @@ def create_pix(
     }
 
 
+
 @router.post("/webhook")
 async def mercadopago_webhook(
     request: Request
@@ -270,7 +271,7 @@ async def mercadopago_webhook(
             }
 
 
-
+        # Consulta o pagamento diretamente no Mercado Pago
         payment_response = sdk.payment().get(
             payment_id
         )
@@ -278,6 +279,9 @@ async def mercadopago_webhook(
 
         payment = payment_response["response"]
 
+
+        # Só continua se o Mercado Pago confirmar
+        # que o pagamento foi aprovado
         if payment.get("status") != "approved":
 
             return {
@@ -290,7 +294,8 @@ async def mercadopago_webhook(
             }
 
 
-
+        # Procura a doação correspondente
+        # ao paymentId recebido
         donations = (
             db.collection("donations")
             .where(
@@ -301,7 +306,6 @@ async def mercadopago_webhook(
             .limit(1)
             .get()
         )
-
 
 
         if len(donations) == 0:
@@ -316,15 +320,84 @@ async def mercadopago_webhook(
             }
 
 
-
         donation_doc = donations[0]
 
-
-        donation = donation_doc.to_dict()
-
+        donation_ref = donation_doc.reference
 
 
-        if donation.get("status") == "approved":
+        # A transação impede que dois webhooks
+        # simultâneos somem a mesma doação duas vezes
+        @db.transactional
+        def approve_donation(transaction):
+
+            donation_snapshot = donation_ref.get(
+                transaction=transaction
+            )
+
+
+            donation = donation_snapshot.to_dict()
+
+
+            # Se outro webhook já aprovou essa doação,
+            # não soma novamente
+            if donation.get("status") == "approved":
+
+                return False
+
+
+            campaign_ref = (
+                db.collection("campaigns")
+                .document(
+                    donation["campaignId"]
+                )
+            )
+
+
+            # Aprova a doação
+            transaction.update(
+                donation_ref,
+                {
+
+                    "status":
+                        "approved",
+
+                    "paymentStatus":
+                        "approved",
+
+                    "approvedAt":
+                        datetime.utcnow()
+
+                }
+            )
+
+
+            # Soma somente essa nova doação
+            # ao valor que a campanha já possui
+            transaction.update(
+                campaign_ref,
+                {
+
+                    "raisedAmount":
+                        Increment(
+                            donation["amount"]
+                        )
+
+                }
+            )
+
+
+            return True
+
+
+        transaction = db.transaction()
+
+
+        approved_now = approve_donation(
+            transaction
+        )
+
+
+        if not approved_now:
 
             return {
 
@@ -336,62 +409,32 @@ async def mercadopago_webhook(
             }
 
 
-
-        donation_doc.reference.update({
-
-            "status":
-                "approved",
-
-            "paymentStatus":
-                "approved",
-
-            "approvedAt":
-                datetime.utcnow()
-
-        })
-
-
-
-        campaign_ref = (
-            db.collection("campaigns")
-            .document(
-                donation["campaignId"]
-            )
-        )
-
-
-        campaign_ref.update({
-
-            "raisedAmount":
-                Increment(
-                    donation["amount"]
-                )
-
-        })
-
-
         return {
 
-            "success":
-                True
+            "success": True,
+
+            "message":
+                "Doação aprovada com sucesso"
 
         }
-
 
 
     except Exception as error:
 
-
-     
+        print(
+            "ERRO WEBHOOK:",
+            error
+        )
 
 
         return {
 
-            "success":
-                False
+            "success": False,
+
+            "error":
+                str(error)
 
         }
-
 
 @router.get("/payments/payment-status/{payment_id}")
 def payment_status(

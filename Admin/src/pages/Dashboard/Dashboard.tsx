@@ -23,7 +23,6 @@ import {
     onSnapshot,
     orderBy,
     query,
-    where,
 } from "firebase/firestore";
 
 import { db } from "../../services/firebase";
@@ -39,6 +38,8 @@ interface Donation {
     amount: number;
 
     paymentMethod: string;
+
+    status: string;
 
     createdAt?: any;
 
@@ -140,11 +141,6 @@ export function Dashboard() {
                         "donations"
                     ),
 
-                    where(
-                        "status",
-                        "==",
-                        "approved"
-                    ),
 
                     orderBy(
                         "createdAt",
@@ -160,13 +156,17 @@ export function Dashboard() {
                  
 
                     const data =
-                        snapshot.docs.map(doc => ({
+                        snapshot.docs
+                            .map(doc => ({
 
-                            id: doc.id,
+                                id: doc.id,
 
-                            ...doc.data()
+                                ...doc.data()
 
-                        })) as Donation[];
+                            } as Donation))
+                            .filter(donation =>
+                                donation.status === "approved"
+                            );
 
                     
 

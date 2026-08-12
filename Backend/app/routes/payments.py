@@ -8,6 +8,8 @@ from datetime import datetime
 
 from app.config.firebase import db
 
+from google.cloud.firestore_v1 import Increment
+
 router = APIRouter()
 
 
@@ -358,32 +360,12 @@ async def mercadopago_webhook(
         )
 
 
-        approved_donations = (
-            db.collection("donations")
-            .where(
-                "campaignId",
-                "==",
-                donation["campaignId"]
-            )
-            .where(
-                "status",
-                "==",
-                "approved"
-            )
-            .get()
-        )
-
-
-        approved_total = sum(
-            float(doc.to_dict().get("amount", 0))
-            for doc in approved_donations
-        )
-
-
         campaign_ref.update({
 
             "raisedAmount":
-                approved_total
+                Increment(
+                    donation["amount"]
+                )
 
         })
 

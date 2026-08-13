@@ -8,7 +8,7 @@ from datetime import datetime
 
 from app.config.firebase import db
 
-from google.cloud.firestore_v1 import Increment
+from google.cloud.firestore_v1 import Increment, transactional
 
 router = APIRouter()
 
@@ -327,7 +327,7 @@ async def mercadopago_webhook(
 
         # A transação impede que dois webhooks
         # simultâneos somem a mesma doação duas vezes
-        @db.transactional
+        @transactional
         def approve_donation(transaction):
 
             donation_snapshot = donation_ref.get(

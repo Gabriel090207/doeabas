@@ -147,7 +147,7 @@ export function Dashboard() {
                         "desc"
                     ),
 
-                    limit(5)
+                    limit(50)
 
                 ),
 
@@ -166,7 +166,8 @@ export function Dashboard() {
                             } as Donation))
                             .filter(donation =>
                                 donation.status === "approved"
-                            );
+                            )
+                            .slice(0, 5);
 
                     
 
